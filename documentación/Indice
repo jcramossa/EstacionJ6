@@ -1,0 +1,3991 @@
+---  
+You:  
+Tengo este código y querría poder analizarlo en profundidad. Me gustaría generar un mapa mental con la app y posteriormente ir analizando cada nodo en profundidad. Toda la documentación generada, en formato markdock, quiero que se deje en un directorio del proyecto llamado "documentación"
+Call: find_files(query=*)
+Response:
+  [Project source]
+  /home/jcramossa/AndroidStudioProjects/EstacionJ6:
+    /
+    .gitignore (16 lines)
+    build.gradle.kts (6 lines)
+    gradle.properties (19 lines)
+    gradle/libs.versions.toml (32 lines)
+    gradlew (252 lines)
+    gradlew.bat (95 lines)
+    settings.gradle.kts (27 lines)
+  /home/jcramossa/AndroidStudioProjects/EstacionJ6/app:
+    /
+    .gitignore (1 line)
+    build.gradle.kts (83 lines)
+    src/
+  /home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/androidTest:
+    /
+    java/
+    java/com/
+    java/com/example/
+    java/com/example/estacionj6/
+    java/com/example/estacionj6/ExampleInstrumentedTest.kt (24 lines)
+  /home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main:
+    /
+    AndroidManifest.xml (38 lines)
+    java/
+    java/com/
+    java/com/example/
+    java/com/example/estacionj6/
+    java/com/example/estacionj6/MainActivity.kt (149 lines)
+    java/com/example/estacionj6/data/
+    java/com/example/estacionj6/data/model/
+    java/com/example/estacionj6/data/model/EspHomeModels.kt (92 lines)
+    java/com/example/estacionj6/data/model/NavidromeModels.kt (52 lines)
+    java/com/example/estacionj6/data/model/PlexModels.kt (30 lines)
+    java/com/example/estacionj6/data/model/WeatherModels.kt (21 lines)
+    java/com/example/estacionj6/data/remote/
+    java/com/example/estacionj6/data/remote/EspHomeApi.kt (19 lines)
+    java/com/example/estacionj6/data/remote/NavidromeApi.kt (42 lines)
+    java/com/example/estacionj6/data/remote/NetworkClient.kt (96 lines)
+    java/com/example/estacionj6/data/remote/PlexApi.kt (33 lines)
+    java/com/example/estacionj6/data/remote/RadioApi.kt (17 lines)
+    java/com/example/estacionj6/data/remote/WeatherApi.kt (15 lines)
+    java/com/example/estacionj6/data/repository/
+    java/com/example/estacionj6/data/repository/HubRepository.kt (18 lines)
+    java/com/example/estacionj6/data/repository/HubRepositoryImpl.kt (73 lines)
+    java/com/example/estacionj6/data/repository/MusicRepository.kt (67 lines)
+    java/com/example/estacionj6/data/repository/PlexRepository.kt (59 lines)
+    java/com/example/estacionj6/data/repository/RadioRepository.kt (12 lines)
+    java/com/example/estacionj6/data/repository/WeatherRepository.kt (118 lines)
+    java/com/example/estacionj6/ui/
+    java/com/example/estacionj6/ui/components/
+    java/com/example/estacionj6/ui/components/DashboardScreen.kt (211 lines)
+    java/com/example/estacionj6/ui/components/SmartHubDashboard.kt (620 lines)
+    java/com/example/estacionj6/ui/main/
+    java/com/example/estacionj6/ui/main/MainViewModel.kt (432 lines)
+    java/com/example/estacionj6/ui/theme/
+    java/com/example/estacionj6/ui/theme/Color.kt (11 lines)
+    java/com/example/estacionj6/ui/theme/Theme.kt (58 lines)
+    java/com/example/estacionj6/ui/theme/Type.kt (34 lines)
+    java/com/example/estacionj6/util/
+    java/com/example/estacionj6/util/BatteryManagerHelper.kt (33 lines)
+    java/com/example/estacionj6/util/VoiceAssistantManager.kt (246 lines)
+    keepRules/
+    keepRules/rules.keep (12 lines)
+    res/
+    res/drawable/
+    res/drawable-v24/
+    res/drawable-v24/ic_launcher_foreground.xml (30 lines)
+    res/drawable/ic_launcher_background.xml (171 lines)
+    res/mipmap-anydpi-v26/
+    res/mipmap-anydpi-v26/ic_launcher.xml (6 lines)
+    res/mipmap-anydpi-v26/ic_launcher_round.xml (6 lines)
+    res/mipmap-hdpi/
+    res/mipmap-hdpi/ic_launcher.webp
+    res/mipmap-hdpi/ic_launcher_round.webp
+    res/mipmap-mdpi/
+    res/mipmap-mdpi/ic_launcher.webp
+    res/mipmap-mdpi/ic_launcher_round.webp
+    res/mipmap-xhdpi/
+    res/mipmap-xhdpi/ic_launcher.webp
+    res/mipmap-xhdpi/ic_launcher_round.webp
+    res/mipmap-xxhdpi/
+    res/mipmap-xxhdpi/ic_launcher.webp
+    res/mipmap-xxhdpi/ic_launcher_round.webp
+    res/mipmap-xxxhdpi/
+    res/mipmap-xxxhdpi/ic_launcher.webp
+    res/mipmap-xxxhdpi/ic_launcher_round.webp
+    res/values/
+    res/values/colors.xml (10 lines)
+    res/values/strings.xml (3 lines)
+    res/values/themes.xml (5 lines)
+    res/xml/
+    res/xml/backup_rules.xml (13 lines)
+    res/xml/data_extraction_rules.xml (19 lines)
+    res/xml/network_security_config.xml (6 lines)
+  /home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/test:
+    /
+    java/
+    java/com/
+    java/com/example/
+    java/com/example/estacionj6/
+    java/com/example/estacionj6/ExampleUnitTest.kt (17 lines)
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/MainActivity.kt)
+Response:
+  package com.example.estacionj6
+  
+  import android.Manifest
+  import android.content.Intent
+  import android.content.pm.ActivityInfo
+  import android.os.Build
+  import android.os.Bundle
+  import android.view.View
+  import android.view.WindowInsets
+  import android.view.WindowInsetsController
+  import android.view.WindowManager
+  import androidx.activity.ComponentActivity
+  import androidx.activity.compose.setContent
+  import androidx.activity.viewModels
+  import androidx.compose.runtime.collectAsState
+  import androidx.compose.runtime.getValue
+  import androidx.lifecycle.ViewModel
+  import androidx.lifecycle.ViewModelProvider
+  import androidx.media3.exoplayer.ExoPlayer
+  import com.example.estacionj6.data.remote.NetworkClient
+  import com.example.estacionj6.data.repository.HubRepositoryImpl
+  import com.example.estacionj6.data.repository.MusicRepository
+  import com.example.estacionj6.data.repository.PlexRepository
+  import com.example.estacionj6.data.repository.RadioRepository
+  import com.example.estacionj6.data.repository.WeatherRepository
+  import com.example.estacionj6.ui.components.SmartHubDashboard
+  import com.example.estacionj6.ui.main.MainViewModel
+  import com.example.estacionj6.util.VoiceAssistantManager
+  
+  class MainActivity : ComponentActivity() {
+  
+      private val viewModel: MainViewModel by viewModels {
+          object : ViewModelProvider.Factory {
+              override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                  val repository = HubRepositoryImpl(
+                      api = NetworkClient.api,
+                      context = applicationContext
+                  )
+                  
+                  val musicRepository = MusicRepository(
+                      api = NetworkClient.navidromeApi,
+                      user = "admin",
+                      pass = "admin",
+                      baseUrl = "http://192.168.1.30:4533/"
+                  )
+                  
+                  val radioRepository = RadioRepository(
+                      api = NetworkClient.radioApi
+                  )
+                  
+                  val plexRepository = PlexRepository(
+                      api = NetworkClient.plexApi,
+                      token = "Sz1L76j34TQPsX5CV7Tw",
+                      baseUrl = "http://192.168.1.30:32400"
+                  )
+  
+                  val weatherRepository = WeatherRepository(
+                      api = NetworkClient.weatherApi,
+                      context = applicationContext
+                  )
+                  
+                  val voiceManager = VoiceAssistantManager(applicationContext)
+                  val exoPlayer = ExoPlayer.Builder(applicationContext).build()
+  
+                  @Suppress("UNCHECKED_CAST")
+                  return MainViewModel(repository, musicRepository, radioRepository, plexRepository, weatherRepository, voiceManager, exoPlayer) as T
+              }
+          }
+      }
+  
+      override fun onCreate(savedInstanceState: Bundle?) {
+          super.onCreate(savedInstanceState)
+  
+          // Solicitar permisos de audio
+          requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 0)
+  
+          // Permitir orientación horizontal en ambos sentidos (Landscape y Reverse Landscape)
+          requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+  
+          // Configurar pantalla completa total (Modo Inmersivo)
+          hideSystemUI()
+  
+          // Mantener la pantalla encendida y desbloqueada siempre (Modo Kiosk / Siempre en primer plano)
+          @Suppress("DEPRECATION")
+          window.addFlags(
+              WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
+              WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
+              WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+              WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+          )
+  
+          setContent {
+              val state by viewModel.uiState.collectAsState()
+              SmartHubDashboard(
+                  state = state,
+                  onToggleRelay = { turnOn -> viewModel.toggleRelay(turnOn) },
+                  onManualWake = { viewModel.manualWake() },
+                  onVoiceMicClick = { viewModel.startVoiceAssistant() },
+                  onToggleMusic = { viewModel.toggleMusic() },
+                  onDeleteAlarm = { id -> viewModel.deleteAlarm(id) },
+                  onToggleAlarm = { id, enabled -> viewModel.toggleAlarm(id, enabled) },
+                  onDismissAlarm = { viewModel.dismissAlarm() },
+                  player = viewModel.player // Necesitamos exponer el player en el ViewModel
+              )
+          }
+      }
+  
+      override fun onWindowFocusChanged(hasFocus: Boolean) {
+          super.onWindowFocusChanged(hasFocus)
+          if (hasFocus) {
+              hideSystemUI()
+          }
+      }
+  
+      @Deprecated("Deprecated in Java", ReplaceWith("Unit"))
+      @Suppress("MissingSuperCall", "DEPRECATION")
+      override fun onBackPressed() {
+          // Bloquear el botón de atrás para impedir salir de la interfaz
+      }
+  
+      override fun onUserLeaveHint() {
+          super.onUserLeaveHint()
+          // Si el usuario intenta presionar el botón Home o minimizar, traer la app inmediatamente al frente
+          val intent = Intent(this, MainActivity::class.java).apply {
+              addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+          }
+          startActivity(intent)
+      }
+  
+      private fun hideSystemUI() {
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+              window.setDecorFitsSystemWindows(false)
+              val controller = window.insetsController
+              if (controller != null) {
+                  controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+                  controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+              }
+          } else {
+              // Soporte para versiones antiguas (como el J6 original)
+              @Suppress("DEPRECATION")
+              window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                      or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                      or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                      or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                      or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                      or View.SYSTEM_UI_FLAG_FULLSCREEN)
+          }
+      }
+  }
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/AndroidManifest.xml)
+Response:
+  <?xml version="1.0" encoding="utf-8"?>
+  <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools">
+      <!-- Permiso obligatorio de red -->
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+      <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+      <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+      <uses-permission android:name="android.permission.RECORD_AUDIO" />
+  
+      <application
+          android:allowBackup="true"
+          android:usesCleartextTraffic="true"
+          android:networkSecurityConfig="@xml/network_security_config"
+          android:dataExtractionRules="@xml/data_extraction_rules"
+          android:fullBackupContent="@xml/backup_rules"
+          android:icon="@mipmap/ic_launcher"
+          android:label="@string/app_name"
+          android:roundIcon="@mipmap/ic_launcher_round"
+          android:supportsRtl="true"
+          android:theme="@style/Theme.EstacionJ6">
+          <activity
+              android:name=".MainActivity"
+              android:exported="true"
+              android:launchMode="singleInstance"
+              android:label="@string/app_name"
+              android:theme="@style/Theme.EstacionJ6"
+              android:windowSoftInputMode="adjustResize">
+              <intent-filter>
+                  <action android:name="android.intent.action.MAIN" />
+  
+                  <category android:name="android.intent.category.LAUNCHER" />
+              </intent-filter>
+          </activity>
+      </application>
+  
+  </manifest>
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/build.gradle.kts)
+Response:
+  plugins {
+      alias(libs.plugins.android.application)
+      alias(libs.plugins.kotlin.compose)
+  }
+  
+  android {
+      namespace = "com.example.estacionj6"
+      compileSdk {
+          version = release(37)
+      }
+  
+      defaultConfig {
+          applicationId = "com.example.estacionj6"
+          minSdk = 23
+          targetSdk = 37
+          versionCode = 1
+          versionName = "1.0"
+  
+          testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+      }
+  
+      buildTypes {
+          release {
+              optimization {
+                  enable = false
+              }
+          }
+      }
+      compileOptions {
+          sourceCompatibility = JavaVersion.VERSION_11
+          targetCompatibility = JavaVersion.VERSION_11
+      }
+      buildFeatures {
+          compose = true
+      }
+  }
+  
+  dependencies {
+      implementation(platform(libs.androidx.compose.bom))
+      implementation(libs.androidx.activity.compose)
+      implementation(libs.androidx.compose.material3)
+      implementation(libs.androidx.compose.ui)
+      implementation(libs.androidx.compose.ui.graphics)
+      implementation(libs.androidx.compose.ui.tooling.preview)
+      implementation(libs.androidx.core.ktx)
+      implementation(libs.androidx.lifecycle.runtime.ktx)
+      testImplementation(libs.junit)
+      androidTestImplementation(platform(libs.androidx.compose.bom))
+      androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+      androidTestImplementation(libs.androidx.espresso.core)
+      androidTestImplementation(libs.androidx.junit)
+      debugImplementation(libs.androidx.compose.ui.test.manifest)
+      debugImplementation(libs.androidx.compose.ui.tooling)
+      // Jetpack Compose y Core (ya vienen por defecto)
+      implementation(platform("androidx.compose:compose-bom:2024.02.00"))
+      implementation("androidx.compose.ui:ui")
+      implementation("androidx.compose.material3:material3")
+      implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+  
+      // Retrofit + Gson (para conectar con el ESP32)
+      implementation("com.squareup.retrofit2:retrofit:2.9.0")
+      implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+      // Interceptor de logs para OkHttp
+      implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+  
+      // Iconos
+      implementation("androidx.compose.material:material-icons-core")
+      implementation("androidx.compose.material:material-icons-extended")
+  
+      // Media3 (ExoPlayer)
+      implementation("androidx.media3:media3-exoplayer:1.2.1")
+      implementation("androidx.media3:media3-session:1.2.1")
+      implementation("androidx.media3:media3-ui:1.2.1")
+  
+      // Gemini AI
+      implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
+  
+      // Imágenes (Coil)
+      implementation("io.coil-kt:coil-compose:2.6.0")
+  
+      // YouTube Player
+      implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+  }
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/main/MainViewModel.kt)
+Response:
+  package com.example.estacionj6.ui.main
+  
+  import android.util.Log
+  import androidx.lifecycle.ViewModel
+  import androidx.lifecycle.viewModelScope
+  import androidx.media3.common.MediaItem
+  import androidx.media3.common.Player
+  import androidx.media3.exoplayer.ExoPlayer
+  import com.example.estacionj6.data.model.HubUiState
+  import com.example.estacionj6.data.model.Alarm
+  import com.example.estacionj6.data.repository.HubRepository
+  import com.example.estacionj6.data.repository.MusicRepository
+  import com.example.estacionj6.data.repository.RadioRepository
+  import com.example.estacionj6.data.repository.PlexRepository
+  import com.example.estacionj6.data.repository.WeatherRepository
+  import com.example.estacionj6.util.VoiceAssistantManager
+  import kotlinx.coroutines.Dispatchers
+  import kotlinx.coroutines.delay
+  import kotlinx.coroutines.flow.*
+  import kotlinx.coroutines.launch
+  import kotlinx.coroutines.withContext
+  import java.text.SimpleDateFormat
+  import java.util.*
+  
+  class MainViewModel(
+      private val repository: HubRepository,
+      private val musicRepository: MusicRepository,
+      private val radioRepository: RadioRepository,
+      private val plexRepository: PlexRepository,
+      private val weatherRepository: WeatherRepository,
+      private val voiceManager: VoiceAssistantManager,
+      val player: ExoPlayer
+  ) : ViewModel() {
+  
+      private val _uiState = MutableStateFlow(HubUiState())
+      val uiState: StateFlow<HubUiState> = _uiState.asStateFlow()
+  
+      private val _manualWakeActive = MutableStateFlow(false)
+  
+      init {
+          loadAlarms()
+          startClock()
+          startPolling()
+          setupPlayer()
+          setupVoiceManager()
+      }
+  
+      private fun loadAlarms() {
+          Log.e("SH_LOG", "Cargando alarmas...")
+          val alarms = repository.getAlarms()
+          Log.e("SH_LOG", "Total alarmas: ${alarms.size}")
+          _uiState.update { it.copy(alarms = alarms) }
+      }
+  
+      private fun setupVoiceManager() {
+          viewModelScope.launch {
+              voiceManager.isListening.collect { isListening ->
+                  _uiState.update { it.copy(isListening = isListening) }
+                  // Atenuar volumen si está escuchando
+                  if (isListening) {
+                      player.volume = 0.2f
+                  } else {
+                      player.volume = 1.0f
+                  }
+              }
+          }
+          viewModelScope.launch {
+              voiceManager.isThinking.collect { isThinking ->
+                  _uiState.update { it.copy(isThinking = isThinking) }
+              }
+          }
+          viewModelScope.launch {
+              voiceManager.transcript.collect { transcript ->
+                  if (transcript.isNotEmpty()) {
+                      _uiState.update { it.copy(voiceTranscript = transcript) }
+                      viewModelScope.launch {
+                          delay(5000)
+                          _uiState.update { it.copy(voiceTranscript = null) }
+                      }
+                  }
+              }
+          }
+      }
+  
+      private fun setupPlayer() {
+          player.addListener(object : Player.Listener {
+              override fun onIsPlayingChanged(isPlaying: Boolean) {
+                  _uiState.update { it.copy(isPlaying = isPlaying) }
+              }
+              override fun onPlaybackStateChanged(playbackState: Int) {
+                  _uiState.update { it.copy(isMusicLoading = playbackState == Player.STATE_BUFFERING) }
+              }
+          })
+      }
+  
+      private fun startClock() {
+          viewModelScope.launch {
+              val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+              val dateFormat = SimpleDateFormat("EEEE, d 'de' MMMM", Locale("es", "ES"))
+              val dateParser = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+              
+              while (true) {
+                  val now = Date()
+                  val calendar = Calendar.getInstance()
+                  val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
+                  val currentMinute = calendar.get(Calendar.MINUTE)
+                  val currentSecond = calendar.get(Calendar.SECOND)
+                  val currentDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+                  val todayStr = dateParser.format(now)
+  
+                  _uiState.update { currentState ->
+                      val firedAlarm = currentState.alarms.firstOrNull { alarm ->
+                          if (!alarm.isEnabled) return@firstOrNull false
+                          val timeMatch = alarm.hour == currentHour && alarm.minute == currentMinute && currentSecond == 0
+                          if (!timeMatch) return@firstOrNull false
+                          
+                          when {
+                              alarm.specificDate != null -> alarm.specificDate == todayStr
+                              alarm.repeatDays != null -> alarm.repeatDays.contains(currentDayOfWeek)
+                              else -> true
+                          }
+                      }
+                      
+                      if (firedAlarm != null) {
+                          if (firedAlarm.isReminder) {
+                              firedAlarm.label?.let { msg -> voiceManager.speak("Atención, recordatorio: $msg") }
+                          } else {
+                              voiceManager.speak("Alarma activada")
+                          }
+                      }
+  
+                      currentState.copy(
+                          currentTime = timeFormat.format(now),
+                          currentDate = dateFormat.format(now).replaceFirstChar { it.uppercase() },
+                          isAlarmFiring = if (firedAlarm != null && !firedAlarm.isReminder) true else currentState.isAlarmFiring,
+                          firingAlarmLabel = firedAlarm?.label ?: currentState.firingAlarmLabel
+                      )
+                  }
+                  delay(1000)
+              }
+          }
+      }
+  
+      private fun startPolling() {
+          viewModelScope.launch {
+              while (true) {
+                  refreshData()
+                  delay(5000)
+              }
+          }
+      }
+  
+      suspend fun refreshData() {
+          val batteryInfo = repository.getPhoneBatteryInfo()
+  
+          // Actualizar batería siempre, incluso si falla el ESP32
+          _uiState.update { currentState ->
+              currentState.copy(
+                  phoneBatteryLevel = batteryInfo.level,
+                  isPhoneCharging = batteryInfo.isCharging
+              )
+          }
+  
+          // Obtener clima exterior y ubicación de la web (Open-Meteo + Geocoder)
+          val weatherResult = withContext(Dispatchers.IO) {
+              weatherRepository.fetchWeather()
+          }
+          weatherResult.onSuccess { weatherData ->
+              _uiState.update { currentState ->
+                  currentState.copy(
+                      extTemperature = weatherData.temperature,
+                      extHumidity = weatherData.humidity,
+                      extPressure = weatherData.pressure,
+                      extApparentTemp = weatherData.apparentTemperature,
+                      windSpeed = weatherData.windSpeed,
+                      windDirection = weatherData.windDirection,
+                      precipitation = weatherData.precipitation,
+                      cloudCover = weatherData.cloudCover,
+                      weatherDescription = weatherData.weatherDescription,
+                      uvIndex = weatherData.uvIndex,
+                      weatherLocationName = weatherData.locationName
+                  )
+              }
+          }
+  
+          val internalResult = repository.fetchStatus()
+  
+          internalResult.onSuccess { status ->
+              _uiState.update { currentState ->
+                  currentState.copy(
+                      temperature = status.ahtTemp,
+                      humidity = status.ahtHum,
+                      pressure = status.bmpPressure,
+                      isPresenceDetected = status.presence,
+                      isMovingPresence = status.movement,
+                      isStaticPresence = status.staticPresence,
+                      isRelayOn = status.relay,
+                      isDimmed = !status.presence && !_manualWakeActive.value && !currentState.isAlarmFiring,
+                      isLoading = false,
+                      error = null
+                  )
+              }
+              evaluateBatteryLogic(batteryInfo.level, status.relay)
+          }.onFailure { exception ->
+              Log.e("SH_LOG", "Error obteniendo status de ESP32 (.13): ${exception.localizedMessage}", exception)
+              _uiState.update { it.copy(isLoading = false, error = "Error ESP32 (.13): ${exception.localizedMessage}") }
+          }
+      }
+  
+      private var lastRelayCommand: Boolean? = null
+  
+      private fun evaluateBatteryLogic(batteryLevel: Int, isRelayCurrentlyOn: Boolean) {
+          if (batteryLevel == -1) return // Ignorar si hay error de lectura
+          
+          Log.d("SH_LOG", "Batería: $batteryLevel% | Relay (ESP32): $isRelayCurrentlyOn | Last Cmd: $lastRelayCommand")
+  
+          viewModelScope.launch {
+              // REGLA 1: Si baja del 20% y no está cargando -> ENCENDER
+              if (batteryLevel <= 20 && !isRelayCurrentlyOn) {
+                  Log.e("SH_LOG", ">>> ACCIÓN: Batería baja. Encendiendo relé.")
+                  toggleRelay(true)
+                  lastRelayCommand = true
+              }
+              // REGLA 2: Si llega al 80% y está cargando -> APAGAR
+              else if (batteryLevel >= 80 && isRelayCurrentlyOn) {
+                  Log.e("SH_LOG", ">>> ACCIÓN: Batería cargada. Apagando relé.")
+                  toggleRelay(false)
+                  lastRelayCommand = false
+              }
+              // REGLA 3: Seguridad. Si por alguna razón está fuera del rango 20-80 y 
+              // el estado no coincide con lo esperado, lo corregimos (opcional, pero ayuda)
+              // Si está a 79% y está APAGADO, no debe hacer nada.
+          }
+      }
+  
+      fun manualWake() {
+          viewModelScope.launch {
+              _manualWakeActive.value = true
+              _uiState.update { it.copy(isDimmed = false) }
+              delay(30_000)
+              _manualWakeActive.value = false
+              _uiState.update { it.copy(isDimmed = !it.isPresenceDetected && !it.isAlarmFiring) }
+          }
+      }
+  
+      fun toggleRelay(turnOn: Boolean) {
+          Log.e("SH_LOG", ">>> toggleRelay llamado con: $turnOn")
+          viewModelScope.launch(Dispatchers.IO) {
+              repository.setRelayState(turnOn).onSuccess {
+                  withContext(Dispatchers.Main) {
+                      _uiState.update { it.copy(isRelayOn = turnOn) }
+                  }
+              }.onFailure { exception ->
+                  withContext(Dispatchers.Main) {
+                      _uiState.update { it.copy(error = "Fallo al conmutar relé: ${exception.message}") }
+                  }
+              }
+          }
+      }
+  
+      fun addAlarm(hour: Int, minute: Int, repeatDays: List<Int>? = null, specificDate: String? = null, label: String? = null, isReminder: Boolean = false) {
+          Log.e("SH_LOG", "Añadiendo ${if (isReminder) "Recordatorio" else "Alarma"}: $hour:$minute")
+          val newAlarm = Alarm(hour = hour, minute = minute, repeatDays = repeatDays, specificDate = specificDate, label = label, isReminder = isReminder)
+          repository.saveAlarm(newAlarm)
+          loadAlarms()
+      }
+  
+      fun deleteAlarm(alarmId: String) {
+          repository.deleteAlarm(alarmId)
+          loadAlarms()
+      }
+  
+      fun toggleAlarm(alarmId: String, enabled: Boolean) {
+          repository.toggleAlarm(alarmId, enabled)
+          loadAlarms()
+      }
+  
+      fun dismissAlarm() {
+          _uiState.update { it.copy(isAlarmFiring = false) }
+      }
+  
+      fun startVoiceAssistant() {
+          Log.e("SH_LOG", "Iniciando asistente de voz...")
+          voiceManager.startListening { transcript ->
+              Log.e("SH_LOG", "Voz recibida: $transcript")
+              voiceManager.processIntent(transcript) { command ->
+                  viewModelScope.launch {
+                      handleAssistantCommand(command)
+                  }
+              }
+          }
+      }
+  
+      private fun handleAssistantCommand(command: VoiceAssistantManager.AssistantCommand) {
+          Log.e("SH_LOG", "Acción IA: ${command.javaClass.simpleName}")
+          when (command) {
+              is VoiceAssistantManager.AssistantCommand.MusicPlay -> playMusic(command.query)
+              is VoiceAssistantManager.AssistantCommand.RadioPlay -> playRadio(command.query)
+              is VoiceAssistantManager.AssistantCommand.YouTubePlay -> playYouTube(command.query)
+              is VoiceAssistantManager.AssistantCommand.PlexPlay -> playPlex(command.query, command.season, command.episode)
+              is VoiceAssistantManager.AssistantCommand.MusicStop -> stopMusic()
+              is VoiceAssistantManager.AssistantCommand.RelayOn -> toggleRelay(true)
+              is VoiceAssistantManager.AssistantCommand.RelayOff -> toggleRelay(false)
+              is VoiceAssistantManager.AssistantCommand.AlarmSet -> {
+                  addAlarm(command.hour, command.minute, command.repeatDays, command.specificDate, command.label, command.isReminder)
+              }
+              else -> {}
+          }
+      }
+  
+      fun stopMusic() {
+          player.stop()
+          _uiState.update { it.copy(
+              musicTitle = null, 
+              musicArtist = null, 
+              isPlaying = false,
+              isRadioActive = false,
+              radioName = null,
+              isYoutubeActive = false,
+              youtubeVideoId = null,
+              isPlexActive = false,
+              plexTitle = null,
+              plexMediaUrl = null
+          ) }
+      }
+  
+      fun playMusic(query: String) {
+          viewModelScope.launch {
+              _uiState.update { it.copy(isMusicLoading = true, isRadioActive = false) }
+              Log.e("SH_LOG", "Navidrome -> Buscando: $query")
+              musicRepository.searchSongs(query).onSuccess { songs ->
+                  Log.e("SH_LOG", "Navidrome -> Encontradas: ${songs.size}")
+                  songs.firstOrNull()?.let { song ->
+                      Log.e("SH_LOG", "Navidrome -> Play: ${song.title}")
+                      val streamUrl = musicRepository.getStreamUrl(song.id)
+                      player.setMediaItem(MediaItem.fromUri(streamUrl))
+                      player.prepare()
+                      player.play()
+                      _uiState.update { it.copy(
+                          musicTitle = song.title,
+                          musicArtist = song.artist,
+                          musicCoverUrl = musicRepository.getCoverArtUrl(song.coverArt),
+                          isMusicLoading = false
+                      ) }
+                  } ?: run {
+                      Log.e("SH_LOG", "Navidrome -> No hubo coincidencias")
+                      _uiState.update { it.copy(error = "No encontré: $query", isMusicLoading = false) }
+                  }
+              }.onFailure {
+                  Log.e("SH_LOG", "Navidrome -> ERROR RED/API", it)
+                  _uiState.update { it.copy(error = "Error Navidrome", isMusicLoading = false) }
+              }
+          }
+      }
+  
+      fun playRadio(query: String) {
+          viewModelScope.launch {
+              stopMusic() // Parar cualquier cosa previa
+              _uiState.update { it.copy(isMusicLoading = true, isRadioActive = true) }
+              Log.e("SH_LOG", "Radio -> Buscando: $query")
+              radioRepository.searchStation(query).onSuccess { station ->
+                  if (station != null) {
+                      Log.e("SH_LOG", "Radio -> Play: ${station.name}")
+                      player.setMediaItem(MediaItem.fromUri(station.url))
+                      player.prepare()
+                      player.play()
+                      _uiState.update { it.copy(
+                          radioName = station.name,
+                          musicTitle = "En directo",
+                          musicArtist = station.name,
+                          musicCoverUrl = station.favicon,
+                          isMusicLoading = false
+                      ) }
+                  } else {
+                      Log.e("SH_LOG", "Radio -> No encontrada")
+                      _uiState.update { it.copy(error = "Radio no encontrada: $query", isMusicLoading = false) }
+                  }
+              }.onFailure {
+                  Log.e("SH_LOG", "Radio -> ERROR", it)
+                  _uiState.update { it.copy(error = "Error al buscar radio", isMusicLoading = false) }
+              }
+          }
+      }
+  
+      fun playYouTube(query: String) {
+          viewModelScope.launch {
+              stopMusic()
+              Log.e("SH_LOG", "YouTube -> Solicitado: $query")
+              _uiState.update { it.copy(
+                  isYoutubeActive = true,
+                  youtubeVideoId = "dQw4w9WgXcQ" // Prueba
+              ) }
+          }
+      }
+  
+      fun playPlex(query: String, season: Int? = null, episode: Int? = null) {
+          viewModelScope.launch {
+              stopMusic()
+              Log.e("SH_LOG", "Plex -> Buscando: $query (T$season E$episode)")
+              plexRepository.searchMedia(query, season, episode).onSuccess { metadata ->
+                  if (metadata != null) {
+                      val fileKey = metadata.media?.firstOrNull()?.parts?.firstOrNull()?.fileKey
+                      if (fileKey != null) {
+                          val streamUrl = plexRepository.getStreamUrl(fileKey)
+                          Log.e("SH_LOG", "Plex -> Play: ${metadata.title}")
+                          // Por ahora Plex lo tratamos como vídeo directo
+                          _uiState.update { it.copy(
+                              isPlexActive = true,
+                              plexTitle = metadata.title,
+                              plexMediaUrl = streamUrl
+                          ) }
+                      }
+                  } else {
+                      _uiState.update { it.copy(error = "No encontrado en Plex: $query") }
+                  }
+              }.onFailure {
+                  Log.e("SH_LOG", "Plex -> ERROR", it)
+              }
+          }
+      }
+  
+      fun toggleMusic() {
+          if (player.isPlaying) player.pause() else player.play()
+      }
+  
+      override fun onCleared() {
+          super.onCleared()
+          player.release()
+          voiceManager.release()
+      }
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/components/SmartHubDashboard.kt)
+Response:
+  package com.example.estacionj6.ui.components
+  
+  import androidx.compose.animation.animateColorAsState
+  import androidx.compose.animation.animateColor
+  import androidx.compose.animation.core.*
+  import androidx.compose.foundation.background
+  import androidx.compose.foundation.gestures.detectTapGestures
+  import androidx.compose.foundation.horizontalScroll
+  import androidx.compose.foundation.verticalScroll
+  import androidx.compose.foundation.layout.*
+  import androidx.compose.foundation.rememberScrollState
+  import androidx.compose.foundation.shape.RoundedCornerShape
+  import androidx.compose.material.icons.Icons
+  import androidx.compose.material.icons.filled.*
+  import androidx.compose.material3.*
+  import androidx.compose.runtime.Composable
+  import androidx.compose.runtime.getValue
+  import androidx.compose.ui.Alignment
+  import androidx.compose.ui.Modifier
+  import androidx.compose.ui.draw.scale
+  import androidx.compose.ui.graphics.Brush
+  import androidx.compose.ui.graphics.Color
+  import androidx.compose.ui.graphics.graphicsLayer
+  import androidx.compose.ui.input.pointer.pointerInput
+  import androidx.compose.ui.text.font.FontWeight
+  import androidx.compose.ui.text.style.TextAlign
+  import androidx.compose.ui.unit.dp
+  import androidx.compose.ui.unit.sp
+  import androidx.media3.common.Player
+  import coil.compose.AsyncImage
+  import com.example.estacionj6.data.model.HubUiState
+  import com.example.estacionj6.data.model.Alarm
+  import java.util.*
+  
+  @Composable
+  fun SmartHubDashboard(
+      state: HubUiState,
+      onToggleRelay: (Boolean) -> Unit,
+      onManualWake: () -> Unit,
+      onVoiceMicClick: () -> Unit,
+      onToggleMusic: () -> Unit,
+      onDeleteAlarm: (String) -> Unit,
+      onToggleAlarm: (String, Boolean) -> Unit,
+      onDismissAlarm: () -> Unit,
+      player: Player
+  ) {
+      val dimAlpha by animateFloatAsState(
+          targetValue = if (state.isDimmed) 0.95f else 0f,
+          animationSpec = tween(durationMillis = 800),
+          label = "dimAlpha"
+      )
+      val scrollState = rememberScrollState()
+  
+      Box(
+          modifier = Modifier
+              .fillMaxSize()
+              .background(Color.Black)
+              .pointerInput(Unit) {
+                  detectTapGestures(onDoubleTap = { onManualWake() })
+              }
+      ) {
+          // Fondo
+          Box(
+              modifier = Modifier
+                  .fillMaxSize()
+                  .background(Brush.radialGradient(colors = listOf(Color(0xFF1A1A1A), Color.Black), radius = 1000f))
+          )
+  
+          // Banner de error de conexión / Wi-Fi si ocurre
+          state.error?.let { errorMsg ->
+              Box(
+                  modifier = Modifier
+                      .align(Alignment.TopCenter)
+                      .padding(top = 12.dp)
+                      .background(Color.Red.copy(alpha = 0.85f), RoundedCornerShape(12.dp))
+                      .padding(horizontal = 16.dp, vertical = 6.dp)
+              ) {
+                  Row(verticalAlignment = Alignment.CenterVertically) {
+                      Icon(imageVector = Icons.Default.WifiOff, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
+                      Spacer(modifier = Modifier.width(8.dp))
+                      Text(text = errorMsg, color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                  }
+              }
+          }
+  
+          Row(
+              modifier = Modifier
+                  .fillMaxSize()
+                  .horizontalScroll(scrollState)
+                  .padding(24.dp),
+              horizontalArrangement = Arrangement.spacedBy(24.dp),
+              verticalAlignment = Alignment.CenterVertically
+          ) {
+              // --- COLUMNA 1 / CARD 1: RELOJ Y FECHA ---
+              Column(
+                  modifier = Modifier.width(215.dp),
+                  verticalArrangement = Arrangement.Center
+              ) {
+                  Text(
+                      text = state.currentTime,
+                      fontSize = 90.sp,
+                      fontWeight = FontWeight.ExtraBold,
+                      color = Color.White,
+                      letterSpacing = (-4).sp,
+                      textAlign = TextAlign.Center
+                  )
+                  Text(
+                      text = state.currentDate,
+                      fontSize = 18.sp,
+                      color = Color.Gray,
+                      fontWeight = FontWeight.Medium,
+                      textAlign = TextAlign.Center
+                  )
+              }
+  
+              // --- COLUMNA 2 / CARD 2: DATO DE CLIMA IN VS OUT + BATERÍA Y RELÉ ---
+              ClimateAndStatusCard(
+                  state = state,
+                  onToggleRelay = onToggleRelay
+              )
+  
+              // --- COLUMNA 3: ALARMAS ---
+              Column(
+                  modifier = Modifier
+                      .width(220.dp)
+                      .fillMaxHeight()
+                      .verticalScroll(rememberScrollState())
+                      .padding(vertical = 8.dp),
+                  verticalArrangement = Arrangement.spacedBy(12.dp)
+              ) {
+                  Text(
+                      text = "Alarmas",
+                      color = Color.White,
+                      fontSize = 14.sp,
+                      fontWeight = FontWeight.Bold,
+                      modifier = Modifier.padding(bottom = 4.dp)
+                  )
+                  if (state.alarms.isEmpty()) {
+                      Text(text = "Sin alarmas", color = Color.Gray, fontSize = 12.sp)
+                  } else {
+                      state.alarms.forEach { alarm ->
+                          AlarmItem(alarm = alarm, onDelete = onDeleteAlarm, onToggle = onToggleAlarm)
+                      }
+                  }
+                  Spacer(modifier = Modifier.height(80.dp))
+              }
+  
+              // --- COLUMNA 4: MÚSICA ---
+              Column(
+                  modifier = Modifier.width(225.dp),
+                  verticalArrangement = Arrangement.spacedBy(16.dp)
+              ) {
+                  MusicCard(
+                      title = if (state.isRadioActive) state.radioName else state.musicTitle,
+                      artist = if (state.isRadioActive) "Radio en directo" else state.musicArtist,
+                      coverUrl = state.musicCoverUrl,
+                      isPlaying = state.isPlaying,
+                      isLoading = state.isMusicLoading,
+                      isRadio = state.isRadioActive,
+                      onToggleMusic = onToggleMusic
+                  )
+              }
+  
+              Spacer(modifier = Modifier.width(20.dp))
+          }
+  
+          // --- TRANSCRIPCIÓN DE VOZ ---
+          state.voiceTranscript?.let { text ->
+              if (state.isListening || text.isNotEmpty()) {
+                  Surface(
+                      color = Color.Black.copy(alpha = 0.7f),
+                      shape = RoundedCornerShape(20.dp),
+                      modifier = Modifier
+                          .align(Alignment.BottomCenter)
+                          .padding(bottom = 32.dp)
+                  ) {
+                      Text(
+                          text = text,
+                          color = Color.White,
+                          fontSize = 18.sp,
+                          fontWeight = FontWeight.Medium,
+                          modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp)
+                      )
+                  }
+              }
+          }
+  
+          // --- BOTÓN FLOTANTE DE MICRÓFONO / GRABACIÓN DE VOZ PARA ALARMAS Y COMANDOS ---
+          FloatingActionButton(
+              onClick = onVoiceMicClick,
+              containerColor = if (state.isListening) Color.Red else Color(0xFF42A5F5),
+              contentColor = Color.White,
+              shape = RoundedCornerShape(20.dp),
+              modifier = Modifier
+                  .align(Alignment.BottomEnd)
+                  .padding(24.dp)
+                  .size(64.dp)
+          ) {
+              Icon(
+                  imageVector = if (state.isListening) Icons.Default.MicOff else Icons.Default.Mic,
+                  contentDescription = "Grabar Voz / Configurar Alarma",
+                  modifier = Modifier.size(32.dp)
+              )
+          }
+  
+          // --- OVERLAY DE ATENUACIÓN / APAGADO DE PANTALLA ---
+          if (dimAlpha > 0f) {
+              Box(
+                  modifier = Modifier
+                      .fillMaxSize()
+                      .graphicsLayer { alpha = dimAlpha }
+                      .background(Color.Black)
+              )
+          }
+  
+          // --- OVERLAY DE ALARMA ACTIVADA ---
+          if (state.isAlarmFiring) {
+              AlarmFiringOverlay(
+                  message = state.firingAlarmLabel,
+                  onDismiss = onDismissAlarm
+              )
+          }
+      }
+  }
+  
+  @Composable
+  fun ClimateAndStatusCard(
+      state: HubUiState,
+      onToggleRelay: (Boolean) -> Unit,
+      modifier: Modifier = Modifier
+  ) {
+      Surface(
+          color = Color(0xFF1E1E1E),
+          shape = RoundedCornerShape(20.dp),
+          modifier = modifier.width(360.dp)
+      ) {
+          Column(
+              modifier = Modifier.padding(16.dp),
+              verticalArrangement = Arrangement.SpaceBetween
+          ) {
+              // --- ENCABEZADO: LOCALIDAD Y DESCRIPCIÓN CLIMA ---
+              Row(
+                  modifier = Modifier.fillMaxWidth(),
+                  horizontalArrangement = Arrangement.SpaceBetween,
+                  verticalAlignment = Alignment.CenterVertically
+              ) {
+                  Row(verticalAlignment = Alignment.CenterVertically) {
+                      Icon(
+                          imageVector = Icons.Default.LocationOn,
+                          contentDescription = null,
+                          tint = Color(0xFFFFCA28),
+                          modifier = Modifier.size(18.dp)
+                      )
+                      Spacer(modifier = Modifier.width(6.dp))
+                      Text(
+                          text = state.weatherLocationName,
+                          color = Color.White,
+                          fontSize = 16.sp,
+                          fontWeight = FontWeight.Bold
+                      )
+                  }
+                  Text(
+                      text = state.weatherDescription,
+                      color = Color.White,
+                      fontSize = 12.sp,
+                      fontWeight = FontWeight.Bold
+                  )
+              }
+  
+              Spacer(modifier = Modifier.height(10.dp))
+              HorizontalDivider(color = Color.Gray.copy(alpha = 0.3f), thickness = 1.dp)
+              Spacer(modifier = Modifier.height(10.dp))
+  
+              // --- 2 COLUMNAS DE VALORES: IN VS OUT ---
+              Row(
+                  modifier = Modifier.fillMaxWidth(),
+                  horizontalArrangement = Arrangement.SpaceBetween
+              ) {
+                  // COLUMNA 1: IN (Sensor ESP32 .13)
+                  Column(modifier = Modifier.weight(1f)) {
+                      Row(verticalAlignment = Alignment.CenterVertically) {
+                          Icon(
+                              imageVector = Icons.Default.Home,
+                              contentDescription = null,
+                              tint = Color(0xFF42A5F5),
+                              modifier = Modifier.size(14.dp)
+                          )
+                          Spacer(modifier = Modifier.width(4.dp))
+                          Text(
+                              text = "IN (Sensor)",
+                              color = Color(0xFF42A5F5),
+                              fontSize = 12.sp,
+                              fontWeight = FontWeight.Bold
+                          )
+                      }
+                      Spacer(modifier = Modifier.height(8.dp))
+                      Text(
+                          text = "Temp: ${String.format(Locale.getDefault(), "%.1f", state.temperature)} °C",
+                          color = Color.White,
+                          fontSize = 13.sp,
+                          fontWeight = FontWeight.SemiBold
+                      )
+                      Spacer(modifier = Modifier.height(4.dp))
+                      Text(
+                          text = "Hum: ${String.format(Locale.getDefault(), "%.1f", state.humidity)} %",
+                          color = Color.White,
+                          fontSize = 13.sp,
+                          fontWeight = FontWeight.SemiBold
+                      )
+                      Spacer(modifier = Modifier.height(4.dp))
+                      Text(
+                          text = "Presión: ${String.format(Locale.getDefault(), "%.0f", state.pressure)} hPa",
+                          color = Color.White,
+                          fontSize = 12.sp,
+                          fontWeight = FontWeight.SemiBold
+                      )
+                  }
+  
+                  Spacer(modifier = Modifier.width(12.dp))
+  
+                  // COLUMNA 2: OUT (Servicio Web)
+                  Column(modifier = Modifier.weight(1.2f)) {
+                      Row(verticalAlignment = Alignment.CenterVertically) {
+                          Icon(
+                              imageVector = Icons.Default.WbSunny,
+                              contentDescription = null,
+                              tint = Color(0xFFFFCA28),
+                              modifier = Modifier.size(14.dp)
+                          )
+                          Spacer(modifier = Modifier.width(4.dp))
+                          Text(
+                              text = "OUT (Web)",
+                              color = Color(0xFFFFCA28),
+                              fontSize = 12.sp,
+                              fontWeight = FontWeight.Bold
+                          )
+                      }
+                      Spacer(modifier = Modifier.height(6.dp))
+                      Text(
+                          text = "Temp: ${String.format(Locale.getDefault(), "%.1f", state.extTemperature)} °C",
+                          color = Color.White,
+                          fontSize = 12.sp,
+                          fontWeight = FontWeight.SemiBold
+                      )
+                      Text(
+                          text = "Hum: ${String.format(Locale.getDefault(), "%.1f", state.extHumidity)} %",
+                          color = Color.White,
+                          fontSize = 12.sp,
+                          fontWeight = FontWeight.SemiBold
+                      )
+                      Text(
+                          text = "Presión: ${String.format(Locale.getDefault(), "%.0f", state.extPressure)} hPa",
+                          color = Color.White,
+                          fontSize = 12.sp,
+                          fontWeight = FontWeight.SemiBold
+                      )
+                      Text(
+                          text = "Sensación: ${String.format(Locale.getDefault(), "%.1f", state.extApparentTemp)} °C",
+                          color = Color.White,
+                          fontSize = 11.sp,
+                          fontWeight = FontWeight.SemiBold
+                      )
+                      Text(
+                          text = "Viento: ${String.format(Locale.getDefault(), "%.1f", state.windSpeed)} km/h",
+                          color = Color.White,
+                          fontSize = 11.sp,
+                          fontWeight = FontWeight.SemiBold
+                      )
+                      Text(
+                          text = "Dirección: ${state.windDirection}",
+                          color = Color.White,
+                          fontSize = 11.sp,
+                          fontWeight = FontWeight.SemiBold
+                      )
+                      Text(
+                          text = "Precip: ${String.format(Locale.getDefault(), "%.1f", state.precipitation)} mm",
+                          color = Color.White,
+                          fontSize = 11.sp,
+                          fontWeight = FontWeight.SemiBold
+                      )
+                      Text(
+                          text = "Nubes: ${String.format(Locale.getDefault(), "%.0f", state.cloudCover)} %",
+                          color = Color.White,
+                          fontSize = 11.sp,
+                          fontWeight = FontWeight.SemiBold
+                      )
+                  }
+              }
+  
+              Spacer(modifier = Modifier.height(12.dp))
+              HorizontalDivider(color = Color.Gray.copy(alpha = 0.3f), thickness = 1.dp)
+              Spacer(modifier = Modifier.height(10.dp))
+  
+              // --- ÚLTIMA FILA DE CARD 2: BATERÍA Y CONMUTADOR DE CARGA ---
+              Row(
+                  modifier = Modifier.fillMaxWidth(),
+                  horizontalArrangement = Arrangement.SpaceBetween,
+                  verticalAlignment = Alignment.CenterVertically
+              ) {
+                  Column {
+                      Text(text = "Batería J6", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Medium)
+                      Row(verticalAlignment = Alignment.CenterVertically) {
+                          Icon(
+                              imageVector = if (state.isPhoneCharging) Icons.Default.BatteryChargingFull else Icons.Default.BatteryFull,
+                              contentDescription = null,
+                              tint = if (state.phoneBatteryLevel < 20) Color.Red else Color.Green,
+                              modifier = Modifier.size(16.dp)
+                          )
+                          Spacer(modifier = Modifier.width(4.dp))
+                          Text(
+                              text = "${state.phoneBatteryLevel}%",
+                              color = Color.White,
+                              fontWeight = FontWeight.Bold,
+                              fontSize = 14.sp
+                          )
+                      }
+                      Text(
+                          text = if (state.isRelayOn) "Cargador Activo" else "Cargador Apagado",
+                          color = if (state.isRelayOn) Color.Green else Color.White,
+                          fontSize = 10.sp
+                      )
+                  }
+  
+                  Switch(
+                      checked = state.isRelayOn,
+                      onCheckedChange = onToggleRelay,
+                      colors = SwitchDefaults.colors(
+                          checkedThumbColor = Color.Green,
+                          checkedTrackColor = Color.Green.copy(alpha = 0.5f)
+                      )
+                  )
+              }
+          }
+      }
+  }
+  
+  @Composable
+  fun MusicCard(
+      title: String?,
+      artist: String?,
+      coverUrl: String?,
+      isPlaying: Boolean,
+      isLoading: Boolean,
+      isRadio: Boolean = false,
+      onToggleMusic: () -> Unit
+  ) {
+      Surface(
+          color = Color(0xFF1A1A1A),
+          shape = RoundedCornerShape(24.dp),
+          modifier = Modifier.fillMaxWidth()
+      ) {
+          Column(modifier = Modifier.padding(16.dp)) {
+              Row(verticalAlignment = Alignment.CenterVertically) {
+                  if (coverUrl != null) {
+                      AsyncImage(
+                          model = coverUrl,
+                          contentDescription = null,
+                          modifier = Modifier
+                              .size(48.dp)
+                              .background(Color.DarkGray, RoundedCornerShape(8.dp))
+                      )
+                  } else {
+                      Box(
+                          modifier = Modifier
+                              .size(48.dp)
+                              .background(Color.DarkGray, RoundedCornerShape(8.dp)),
+                          contentAlignment = Alignment.Center
+                      ) {
+                          Icon(
+                              imageVector = if (isRadio) Icons.Default.Radio else Icons.Default.MusicNote,
+                              contentDescription = null,
+                              tint = Color.White
+                          )
+                      }
+                  }
+  
+                  Spacer(modifier = Modifier.width(12.dp))
+  
+                  Column(modifier = Modifier.weight(1f)) {
+                      Text(
+                          text = title ?: "Sin reproducción",
+                          color = Color.White,
+                          fontSize = 14.sp,
+                          fontWeight = FontWeight.Bold,
+                          maxLines = 1
+                      )
+                      Text(
+                          text = artist ?: "Selecciona música o radio",
+                          color = Color.Gray,
+                          fontSize = 12.sp,
+                          maxLines = 1
+                      )
+                  }
+              }
+  
+              Spacer(modifier = Modifier.height(12.dp))
+  
+              IconButton(
+                  onClick = onToggleMusic,
+                  modifier = Modifier
+                      .fillMaxWidth()
+                      .height(40.dp)
+                      .background(Color.White, RoundedCornerShape(20.dp))
+              ) {
+                  if (isLoading) {
+                      CircularProgressIndicator(
+                          modifier = Modifier.size(20.dp),
+                          color = Color.Black,
+                          strokeWidth = 2.dp
+                      )
+                  } else {
+                      Icon(
+                          imageVector = if (isPlaying) Icons.Default.Pause else Icons.Default.PlayArrow,
+                          contentDescription = null,
+                          tint = Color.Black
+                      )
+                  }
+              }
+          }
+      }
+  }
+  
+  @Composable
+  fun AlarmItem(
+      alarm: Alarm,
+      onDelete: (String) -> Unit,
+      onToggle: (String, Boolean) -> Unit
+  ) {
+      Surface(
+          color = Color(0xFF1E1E1E),
+          shape = RoundedCornerShape(16.dp),
+          modifier = Modifier.fillMaxWidth()
+      ) {
+          Row(
+              modifier = Modifier
+                  .fillMaxWidth()
+                  .padding(12.dp),
+              horizontalArrangement = Arrangement.SpaceBetween,
+              verticalAlignment = Alignment.CenterVertically
+          ) {
+              Column {
+                  Text(
+                      text = String.format(Locale.getDefault(), "%02d:%02d", alarm.hour, alarm.minute),
+                      color = Color.White,
+                      fontSize = 20.sp,
+                      fontWeight = FontWeight.Bold
+                  )
+                  alarm.label?.let {
+                      Text(text = it, color = Color.Gray, fontSize = 11.sp)
+                  }
+                  IconButton(onClick = { onDelete(alarm.id) }, modifier = Modifier.size(24.dp)) {
+                      Icon(Icons.Default.Delete, contentDescription = null, tint = Color.Gray, modifier = Modifier.size(16.dp))
+                  }
+              }
+              Switch(
+                  checked = alarm.isEnabled,
+                  onCheckedChange = { onToggle(alarm.id, it) },
+                  colors = SwitchDefaults.colors(checkedThumbColor = Color.Cyan)
+              )
+          }
+      }
+  }
+  
+  @Composable
+  fun AlarmFiringOverlay(message: String?, onDismiss: () -> Unit) {
+      val infiniteTransition = rememberInfiniteTransition(label = "alarm")
+      val color by infiniteTransition.animateColor(
+          initialValue = Color.Red.copy(alpha = 0.6f),
+          targetValue = Color.Black.copy(alpha = 0.9f),
+          animationSpec = infiniteRepeatable(animation = tween(500), repeatMode = RepeatMode.Reverse),
+          label = "alarmColor"
+      )
+      val scale by infiniteTransition.animateFloat(
+          initialValue = 1f,
+          targetValue = 1.1f,
+          animationSpec = infiniteRepeatable(animation = tween(500), repeatMode = RepeatMode.Reverse),
+          label = "alarmScale"
+      )
+  
+      Box(
+          modifier = Modifier
+              .fillMaxSize()
+              .background(color),
+          contentAlignment = Alignment.Center
+      ) {
+          Column(horizontalAlignment = Alignment.CenterHorizontally) {
+              Icon(
+                  imageVector = Icons.Default.Alarm,
+                  contentDescription = null,
+                  tint = Color.White,
+                  modifier = Modifier
+                      .size(120.dp)
+                      .scale(scale)
+              )
+  
+              if (message != null) {
+                  Spacer(modifier = Modifier.height(24.dp))
+                  Text(
+                      text = message,
+                      color = Color.White,
+                      fontSize = 32.sp,
+                      fontWeight = FontWeight.Bold,
+                      textAlign = TextAlign.Center,
+                      modifier = Modifier.padding(horizontal = 32.dp)
+                  )
+              }
+  
+              Spacer(modifier = Modifier.height(48.dp))
+              Button(
+                  onClick = onDismiss,
+                  colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Red),
+                  modifier = Modifier.size(200.dp, 80.dp),
+                  shape = RoundedCornerShape(40.dp)
+              ) {
+                  Text(text = "DETENER", fontSize = 24.sp, fontWeight = FontWeight.ExtraBold)
+              }
+          }
+      }
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/components/DashboardScreen.kt)
+Response:
+  package com.example.estacionj6.ui.components
+  
+  import androidx.compose.foundation.background
+  import androidx.compose.foundation.layout.*
+  import androidx.compose.foundation.shape.RoundedCornerShape
+  import androidx.compose.material3.*
+  import androidx.compose.runtime.Composable
+  import androidx.compose.ui.Alignment
+  import androidx.compose.ui.Modifier
+  import androidx.compose.ui.graphics.Color
+  import androidx.compose.ui.text.font.FontWeight
+  import androidx.compose.ui.unit.dp
+  import androidx.compose.ui.unit.sp
+  import com.example.estacionj6.data.model.HubUiState
+  
+  @OptIn(ExperimentalMaterial3Api::class)
+  @Composable
+  fun DashboardScreen(
+      state: HubUiState,
+      onToggleRelay: (Boolean) -> Unit
+  ) {
+      Scaffold(
+          topBar = {
+              TopAppBar(
+                  title = { Text("Smart Hub J6", fontWeight = FontWeight.Bold) },
+                  colors = TopAppBarDefaults.topAppBarColors(
+                      containerColor = MaterialTheme.colorScheme.primaryContainer
+                  )
+              )
+          }
+      ) { padding ->
+          Column(
+              modifier = Modifier
+                  .fillMaxSize()
+                  .padding(padding)
+                  .padding(16.dp),
+              verticalArrangement = Arrangement.spacedBy(16.dp)
+          ) {
+              // Indicador de error si ocurre
+              state.error?.let { error ->
+                  Card(
+                      colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
+                      modifier = Modifier.fillMaxWidth()
+                  ) {
+                      Text(
+                          text = error,
+                          color = MaterialTheme.colorScheme.onErrorContainer,
+                          modifier = Modifier.padding(12.dp)
+                      )
+                  }
+              }
+  
+  
+              // Tarjeta de Presencia LD2410
+              PresenceCard(isGlobalPresence = state.isPresenceDetected, isMoving = state.isMovingPresence, isStatic = state.isStaticPresence)
+  
+              // Tarjetas Ambientales (Temperatura, Humedad, Presión)
+              Row(
+                  modifier = Modifier.fillMaxWidth(),
+                  horizontalArrangement = Arrangement.spacedBy(8.dp)
+              ) {
+                  MetricCard(
+                      title = "Temperatura",
+                      value = String.format("%.1f °C", state.temperature),
+                      modifier = Modifier.weight(1f)
+                  )
+                  MetricCard(
+                      title = "Humedad",
+                      value = String.format("%.1f %%", state.humidity),
+                      modifier = Modifier.weight(1f)
+                  )
+              }
+  
+              MetricCard(
+                  title = "Presión Atmosférica",
+                  value = String.format("%.1f hPa", state.pressure),
+                  modifier = Modifier.fillMaxWidth()
+              )
+  
+              Spacer(modifier = Modifier.weight(1f))
+  
+              // Control de Batería J6 y Relé
+              BatteryControlCard(
+                  batteryLevel = state.phoneBatteryLevel,
+                  isCharging = state.isPhoneCharging,
+                  isRelayOn = state.isRelayOn,
+                  onToggleRelay = onToggleRelay
+              )
+          }
+      }
+  }
+  
+  @Composable
+  fun PresenceCard(
+      isGlobalPresence: Boolean,
+      isMoving: Boolean,
+      isStatic: Boolean
+  ) {
+      val bgColor = if (isGlobalPresence) Color(0xFF2E7D32) else Color(0xFF424242)
+  
+      Card(
+          modifier = Modifier.fillMaxWidth(),
+          shape = RoundedCornerShape(12.dp),
+          colors = CardDefaults.cardColors(containerColor = bgColor)
+      ) {
+          Column(
+              modifier = Modifier
+                  .fillMaxWidth()
+                  .padding(16.dp),
+              horizontalAlignment = Alignment.CenterHorizontally
+          ) {
+              Text(
+                  text = if (isGlobalPresence) "PRESENCIA DETECTADA" else "HABITACIÓN VACÍA",
+                  color = Color.White,
+                  fontWeight = FontWeight.ExtraBold,
+                  fontSize = 18.sp
+              )
+  
+              if (isGlobalPresence) {
+                  Spacer(modifier = Modifier.height(8.dp))
+                  Row(
+                      horizontalArrangement = Arrangement.spacedBy(12.dp)
+                  ) {
+                      PresenceChip(label = "Movimiento", isActive = isMoving)
+                      PresenceChip(label = "Estático", isActive = isStatic)
+                  }
+              }
+          }
+      }
+  }
+  
+  @Composable
+  fun PresenceChip(label: String, isActive: Boolean) {
+      Surface(
+          color = if (isActive) Color(0xFF81C784) else Color(0xFF616161),
+          shape = RoundedCornerShape(16.dp)
+      ) {
+          Text(
+              text = "$label: ${if (isActive) "ON" else "OFF"}",
+              color = Color.White,
+              style = MaterialTheme.typography.labelSmall,
+              modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+          )
+      }
+  }
+  
+  @Composable
+  fun MetricCard(title: String, value: String, modifier: Modifier = Modifier) {
+      Card(
+          modifier = modifier,
+          elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+      ) {
+          Column(
+              modifier = Modifier.padding(16.dp),
+              horizontalAlignment = Alignment.CenterHorizontally
+          ) {
+              Text(text = title, style = MaterialTheme.typography.labelMedium)
+              Spacer(modifier = Modifier.height(8.dp))
+              Text(
+                  text = value,
+                  style = MaterialTheme.typography.headlineMedium,
+                  fontWeight = FontWeight.Bold
+              )
+          }
+      }
+  }
+  
+  @Composable
+  fun BatteryControlCard(
+      batteryLevel: Int,
+      isCharging: Boolean,
+      isRelayOn: Boolean,
+      onToggleRelay: (Boolean) -> Unit
+  ) {
+      Card(
+          modifier = Modifier.fillMaxWidth(),
+          colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+      ) {
+          Column(modifier = Modifier.padding(16.dp)) {
+              Text(
+                  text = "Gestión de Batería (Smart Hub)",
+                  style = MaterialTheme.typography.titleMedium,
+                  fontWeight = FontWeight.Bold
+              )
+              Spacer(modifier = Modifier.height(8.dp))
+  
+              Row(
+                  modifier = Modifier.fillMaxWidth(),
+                  horizontalArrangement = Arrangement.SpaceBetween,
+                  verticalAlignment = Alignment.CenterVertically
+              ) {
+                  Column {
+                      Text(text = "Nivel J6: $batteryLevel%")
+                      Text(
+                          text = if (isCharging) "Cargando..." else "En batería",
+                          style = MaterialTheme.typography.bodySmall
+                      )
+                  }
+  
+                  Row(verticalAlignment = Alignment.CenterVertically) {
+                      Text(text = if (isRelayOn) "Cargador ON" else "Cargador OFF")
+                      Spacer(modifier = Modifier.width(8.dp))
+                      Switch(
+                          checked = isRelayOn,
+                          onCheckedChange = onToggleRelay
+                      )
+                  }
+              }
+          }
+      }
+  }
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/util/VoiceAssistantManager.kt)
+Response:
+  package com.example.estacionj6.util
+  
+  import android.content.Context
+  import android.content.Intent
+  import android.os.Bundle
+  import android.speech.RecognitionListener
+  import android.speech.RecognizerIntent
+  import android.speech.SpeechRecognizer
+  import android.speech.tts.TextToSpeech
+  import android.util.Log
+  import com.google.ai.client.generativeai.GenerativeModel
+  import kotlinx.coroutines.CoroutineScope
+  import kotlinx.coroutines.Dispatchers
+  import kotlinx.coroutines.flow.MutableStateFlow
+  import kotlinx.coroutines.flow.StateFlow
+  import kotlinx.coroutines.launch
+  import org.json.JSONObject
+  import java.util.*
+  
+  class VoiceAssistantManager(private val context: Context) : TextToSpeech.OnInitListener {
+  
+      private val speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context)
+      private var tts: TextToSpeech? = TextToSpeech(context, this)
+  
+      private val _isListening = MutableStateFlow(false)
+      val isListening: StateFlow<Boolean> = _isListening
+  
+      private val _isThinking = MutableStateFlow(false)
+      val isThinking: StateFlow<Boolean> = _isThinking
+  
+      private val _transcript = MutableStateFlow("")
+      val transcript: StateFlow<String> = _transcript
+  
+      private var modelName = "gemini-1.5-flash-latest"
+      private var generativeModel = GenerativeModel(
+          modelName = modelName,
+          apiKey = "AIzaSyB3LPEmn_4dyOri0-o-TJkz9U7IlhWK8UY"
+      )
+  
+      override fun onInit(status: Int) {
+          if (status == TextToSpeech.SUCCESS) {
+              tts?.language = Locale("es", "ES")
+          }
+      }
+  
+      fun speak(text: String) {
+          Log.e("SH_LOG", "Hub dice: $text")
+          tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
+      }
+  
+      fun startListening(onResult: (String) -> Unit) {
+          val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+              putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+              putExtra(RecognizerIntent.EXTRA_LANGUAGE, "es-ES")
+          }
+  
+          speechRecognizer.setRecognitionListener(object : RecognitionListener {
+              override fun onReadyForSpeech(params: Bundle?) { _isListening.value = true }
+              override fun onBeginningOfSpeech() {}
+              override fun onRmsChanged(rmsdB: Float) {}
+              override fun onBufferReceived(buffer: ByteArray?) {}
+              override fun onEndOfSpeech() { _isListening.value = false }
+              override fun onError(error: Int) { _isListening.value = false }
+              override fun onResults(results: Bundle?) {
+                  val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                  val text = matches?.firstOrNull() ?: ""
+                  _transcript.value = text
+                  onResult(text)
+              }
+              override fun onPartialResults(partialResults: Bundle?) {
+                  val matches = partialResults?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                  matches?.firstOrNull()?.let { _transcript.value = it }
+              }
+              override fun onEvent(eventType: Int, params: Bundle?) {}
+          })
+  
+          speechRecognizer.startListening(intent)
+      }
+  
+      fun processIntent(text: String, onCommand: (AssistantCommand) -> Unit) {
+          if (text.isEmpty()) return
+          _isThinking.value = true
+          
+          CoroutineScope(Dispatchers.IO).launch {
+              try {
+                  Log.e("SH_LOG", "Pidiendo a $modelName: $text")
+                  val prompt = """
+                      Responde SOLO un JSON: {
+                        "response": "..",
+                        "action": "ALARM_SET" | "MUSIC_PLAY" | "MUSIC_STOP" | "RELAY_ON" | "RELAY_OFF" | "RADIO_PLAY" | "YOUTUBE_PLAY" | "PLEX_PLAY",
+                        "hour": 8,
+                        "minute": 30,
+                        "label": "..",
+                        "isReminder": false,
+                        "query": "búsqueda",
+                        "season": 1,
+                        "episode": 5
+                      }
+                      REGLA: PLEX_PLAY si pide "ver", "película" o "serie" de Plex. 
+                      Extrae temporada y episodio si el usuario lo indica.
+                      Frase: "$text"
+                  """.trimIndent()
+  
+                  val result = generativeModel.generateContent(prompt)
+                  val fullText = result.text ?: ""
+                  Log.e("SH_LOG", "Respuesta IA: $fullText")
+  
+                  val startIndex = fullText.indexOf("{")
+                  val endIndex = fullText.lastIndexOf("}")
+                  
+                  if (startIndex != -1 && endIndex != -1) {
+                      val json = JSONObject(fullText.substring(startIndex, endIndex + 1))
+                      val action = json.optString("action", "NONE").uppercase()
+                      val spoken = json.optString("response", "Hecho")
+                      
+                      speak(spoken)
+                      
+                      when (action) {
+                          "ALARM_SET" -> {
+                              val h = try { json.get("hour").toString().toInt() } catch(e: Exception) { -1 }
+                              val m = try { json.get("minute").toString().toInt() } catch(e: Exception) { 0 }
+                              val label = json.optString("label", "").ifEmpty { null }
+                              val isRem = json.optBoolean("isReminder", false)
+                              if (h in 0..23) onCommand(AssistantCommand.AlarmSet(h, m, null, null, label, isRem))
+                          }
+                          "MUSIC_PLAY" -> onCommand(AssistantCommand.MusicPlay(json.optString("query", text)))
+                          "RADIO_PLAY" -> onCommand(AssistantCommand.RadioPlay(json.optString("query", text)))
+                          "YOUTUBE_PLAY" -> onCommand(AssistantCommand.YouTubePlay(json.optString("query", text)))
+                          "PLEX_PLAY" -> {
+                              val q = json.optString("query", text)
+                              val s = json.optInt("season", -1).takeIf { it != -1 }
+                              val e = json.optInt("episode", -1).takeIf { it != -1 }
+                              onCommand(AssistantCommand.PlexPlay(q, s, e))
+                          }
+                          "MUSIC_STOP" -> onCommand(AssistantCommand.MusicStop)
+                          "RELAY_ON" -> onCommand(AssistantCommand.RelayOn)
+                          "RELAY_OFF" -> onCommand(AssistantCommand.RelayOff)
+                          else -> onCommand(AssistantCommand.None)
+                      }
+                  } else {
+                      throw Exception("No JSON")
+                  }
+              } catch (e: Exception) {
+                  Log.e("SH_LOG", "IA falló (${e.message}). Usando cerebro de emergencia.")
+                  val upper = text.uppercase()
+                  
+                  when {
+                      upper.contains("ALARMA") || upper.contains("RECUÉRDAME") -> {
+                          // Extractor de números en palabras (Básico)
+                          val wordMap = mapOf(
+                              "CERO" to 0, "UNA" to 1, "UNO" to 1, "DOS" to 2, "TRES" to 3, "CUATRO" to 4, "CINCO" to 5,
+                              "SEIS" to 6, "SIETE" to 7, "OCHO" to 8, "NUEVE" to 9, "DIEZ" to 10, "ONCE" to 11, "DOCE" to 12,
+                              "TRECE" to 13, "CATORCE" to 14, "QUINCE" to 15, "DIECISÉIS" to 16, "DIECISIETE" to 17,
+                              "DIECIOCHO" to 18, "DIECINUEVE" to 19, "VEINTE" to 20, "TREINTA" to 30, "CUARENTA" to 40, "CINCUENTA" to 50
+                          )
+                          
+                          val numbers = "\\d+".toRegex().findAll(text).map { it.value.toInt() }.toMutableList()
+                          if (numbers.isEmpty()) {
+                              val words = text.uppercase().split(" ")
+                              var hour = -1
+                              var minute = 0
+                              words.forEachIndexed { i, word ->
+                                  wordMap[word]?.let { valNum ->
+                                      if (hour == -1) hour = valNum
+                                      else if (words.getOrNull(i-1) == "Y" || words.getOrNull(i-1) == "CON") minute += valNum
+                                      else if (minute == 0) minute = valNum
+                                  }
+                              }
+                              if (hour != -1) { numbers.add(hour); numbers.add(minute) }
+                          }
+  
+                          val h = numbers.getOrNull(0) ?: 8
+                          val m = numbers.getOrNull(1) ?: 0
+                          val isRem = upper.contains("RECUÉRDAME")
+                          speak(if (isRem) "Recordatorio a las $h y $m" else "Alarma a las $h y $m")
+                          onCommand(AssistantCommand.AlarmSet(h, m, null, null, text, isRem))
+                      }
+                      upper.contains("RADIO") || upper.contains("EMISORA") -> {
+                          val q = text.lowercase().replace("pon la radio", "").replace("pon la emisora", "").replace("radio ", "").trim()
+                          speak("Buscando emisora $q")
+                          onCommand(AssistantCommand.RadioPlay(q))
+                      }
+                      upper.contains("QUITAR") || upper.contains("PARAR") || upper.contains("DETENER") || upper.contains("SILENCIO") || upper.contains("PARA LA") -> {
+                          speak("Vale, me callo")
+                          onCommand(AssistantCommand.MusicStop)
+                      }
+                      upper.contains("MÚSICA") || upper.contains("PON") -> {
+                          val q = text.lowercase().replace("pon ", "").replace("música ", "").trim()
+                          if (upper.contains("VIDEO") || upper.contains("YOUTUBE")) {
+                              speak("Buscando vídeo de $q")
+                              onCommand(AssistantCommand.YouTubePlay(q))
+                          } else if (upper.contains("PLEX") || upper.contains("PELÍCULA") || upper.contains("SERIE")) {
+                              // Intento extraer temporada y episodio del texto
+                              val numbers = "\\d+".toRegex().findAll(text).map { it.value.toInt() }.toList()
+                              val s = if (upper.contains("TEMPORADA")) numbers.firstOrNull() else null
+                              val e = if (upper.contains("CAPÍTULO") || upper.contains("EPISODIO")) numbers.lastOrNull() else null
+                              
+                              val q = text.lowercase()
+                                  .replace("pon ", "")
+                                  .replace("ver ", "")
+                                  .replace(" en plex", "")
+                                  .replace("temporada \\d+".toRegex(), "")
+                                  .replace("capítulo \\d+".toRegex(), "")
+                                  .trim()
+                                  
+                              speak("Buscando $q en Plex")
+                              onCommand(AssistantCommand.PlexPlay(q, s, e))
+                          } else {
+                              speak("Buscando $q")
+                              onCommand(AssistantCommand.MusicPlay(q))
+                          }
+                      }
+                      upper.contains("ENCIENDE") -> { speak("Encendido"); onCommand(AssistantCommand.RelayOn) }
+                      upper.contains("APAGA") -> { speak("Apagado"); onCommand(AssistantCommand.RelayOff) }
+                  }
+              } finally {
+                  _isThinking.value = false
+              }
+          }
+      }
+  
+      fun release() {
+          speechRecognizer.destroy()
+          tts?.stop()
+          tts?.shutdown()
+      }
+  
+      sealed class AssistantCommand {
+          data class MusicPlay(val query: String) : AssistantCommand()
+          data class RadioPlay(val query: String) : AssistantCommand()
+          data class YouTubePlay(val query: String) : AssistantCommand()
+          data class PlexPlay(val query: String, val season: Int? = null, val episode: Int? = null) : AssistantCommand()
+          object MusicStop : AssistantCommand()
+          object RelayOn : AssistantCommand()
+          object RelayOff : AssistantCommand()
+          data class AlarmSet(
+              val hour: Int, val minute: Int, 
+              val repeatDays: List<Int>? = null,
+              val specificDate: String? = null,
+              val label: String? = null,
+              val isReminder: Boolean = false
+          ) : AssistantCommand()
+          object None : AssistantCommand()
+      }
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/util/BatteryManagerHelper.kt)
+Response:
+  package com.example.estacionj6.util
+  
+  import android.content.Context
+  import android.content.Intent
+  import android.content.IntentFilter
+  import android.os.BatteryManager
+  
+  data class BatteryInfo(
+      val level: Int,
+      val isCharging: Boolean
+  )
+  
+  object BatteryManagerHelper {
+      fun getBatteryInfo(context: Context): BatteryInfo {
+          val intentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+          val batteryStatus: Intent? = context.registerReceiver(null, intentFilter)
+  
+          val level = batteryStatus?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
+          val scale = batteryStatus?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
+          val batteryPct = if (level != -1 && scale > 0) {
+              ((level / scale.toFloat()) * 100).toInt()
+          } else {
+              -1
+          }
+  
+          val status = batteryStatus?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ?: -1
+          val isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                  status == BatteryManager.BATTERY_STATUS_FULL
+  
+          return BatteryInfo(level = batteryPct, isCharging = isCharging)
+      }
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/model/EspHomeModels.kt)
+Response:
+  package com.example.estacionj6.data.model
+  
+  import com.google.gson.annotations.SerializedName
+  import java.util.UUID
+  
+  // Nuevo modelo para el endpoint /api/status (Sensor Interno .13)
+  data class EspHomeStatus(
+      @SerializedName("rele") val relay: Boolean,
+      @SerializedName("presencia") val presence: Boolean,
+      @SerializedName("movimiento") val movement: Boolean,
+      @SerializedName("persona_estatica") val staticPresence: Boolean,
+      @SerializedName("dht_temperatura") val dhtTemp: Float,
+      @SerializedName("dht_humedad") val dhtHum: Float,
+      @SerializedName("aht_temperatura") val ahtTemp: Float,
+      @SerializedName("aht_humedad") val ahtHum: Float,
+      @SerializedName("bmp_temperatura") val bmpTemp: Float,
+      @SerializedName("bmp_presion") val bmpPressure: Float
+  )
+  
+  // Modelo para alarmas
+  data class Alarm(
+      val id: String = UUID.randomUUID().toString(),
+      val hour: Int,
+      val minute: Int,
+      val isEnabled: Boolean = true,
+      val label: String? = null,
+      val repeatDays: List<Int>? = null,
+      val specificDate: String? = null,
+      val isReminder: Boolean = false // true para Recordatorio, false para Alarma
+  )
+  
+  // Modelo para Radio
+  data class RadioStation(
+      @SerializedName("name") val name: String,
+      @SerializedName("url") val url: String,
+      @SerializedName("favicon") val favicon: String? = null,
+      @SerializedName("tags") val tags: String? = null
+  )
+  
+  // Estado unificado que consumirá la interfaz gráfica en Compose
+  data class HubUiState(
+      val currentTime: String = "00:00",
+      val currentDate: String = "",
+      val temperature: Float = 0f,
+      val humidity: Float = 0f,
+      val pressure: Float = 0f,
+      val extTemperature: Float = 0f,
+      val extHumidity: Float = 0f,
+      val isPresenceDetected: Boolean = false,
+      val isMovingPresence: Boolean = false,
+      val isStaticPresence: Boolean = false,
+      val isRelayOn: Boolean = false,
+      val phoneBatteryLevel: Int = 0,
+      val isPhoneCharging: Boolean = false,
+      val isDimmed: Boolean = false,
+      val isLoading: Boolean = true,
+      val error: String? = null,
+  
+      // Música y Radio
+      val musicTitle: String? = null,
+      val musicArtist: String? = null,
+      val musicCoverUrl: String? = null,
+      val isPlaying: Boolean = false,
+      val isMusicLoading: Boolean = false,
+      val isRadioActive: Boolean = false,
+      val radioName: String? = null,
+      val youtubeVideoId: String? = null,
+      val isYoutubeActive: Boolean = false,
+      val plexTitle: String? = null,
+      val isPlexActive: Boolean = false,
+      val plexMediaUrl: String? = null,
+  
+      // Voz
+      val isListening: Boolean = false,
+      val isThinking: Boolean = false,
+      val voiceTranscript: String? = null,
+  
+      // Alarmas
+      val alarms: List<Alarm> = emptyList(),
+      val isAlarmFiring: Boolean = false,
+      val firingAlarmLabel: String? = null,
+      val weatherLocationName: String = "GPS",
+      val extPressure: Float = 0f,
+      val extApparentTemp: Float = 0f,
+      val windSpeed: Float = 0f,
+      val windDirection: String = "",
+      val precipitation: Float = 0f,
+      val cloudCover: Float = 0f,
+      val weatherDescription: String = "Cargando...",
+      val uvIndex: Float = 0f
+  )
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/model/NavidromeModels.kt)
+Response:
+  package com.example.estacionj6.data.model
+  
+  import com.google.gson.annotations.SerializedName
+  
+  data class SubsonicResponse(
+      @SerializedName("subsonic-response") val response: SubsonicContent
+  )
+  
+  data class SubsonicContent(
+      @SerializedName("status") val status: String,
+      @SerializedName("version") val version: String,
+      @SerializedName("searchResult3") val searchResult: SearchResult? = null,
+      @SerializedName("artist") val artist: NavidromeArtist? = null,
+      @SerializedName("album") val album: NavidromeAlbum? = null
+  )
+  
+  data class SearchResult(
+      @SerializedName("song") val songs: List<NavidromeSong>? = null,
+      @SerializedName("artist") val artists: List<NavidromeArtist>? = null,
+      @SerializedName("album") val albums: List<NavidromeAlbum>? = null
+  )
+  
+  data class NavidromeArtist(
+      @SerializedName("id") val id: String,
+      @SerializedName("name") val name: String,
+      @SerializedName("album") val albums: List<NavidromeAlbum>? = null
+  )
+  
+  data class NavidromeAlbum(
+      @SerializedName("id") val id: String,
+      @SerializedName("name") val title: String,
+      @SerializedName("artist") val artist: String? = null,
+      @SerializedName("song") val songs: List<NavidromeSong>? = null
+  )
+  
+  data class NavidromeSong(
+      @SerializedName("id") val id: String,
+      @SerializedName("title") val title: String,
+      @SerializedName("artist") val artist: String,
+      @SerializedName("album") val album: String? = null,
+      @SerializedName("duration") val duration: Int = 0,
+      @SerializedName("coverArt") val coverArt: String? = null
+  )
+  
+  // Estado para la UI de música
+  data class MusicUiState(
+      val currentSong: NavidromeSong? = null,
+      val isPlaying: Boolean = false,
+      val isBuffering: Boolean = false,
+      val error: String? = null
+  )
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/model/PlexModels.kt)
+Response:
+  package com.example.estacionj6.data.model
+  
+  import com.google.gson.annotations.SerializedName
+  
+  data class PlexResponse(
+      @SerializedName("MediaContainer") val container: PlexContainer
+  )
+  
+  data class PlexContainer(
+      @SerializedName("Metadata") val metadata: List<PlexMetadata>? = null
+  )
+  
+  data class PlexMetadata(
+      @SerializedName("ratingKey") val key: String,
+      @SerializedName("title") val title: String,
+      @SerializedName("type") val type: String, // movie, show, season, episode
+      @SerializedName("index") val index: Int? = null, // Número de temporada o episodio
+      @SerializedName("summary") val summary: String? = null,
+      @SerializedName("thumb") val thumb: String? = null,
+      @SerializedName("Media") val media: List<PlexMedia>? = null
+  )
+  
+  data class PlexMedia(
+      @SerializedName("Part") val parts: List<PlexPart>? = null
+  )
+  
+  data class PlexPart(
+      @SerializedName("key") val fileKey: String
+  )
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/model/WeatherModels.kt)
+Response:
+  package com.example.estacionj6.data.model
+  
+  import com.google.gson.annotations.SerializedName
+  
+  data class WeatherResponse(
+      @SerializedName("current") val current: CurrentWeather?
+  )
+  
+  data class CurrentWeather(
+      @SerializedName("temperature_2m") val temperature: Float,
+      @SerializedName("relative_humidity_2m") val humidity: Float,
+      @SerializedName("surface_pressure") val pressure: Float? = null,
+      @SerializedName("apparent_temperature") val apparentTemperature: Float? = null,
+      @SerializedName("wind_speed_10m") val windSpeed: Float? = null,
+      @SerializedName("wind_direction_10m") val windDirection: Float? = null,
+      @SerializedName("weather_code") val weatherCode: Int? = null,
+      @SerializedName("uv_index") val uvIndex: Float? = null,
+      @SerializedName("precipitation") val precipitation: Float? = null,
+      @SerializedName("cloud_cover") val cloudCover: Float? = null
+  )
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/remote/EspHomeApi.kt)
+Response:
+  package com.example.estacionj6.data.remote
+  
+  import com.example.estacionj6.data.model.EspHomeStatus
+  import okhttp3.ResponseBody
+  import retrofit2.http.*
+  
+  interface EspHomeApi {
+  
+      // --- ENDPOINT UNIFICADO (.13) ---
+      @GET("api/status")
+      suspend fun getStatus(): EspHomeStatus
+  
+      // --- ACCIONES ---
+      @POST("api/rele/{action}")
+      suspend fun controlRelay(
+          @Path("action") action: String
+      ): ResponseBody
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/remote/NavidromeApi.kt)
+Response:
+  package com.example.estacionj6.data.remote
+  
+  import com.example.estacionj6.data.model.SubsonicResponse
+  import retrofit2.http.GET
+  import retrofit2.http.Query
+  
+  interface NavidromeApi {
+  
+      @GET("rest/search3.view")
+      suspend fun search(
+          @Query("query") query: String,
+          @Query("u") user: String,
+          @Query("t") token: String,
+          @Query("s") salt: String,
+          @Query("v") version: String = "1.16.1",
+          @Query("c") client: String = "SmartHub",
+          @Query("f") format: String = "json"
+      ): SubsonicResponse
+  
+      @GET("rest/getArtist.view")
+      suspend fun getArtist(
+          @Query("id") id: String,
+          @Query("u") user: String,
+          @Query("t") token: String,
+          @Query("s") salt: String,
+          @Query("v") version: String = "1.16.1",
+          @Query("c") client: String = "SmartHub",
+          @Query("f") format: String = "json"
+      ): SubsonicResponse
+  
+      @GET("rest/getAlbum.view")
+      suspend fun getAlbum(
+          @Query("id") id: String,
+          @Query("u") user: String,
+          @Query("t") token: String,
+          @Query("s") salt: String,
+          @Query("v") version: String = "1.16.1",
+          @Query("c") client: String = "SmartHub",
+          @Query("f") format: String = "json"
+      ): SubsonicResponse
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/remote/NetworkClient.kt)
+Response:
+  package com.example.estacionj6.data.remote
+  
+  import android.util.Log
+  import okhttp3.OkHttpClient
+  import okhttp3.Request
+  import okhttp3.logging.HttpLoggingInterceptor
+  import retrofit2.Retrofit
+  import retrofit2.converter.gson.GsonConverterFactory
+  import java.util.concurrent.TimeUnit
+  
+  object NetworkClient {
+      private const val BASE_URL = "http://192.168.1.13/"
+      private const val TAG = "SMART_HUB_NET"
+  
+      // Logger estándar de OkHttp
+      private val loggingInterceptor = HttpLoggingInterceptor { message ->
+          Log.d(TAG, message)
+      }.apply {
+          level = HttpLoggingInterceptor.Level.BODY
+      }
+  
+      private val okHttpClient = OkHttpClient.Builder()
+          .connectTimeout(10, TimeUnit.SECONDS)
+          .readTimeout(10, TimeUnit.SECONDS)
+          .addInterceptor { chain ->
+              val originalRequest = chain.request()
+              val request = originalRequest.newBuilder()
+                  .header("User-Agent", "Mozilla/5.0 (Linux; Android 10; SM-J600G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36")
+                  .header("Accept", "application/json, text/plain, */*")
+                  .build()
+  
+              // Log manual directo a la consola de la URL enviada
+              Log.d(TAG, "--> ENVIANDO PETICIÓN A: ${request.url}")
+  
+              val response = chain.proceed(request)
+  
+              Log.d(TAG, "<-- RESPUESTA DE: ${response.request.url} | Código: ${response.code}")
+              response
+          }
+          .addInterceptor(loggingInterceptor)
+          .build()
+  
+      val api: EspHomeApi by lazy {
+          Retrofit.Builder()
+              .baseUrl(BASE_URL)
+              .client(okHttpClient)
+              .addConverterFactory(GsonConverterFactory.create())
+              .build()
+              .create(EspHomeApi::class.java)
+      }
+  
+      private const val NAVIDROME_BASE_URL = "http://192.168.1.30:4533/"
+  
+      val navidromeApi: NavidromeApi by lazy {
+          Retrofit.Builder()
+              .baseUrl(NAVIDROME_BASE_URL)
+              .client(okHttpClient)
+              .addConverterFactory(GsonConverterFactory.create())
+              .build()
+              .create(NavidromeApi::class.java)
+      }
+  
+      private const val RADIO_BASE_URL = "https://de1.api.radio-browser.info/"
+  
+      val radioApi: RadioApi by lazy {
+          Retrofit.Builder()
+              .baseUrl(RADIO_BASE_URL)
+              .client(okHttpClient)
+              .addConverterFactory(GsonConverterFactory.create())
+              .build()
+              .create(RadioApi::class.java)
+      }
+  
+      private const val PLEX_BASE_URL = "http://192.168.1.30:32400/"
+  
+      val plexApi: PlexApi by lazy {
+          Retrofit.Builder()
+              .baseUrl(PLEX_BASE_URL)
+              .client(okHttpClient)
+              .addConverterFactory(GsonConverterFactory.create())
+              .build()
+              .create(PlexApi::class.java)
+      }
+  
+      private const val WEATHER_BASE_URL = "https://api.open-meteo.com/"
+  
+      val weatherApi: WeatherApi by lazy {
+          Retrofit.Builder()
+              .baseUrl(WEATHER_BASE_URL)
+              .client(okHttpClient)
+              .addConverterFactory(GsonConverterFactory.create())
+              .build()
+              .create(WeatherApi::class.java)
+      }
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/remote/PlexApi.kt)
+Response:
+  package com.example.estacionj6.data.remote
+  
+  import com.example.estacionj6.data.model.PlexResponse
+  import retrofit2.http.GET
+  import retrofit2.http.Header
+  import retrofit2.http.Path
+  import retrofit2.http.Query
+  
+  interface PlexApi {
+      @GET("library/sections/all")
+      suspend fun getAllLibraries(
+          @Query("X-Plex-Token") token: String
+      ): PlexResponse
+  
+      @GET("search")
+      suspend fun search(
+          @Query("query") query: String,
+          @Query("X-Plex-Token") token: String
+      ): PlexResponse
+  
+      @GET("library/metadata/{key}")
+      suspend fun getMetadata(
+          @Path("key") key: String,
+          @Query("X-Plex-Token") token: String
+      ): PlexResponse
+  
+      @GET("library/metadata/{key}/children")
+      suspend fun getChildren(
+          @Path("key") key: String,
+          @Query("X-Plex-Token") token: String
+      ): PlexResponse
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/remote/RadioApi.kt)
+Response:
+  package com.example.estacionj6.data.remote
+  
+  import com.example.estacionj6.data.model.RadioStation
+  import retrofit2.http.GET
+  import retrofit2.http.Path
+  import retrofit2.http.Query
+  
+  interface RadioApi {
+      @GET("json/stations/byname/{name}")
+      suspend fun searchStations(
+          @Path("name") name: String,
+          @Query("limit") limit: Int = 5,
+          @Query("order") order: String = "votes",
+          @Query("reverse") reverse: Boolean = true
+      ): List<RadioStation>
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/remote/WeatherApi.kt)
+Response:
+  package com.example.estacionj6.data.remote
+  
+  import com.example.estacionj6.data.model.WeatherResponse
+  import retrofit2.http.GET
+  import retrofit2.http.Query
+  
+  interface WeatherApi {
+      @GET("v1/forecast")
+      suspend fun getCurrentWeather(
+          @Query("latitude") lat: Double,
+          @Query("longitude") lon: Double,
+          @Query("current") current: String = "temperature_2m,relative_humidity_2m,surface_pressure,apparent_temperature,wind_speed_10m,wind_direction_10m,weather_code,uv_index,precipitation,cloud_cover"
+      ): WeatherResponse
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/repository/HubRepository.kt)
+Response:
+  package com.example.estacionj6.data.repository
+  
+  import com.example.estacionj6.data.model.EspHomeStatus
+  import com.example.estacionj6.data.model.Alarm
+  import com.example.estacionj6.util.BatteryInfo
+  
+  interface HubRepository {
+      suspend fun fetchStatus(): Result<EspHomeStatus>
+      suspend fun setRelayState(turnOn: Boolean): Result<Unit>
+      fun getPhoneBatteryInfo(): BatteryInfo
+  
+      // Gestión de Alarmas
+      fun getAlarms(): List<Alarm>
+      fun saveAlarm(alarm: Alarm)
+      fun deleteAlarm(alarmId: String)
+      fun toggleAlarm(alarmId: String, enabled: Boolean)
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/repository/HubRepositoryImpl.kt)
+Response:
+  package com.example.estacionj6.data.repository
+  
+  import android.content.Context
+  import android.util.Log
+  import com.example.estacionj6.data.model.Alarm
+  import com.example.estacionj6.data.model.EspHomeStatus
+  import com.example.estacionj6.data.remote.EspHomeApi
+  import com.example.estacionj6.util.BatteryInfo
+  import com.example.estacionj6.util.BatteryManagerHelper
+  import com.google.gson.Gson
+  import com.google.gson.reflect.TypeToken
+  
+  class HubRepositoryImpl(
+      private val api: EspHomeApi,
+      private val context: Context
+  ) : HubRepository {
+  
+      private val prefs = context.getSharedPreferences("smart_hub_prefs", Context.MODE_PRIVATE)
+      private val gson = Gson()
+  
+      override suspend fun fetchStatus(): Result<EspHomeStatus> = runCatching {
+          Log.d("SH_LOG", "--> Solicitando estado al ESP32: http://192.168.1.13/api/status")
+          val response = api.getStatus()
+          Log.d("SH_LOG", "<-- Respuesta recibida de ESP32: $response")
+          response
+      }.onFailure { e ->
+          Log.e("SH_LOG", "!-- Error en fetchStatus(): ${e.javaClass.simpleName} - ${e.message}", e)
+      }
+  
+      override suspend fun setRelayState(turnOn: Boolean): Result<Unit> = runCatching {
+          val action = if (turnOn) "on" else "off"
+          api.controlRelay(action)
+          Unit
+      }
+  
+      override fun getPhoneBatteryInfo(): BatteryInfo {
+          return BatteryManagerHelper.getBatteryInfo(context)
+      }
+  
+      // --- GESTIÓN DE ALARMAS ---
+  
+      override fun getAlarms(): List<Alarm> {
+          val json = prefs.getString("alarms", null) ?: return emptyList()
+          val type = object : TypeToken<List<Alarm>>() {}.type
+          return gson.fromJson(json, type)
+      }
+  
+      override fun saveAlarm(alarm: Alarm) {
+          val alarms = getAlarms().toMutableList()
+          alarms.removeAll { it.id == alarm.id }
+          alarms.add(alarm)
+          saveAlarmsList(alarms)
+      }
+  
+      override fun deleteAlarm(alarmId: String) {
+          val alarms = getAlarms().toMutableList()
+          alarms.removeAll { it.id == alarmId }
+          saveAlarmsList(alarms)
+      }
+  
+      override fun toggleAlarm(alarmId: String, enabled: Boolean) {
+          val alarms = getAlarms().map {
+              if (it.id == alarmId) it.copy(isEnabled = enabled) else it
+          }
+          saveAlarmsList(alarms)
+      }
+  
+      private fun saveAlarmsList(alarms: List<Alarm>) {
+          val json = gson.toJson(alarms)
+          prefs.edit().putString("alarms", json).apply()
+      }
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/repository/MusicRepository.kt)
+Response:
+  package com.example.estacionj6.data.repository
+  
+  import com.example.estacionj6.data.model.NavidromeSong
+  import com.example.estacionj6.data.remote.NavidromeApi
+  import java.security.MessageDigest
+  import java.util.*
+  
+  class MusicRepository(
+      private val api: NavidromeApi,
+      private val user: String,
+      private val pass: String,
+      private val baseUrl: String
+  ) {
+  
+      suspend fun searchSongs(query: String): Result<List<NavidromeSong>> = runCatching {
+          val salt = UUID.randomUUID().toString().substring(0, 8)
+          val token = md5(pass + salt)
+          
+          val response = api.search(query, user, token, salt)
+          val result = response.response.searchResult
+  
+          // 1. Si hay canciones directas, devolverlas
+          val directSongs = result?.songs
+          if (!directSongs.isNullOrEmpty()) {
+              return@runCatching directSongs
+          }
+  
+          // 2. Si no hay canciones pero hay un artista, buscar sus canciones
+          val artistId = result?.artists?.firstOrNull()?.id
+          if (artistId != null) {
+              val artistResp = api.getArtist(artistId, user, token, salt)
+              val albumId = artistResp.response.artist?.albums?.firstOrNull()?.id
+              if (albumId != null) {
+                  val albumResp = api.getAlbum(albumId, user, token, salt)
+                  return@runCatching albumResp.response.album?.songs ?: emptyList()
+              }
+          }
+  
+          // 3. Si no hay artista pero hay un álbum, buscar canciones del álbum
+          val albumId = result?.albums?.firstOrNull()?.id
+          if (albumId != null) {
+              val albumResp = api.getAlbum(albumId, user, token, salt)
+              return@runCatching albumResp.response.album?.songs ?: emptyList()
+          }
+  
+          emptyList()
+      }
+  
+      fun getStreamUrl(songId: String): String {
+          val salt = UUID.randomUUID().toString().substring(0, 8)
+          val token = md5(pass + salt)
+          return "${baseUrl}rest/stream.view?id=$songId&u=$user&t=$token&s=$salt&v=1.16.1&c=SmartHub&f=json"
+      }
+  
+      fun getCoverArtUrl(coverArtId: String?): String? {
+          if (coverArtId == null) return null
+          val salt = UUID.randomUUID().toString().substring(0, 8)
+          val token = md5(pass + salt)
+          return "${baseUrl}rest/getCoverArt.view?id=$coverArtId&u=$user&t=$token&s=$salt&v=1.16.1&c=SmartHub"
+      }
+  
+      private fun md5(input: String): String {
+          val md = MessageDigest.getInstance("MD5")
+          return md.digest(input.toByteArray()).joinToString("") { "%02x".format(it) }
+      }
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/repository/PlexRepository.kt)
+Response:
+  package com.example.estacionj6.data.repository
+  
+  import com.example.estacionj6.data.model.PlexMetadata
+  import com.example.estacionj6.data.remote.PlexApi
+  
+  class PlexRepository(
+      private val api: PlexApi,
+      private val token: String,
+      private val baseUrl: String
+  ) {
+      suspend fun searchMedia(query: String, season: Int? = null, episode: Int? = null): Result<PlexMetadata?> = runCatching {
+          val response = api.search(query, token)
+          val firstResult = response.container.metadata?.firstOrNull()
+          
+          // Si el resultado es una serie (show)
+          if (firstResult?.type == "show") {
+              val showKey = firstResult.key // ratingKey
+              
+              // 1. Obtener temporadas
+              val seasonsResp = api.getChildren(showKey, token)
+              val seasons = seasonsResp.container.metadata ?: emptyList()
+              
+              // Seleccionar temporada (por defecto la 1 si no se especifica)
+              val targetSeason = if (season != null) {
+                  seasons.firstOrNull { it.index == season }
+              } else {
+                  seasons.firstOrNull { it.index != 0 } // Evitar especiales si es posible
+              } ?: seasons.firstOrNull()
+  
+              if (targetSeason != null) {
+                  // 2. Obtener episodios de esa temporada
+                  val episodesResp = api.getChildren(targetSeason.key, token)
+                  val episodes = episodesResp.container.metadata ?: emptyList()
+                  
+                  // Seleccionar episodio (por defecto el 1 si no se especifica)
+                  val targetEpisode = if (episode != null) {
+                      episodes.firstOrNull { it.index == episode }
+                  } else {
+                      episodes.firstOrNull()
+                  }
+                  
+                  return@runCatching targetEpisode ?: firstResult
+              }
+          }
+          
+          firstResult
+      }
+  
+      fun getStreamUrl(fileKey: String): String {
+          // Añadimos parámetros para forzar Direct Play en el J6 si es posible
+          return "$baseUrl$fileKey?X-Plex-Token=$token"
+      }
+  
+      fun getThumbUrl(thumbKey: String?): String? {
+          if (thumbKey == null) return null
+          return "$baseUrl$thumbKey?X-Plex-Token=$token"
+      }
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/repository/RadioRepository.kt)
+Response:
+  package com.example.estacionj6.data.repository
+  
+  import com.example.estacionj6.data.model.RadioStation
+  import com.example.estacionj6.data.remote.RadioApi
+  
+  class RadioRepository(private val api: RadioApi) {
+      suspend fun searchStation(query: String): Result<RadioStation?> = runCatching {
+          val results = api.searchStations(query)
+          results.firstOrNull()
+      }
+  }
+  
+Call: read_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/repository/WeatherRepository.kt)
+Response:
+  package com.example.estacionj6.data.repository
+  
+  import android.annotation.SuppressLint
+  import android.content.Context
+  import android.location.Geocoder
+  import android.location.LocationManager
+  import android.util.Log
+  import com.example.estacionj6.data.remote.WeatherApi
+  import java.util.Locale
+  
+  data class WeatherData(
+      val temperature: Float,
+      val humidity: Float,
+      val pressure: Float,
+      val apparentTemperature: Float,
+      val windSpeed: Float,
+      val windDirection: String,
+      val precipitation: Float,
+      val cloudCover: Float,
+      val weatherDescription: String,
+      val uvIndex: Float,
+      val locationName: String
+  )
+  
+  class WeatherRepository(
+      private val api: WeatherApi,
+      private val context: Context,
+      private val defaultLat: Double = 40.4168,
+      private val defaultLon: Double = -3.7038
+  ) {
+      @SuppressLint("MissingPermission")
+      private fun getLocation(): Pair<Double, Double> {
+          val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as? LocationManager ?: return Pair(defaultLat, defaultLon)
+          try {
+              val gpsLocation = if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                  locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+              } else null
+  
+              val netLocation = if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                  locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+              } else null
+  
+              val bestLocation = when {
+                  gpsLocation != null && netLocation != null -> if (gpsLocation.time > netLocation.time) gpsLocation else netLocation
+                  gpsLocation != null -> gpsLocation
+                  else -> netLocation
+              }
+  
+              if (bestLocation != null) {
+                  return Pair(bestLocation.latitude, bestLocation.longitude)
+              }
+          } catch (e: SecurityException) {
+              Log.e("SH_LOG", "Permiso de ubicación no concedido: ${e.message}")
+          }
+          return Pair(defaultLat, defaultLon)
+      }
+  
+      private fun getCityName(lat: Double, lon: Double): String {
+          try {
+              val geocoder = Geocoder(context, Locale.getDefault())
+              @Suppress("DEPRECATION")
+              val addresses = geocoder.getFromLocation(lat, lon, 1)
+              if (!addresses.isNullOrEmpty()) {
+                  val address = addresses[0]
+                  return address.locality ?: address.subAdminArea ?: address.adminArea ?: "Ubicación GPS"
+              }
+          } catch (e: Exception) {
+              Log.e("SH_LOG", "Error obteniendo ciudad con Geocoder: ${e.message}")
+          }
+          return String.format(Locale.getDefault(), "%.1f, %.1f", lat, lon)
+      }
+  
+      private fun getWeatherDescription(code: Int?): String {
+          return when (code) {
+              0 -> "Despejado ☀️"
+              1, 2, 3 -> "Parcialmente nublado ⛅"
+              45, 48 -> "Niebla 🌫️"
+              51, 53, 55, 56, 57 -> "Llovizna 🌧️"
+              61, 63, 65, 66, 67 -> "Lluvia 🌧️"
+              71, 73, 75, 77 -> "Nieve ❄️"
+              80, 81, 82 -> "Chubascos 🌦️"
+              95, 96, 99 -> "Tormenta ⛈️"
+              else -> "Clima variable 🌤️"
+          }
+      }
+  
+      private fun getWindDirectionCardinal(degrees: Float?): String {
+          if (degrees == null) return "N/D"
+          val directions = arrayOf("N", "NE", "E", "SE", "S", "SO", "O", "NO")
+          val index = (((degrees + 22.5f) % 360) / 45).toInt()
+          return "${directions[index]} (${degrees.toInt()}°)"
+      }
+  
+      suspend fun fetchWeather(): Result<WeatherData> = runCatching {
+          val (lat, lon) = getLocation()
+          val locationName = getCityName(lat, lon)
+          Log.d("SH_LOG", "--> Solicitando clima detallado de Open-Meteo para '$locationName' (lat: $lat, lon: $lon)")
+          val response = api.getCurrentWeather(lat, lon)
+          val current = response.current ?: throw IllegalStateException("No se encontraron datos de clima actuales")
+          
+          val temp = current.temperature
+          val hum = current.humidity
+          val press = current.pressure ?: 0f
+          val apparent = current.apparentTemperature ?: temp
+          val windSpd = current.windSpeed ?: 0f
+          val windDir = getWindDirectionCardinal(current.windDirection)
+          val precip = current.precipitation ?: 0f
+          val clouds = current.cloudCover ?: 0f
+          val desc = getWeatherDescription(current.weatherCode)
+          val uv = current.uvIndex ?: 0f
+  
+          Log.d("SH_LOG", "<-- Clima completo recibido ($locationName): Temp=$temp°C, Precip=$precip mm, Nubes=$clouds%")
+          WeatherData(temp, hum, press, apparent, windSpd, windDir, precip, clouds, desc, uv, locationName)
+      }.onFailure { e ->
+          Log.e("SH_LOG", "!-- Error obteniendo clima completo: ${e.message}", e)
+      }
+  }
+  
+Call: list_files(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6, maxDepth=1)
+Response:
+  app/
+  .git/
+  .idea/
+  gradle/
+  .kotlin/
+  gradlew (252 lines)
+  .gitignore (16 lines)
+  gradlew.bat (95 lines)
+  build.gradle.kts (6 lines)
+  gradle.properties (19 lines)
+  settings.gradle.kts (27 lines)
+Call: write_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/00_MAPA_MENTAL.md, text=# Mapa Mental y Visión General: Estación J6 (Smart Hub)
+
+La aplicación **EstacionJ6** es un sistema domótico centralizado tipo pantalla inteligente (*Smart Display / Kiosk*) desarrollado en **Kotlin** y **Jetpack Compose**. Su finalidad es convertir un dispositivo Android (específicamente optimizado para terminales de características fijas como un Samsung Galaxy J6) en una consola doméstica de control 24/7 interactiva.
+
+---
+
+## 1. Mapa Mental del Sistema
+
+```mermaid
+flowchart TD
+    Root["Smart Hub J6 (EstacionJ6)"]
+
+    %% RAMA 1: SISTEMA & KIOSK
+    Root --> Kiosk["1. Sistema & Modo Kiosk"]
+    Kiosk --> K1["Pantalla Completa Inmersiva (HideSystemUI)"]
+    Kiosk --> K2["Keep Screen On & Auto-Unlock"]
+    Kiosk --> K3["Bloqueo Navegación (Back & Home Trap)"]
+    Kiosk --> K4["Orientación Landscape Sensor"]
+    Kiosk --> K5["Atenuación Automática por Ausencia"]
+
+    %% RAMA 2: GESTIÓN DE ESTADO Y REACTIVIDAD
+    Root --> StateNode["2. Estado & Lógica (MainViewModel)"]
+    StateNode --> S1["HubUiState (StateFlow Único)"]
+    StateNode --> S2["Loop de Reloj y Alarmas (1 seg)"]
+    StateNode --> S3["Loop de Polling IoT & Clima (5 seg)"]
+    StateNode --> S4["Gestión de Despertar Manual (30s timeout)"]
+    StateNode --> S5["Ducking de Audio en escucha activa"]
+
+    %% RAMA 3: HARDWARE IOT & BATERÍA
+    Root --> IoT["3. IoT, Sensores & Batería"]
+    IoT --> I1["ESP32 ESPHome (.13 /api/status)"]
+    I1 --> I1A["AHT20/DHT: Temp & Humedad"]
+    I1 --> I1B["BMP280: Presión Atmosférica"]
+    I1 --> I1C["LD2410: Radar Presencia & Movimiento"]
+    IoT --> I2["Control de Relé (/api/rele/{on|off})"]
+    IoT --> I3["Gestor de Batería J6 (BatteryManagerHelper)"]
+    I3 --> I3A["Histeresis Inteligente: Carga 20% a 80%"]
+
+    %% RAMA 4: MULTIMEDIA & STREAMING
+    Root --> Media["4. Multimedia & Streaming"]
+    Media --> M1["ExoPlayer (Media3)"]
+    Media --> M2["Navidrome (Subsonic API)"]
+    M2 --> M2A["Autenticación MD5 + Salt"]
+    M2 --> M2B["Búsqueda Jerárquica: Canción / Artista / Álbum"]
+    Media --> M3["Radio Online (Radio-Browser API)"]
+    Media --> M4["Plex Media Server (Direct Play / Series & Movies)"]
+    Media --> M5["YouTube Embed (Preparado)"]
+
+    %% RAMA 5: INTELIGENCIA ARTIFICIAL & VOZ
+    Root --> Voice["5. Asistente de Voz & IA"]
+    Voice --> V1["Reconocimiento de Voz (SpeechRecognizer es-ES)"]
+    Voice --> V2["Síntesis de Voz (TextToSpeech)"]
+    Voice --> V3["Gemini 1.5 Flash (GenerativeModel)"]
+    V3 --> V3A["Inferencia JSON con Intent Parsing"]
+    Voice --> V4["Cerebro de Emergencia (Regex + NLP Léxico Offline)"]
+
+    %% RAMA 6: CLIMA EXTERIOR & LOCALIZACIÓN
+    Root --> Weather["6. Clima & Ubicación"]
+    Weather --> W1["LocationManager (GPS / Network)"]
+    Weather --> W2["Reverse Geocoding (Geocoder Ciudad)"]
+    Weather --> W3["Open-Meteo REST API"]
+    W3 --> W3A["Variables: Temp, Hum, Presión, Viento, Precipitación, UV"]
+    W3 --> W3B["Mapeo Códigos WMO con Emojis"]
+
+    %% RAMA 7: INTERFAZ DE USUARIO (COMPOSE)
+    Root --> UI["7. Interfaz Gráfica (Compose)"]
+    UI --> U1["SmartHubDashboard (Horizontal Scroll)"]
+    U1 --> U1A["Card Reloj & Fecha Dinámica"]
+    U1 --> U1B["Card Comparativa Clima (IN vs OUT)"]
+    U1 --> U1C["Card Gestión Alarmas & Recordatorios"]
+    U1 --> U1D["Card Reproductor & Carátulas (Coil)"]
+    UI --> U2["Overlays Interactivos"]
+    U2 --> U2A["Atenuación Progresiva (dimAlpha)"]
+    U2 --> U2B["Alarma Activada (Alerta visual pulsante)"]
+    U2 --> U2C["Transcripción de Voz Flotante"]
+```
+
+---
+
+## 2. Mapa de Nodos y Estructura de Documentación
+
+A continuación se detalla el desglose por nodos para su análisis en profundidad, con acceso directo a cada documento especializado:
+
+| Nodo | Título del Módulo | Archivo de Documentación | Componentes Clave Involucrados |
+| :--- | :--- | :--- | :--- |
+| **01** | **Arquitectura & Modo Kiosk** | [`01_ARQUITECTURA_Y_KIOSK.md`](./01_ARQUITECTURA_Y_KIOSK.md) | `MainActivity.kt`, `AndroidManifest.xml` |
+| **02** | **Gestión de Estado & ViewModel** | [`02_GESTION_ESTADO_Y_VIEWMODEL.md`](./02_GESTION_ESTADO_Y_VIEWMODEL.md) | `MainViewModel.kt`, `HubUiState` |
+| **03** | **Domótica IoT, Sensores & Batería** | [`03_DOMOTICA_IOT_Y_BATERIA.md`](./03_DOMOTICA_IOT_Y_BATERIA.md) | `EspHomeApi.kt`, `HubRepositoryImpl.kt`, `BatteryManagerHelper.kt` |
+| **04** | **Multimedia, Audio & Streaming** | [`04_MULTIMEDIA_STREAMING.md`](./04_MULTIMEDIA_STREAMING.md) | `MusicRepository.kt`, `PlexRepository.kt`, `RadioRepository.kt`, `ExoPlayer` |
+| **05** | **Asistente de Voz & Cerebro IA** | [`05_ASISTENTE_VOZ_E_IA.md`](./05_ASISTENTE_VOZ_E_IA.md) | `VoiceAssistantManager.kt`, Gemini 1.5 Flash SDK |
+| **06** | **Meteorología & Geolocalización** | [`06_METEOROLOGIA_Y_GEOLOCALIZACION.md`](./06_METEOROLOGIA_Y_GEOLOCALIZACION.md) | `WeatherRepository.kt`, `WeatherApi.kt`, Open-Meteo |
+| **07** | **Interfaz UI Jetpack Compose** | [`07_INTERFAZ_UI_JETPACK_COMPOSE.md`](./07_INTERFAZ_UI_JETPACK_COMPOSE.md) | `SmartHubDashboard.kt`, `DashboardScreen.kt` |
+| **08** | **Evaluación Crítica & Plan de Mejoras** | [`08_EVALUACION_CRITICA_Y_MEJORAS.md`](./08_EVALUACION_CRITICA_Y_MEJORAS.md) | Seguridad, Arquitectura, Rendimiento AMOLED |
+
+---
+
+## 3. Resumen Ejecutivo de la Solución
+
+- **Objetivo**: Estación fija de control del hogar colocada en pared o soporte de mesa.
+- **Microcontrolador Asociado**: ESP32 ejecutando ESPHome en la red local (`192.168.1.13`), equipado con radar mmWave LD2410 (detección de presencia humana micrométrica), sensor ambiental AHT20/BMP280 y relé conmutador del cargador.
+- **Inteligencia**: Asistente con control multimodal de voz; utiliza Gemini 1.5 Flash para extraer intenciones domóticas y multimedia, y dispone de un fallback algorítmico sin conexión a internet.
+- **Servidores Locales**: Navidrome para música personal y Plex Media Server para vídeo y series.
+)
+Response:
+  File was written
+Call: write_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/01_ARQUITECTURA_Y_KIOSK.md, text=# Nodo 1: Arquitectura Base y Modo Kiosk
+
+Este documento analiza en profundidad el ciclo de vida, la configuración a nivel de sistema operativo y los mecanismos implementados en la clase [`MainActivity.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/MainActivity.kt) y el manifiesto [`AndroidManifest.xml`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/AndroidManifest.xml) para convertir un teléfono Android en un terminal Kiosk permanente.
+
+---
+
+## 1. Patrón Kiosk y Modo Always-On
+
+Para que el dispositivo funcione de manera ininterrumpida como consola centralizada, el sistema aplica las siguientes técnicas:
+
+```mermaid
+flowchart TD
+    Launch[Inicio de la App / Boot] --> Perms[Solicitud Permiso RECORD_AUDIO]
+    Perms --> Orient[Fijar Orientación: SENSOR_LANDSCAPE]
+    Orient --> Immersive[hideSystemUI: Modo Inmersivo Estricto]
+    Immersive --> WinFlags[Flags de Ventana: KeepScreenOn & DismissKeyguard]
+    
+    WinFlags --> EventFocus[Pérdida de Foco / Retorno]
+    EventFocus -->|onWindowFocusChanged| Immersive
+    
+    WinFlags --> EventBack[Pulsación Botón Atrás]
+    EventBack -->|onBackPressed interceptado| BlockBack[Acción Bloqueada: Ignorar]
+    
+    WinFlags --> EventHome[Intento de Salir / Botón Home]
+    EventHome -->|onUserLeaveHint| ReorderFront[Intent: FLAG_ACTIVITY_REORDER_TO_FRONT]
+    ReorderFront --> Launch
+```
+
+### 1.1. Inmersión de Pantalla (`hideSystemUI`)
+La aplicación oculta completamente las barras de navegación y de estado del sistema:
+- **En Android 11+ (API 30+)**: Usa `WindowInsetsController` con comportamiento `BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE`, permitiendo interactuar con bordes sin que la interfaz del sistema desplace los elementos Compose.
+- **En versiones anteriores (API < 30, como el Samsung J6 con Android 8/9/10)**: Aplica los flags clásicos:
+  ```kotlin
+  View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+  or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+  or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+  or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+  or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+  or View.SYSTEM_UI_FLAG_FULLSCREEN
+  ```
+- **Reactivación**: Se engancha a `onWindowFocusChanged(hasFocus: Boolean)` para volver a invocar `hideSystemUI()` si un diálogo o notificación temporal desplegó la barra.
+
+### 1.2. Mantenimiento de Pantalla y Desbloqueo (`Window Flags`)
+En `onCreate`, se configuran directivas a la ventana de la ventana:
+- `FLAG_KEEP_SCREEN_ON`: Impide que el temporizador de inactividad de Android suspenda el hardware o apague el panel.
+- `FLAG_DISMISS_KEYGUARD`: Salta el bloqueo de pantalla si el dispositivo se reinicia.
+- `FLAG_SHOW_WHEN_LOCKED`: Asegura que la aplicación se dibuje por encima de cualquier pantalla de bloqueo.
+- `FLAG_TURN_SCREEN_ON`: Enciende la pantalla si estaba suspendida al arrancar.
+
+### 1.3. Mecanismos Anti-Escape (Kiosk Lock)
+1. **Bloqueo de botón Atrás (`onBackPressed`)**:
+   Sobrescrito intencionadamente sin invocar `super.onBackPressed()`. El usuario no puede retroceder ni cerrar la Activity con el botón físico o virtual de atrás.
+2. **Trampa de Botón Inicio / Minimización (`onUserLeaveHint`)**:
+   Cuando el usuario presiona el botón Home o intenta cambiar de tarea, el callback `onUserLeaveHint()` dispara de inmediato un Intent explícito con las banderas `FLAG_ACTIVITY_NEW_TASK` y `FLAG_ACTIVITY_REORDER_TO_FRONT`, devolviendo a la app al primer plano sin latencia perceptible.
+
+---
+
+## 2. Configuración del Manifiesto (`AndroidManifest.xml`)
+
+### 2.1. Permisos Declarados
+| Permiso | Propósito en la App |
+| :--- | :--- |
+| `android.permission.INTERNET` | Comunicación HTTP con el ESP32 local, Navidrome, Plex, Radio-Browser, Open-Meteo y la API de Gemini. |
+| `android.permission.ACCESS_NETWORK_STATE` | Verificación de conectividad activa. |
+| `android.permission.ACCESS_WIFI_STATE` | Detección de conectividad Wi-Fi local para los servicios domóticos. |
+| `android.permission.ACCESS_FINE_LOCATION` | Obtención de coordenadas GPS precisas para el cálculo de previsión meteorológica local. |
+| `android.permission.ACCESS_COARSE_LOCATION` | Obtención de coordenadas por antenas/red en interiores donde no hay cobertura GPS. |
+| `android.permission.RECORD_AUDIO` | Acceso al micrófono para el reconocimiento de voz del asistente inteligente. |
+
+### 2.2. Políticas de Red y Tráfico HTTP Claro
+- `android:usesCleartextTraffic="true"` y `android:networkSecurityConfig="@xml/network_security_config"`:
+  Indispensable dado que los microcontroladores locales (ESP32 con ESPHome en `http://192.168.1.13`) y servidores internos (`http://192.168.1.30:4533` y `http://192.168.1.30:32400`) operan sobre HTTP plano sin certificado SSL.
+
+### 2.3. Modo de Lanzamiento
+- `launchMode="singleInstance"`: Asegura que no se puedan apilar múltiples instancias de `MainActivity` en la pila de tareas, garantizando que el ciclo Kiosk se mantenga sobre una única instancia activa.
+
+---
+
+## 3. Inyección de Dependencias Manual en `MainActivity`
+
+La aplicación utiliza actualmente el patrón **ViewModelProvider.Factory** personalizado en `MainActivity` para instanciar el [`MainViewModel`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/main/MainViewModel.kt) con sus repositorios y servicios asociados:
+
+```mermaid
+classDiagram
+    class MainActivity {
+        +MainViewModel viewModel
+        +onCreate()
+        +hideSystemUI()
+        +onUserLeaveHint()
+    }
+
+    class MainViewModel {
+        +StateFlow~HubUiState~ uiState
+        +ExoPlayer player
+        +toggleRelay()
+        +startVoiceAssistant()
+    }
+
+    class HubRepositoryImpl {
+        -EspHomeApi api
+        -SharedPreferences prefs
+    }
+
+    class MusicRepository {
+        -NavidromeApi api
+    }
+
+    class PlexRepository {
+        -PlexApi api
+    }
+
+    class RadioRepository {
+        -RadioApi api
+    }
+
+    class WeatherRepository {
+        -WeatherApi api
+    }
+
+    class VoiceAssistantManager {
+        -SpeechRecognizer speechRecognizer
+        -GenerativeModel generativeModel
+    }
+
+    MainActivity ..> MainViewModel : Instancia mediante Factory
+    MainViewModel --> HubRepositoryImpl
+    MainViewModel --> MusicRepository
+    MainViewModel --> PlexRepository
+    MainViewModel --> RadioRepository
+    MainViewModel --> WeatherRepository
+    MainViewModel --> VoiceAssistantManager
+    MainViewModel --> ExoPlayer
+```
+
+### Parámetros cableados en el Factory:
+- **ESP32**: Conexión a través del singleton [`NetworkClient.api`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/remote/NetworkClient.kt) (`http://192.168.1.13/`).
+- **Navidrome**: Credenciales fijas (`admin` / `admin`) y URL base local `http://192.168.1.30:4533/`.
+- **Plex**: Token fijo de usuario (`Sz1L76j34TQPsX5CV7Tw`) y URL `http://192.168.1.30:32400`.
+- **ExoPlayer**: Instanciado a nivel de contexto de aplicación y compartido entre el ViewModel y la vista de Compose.
+)
+Response:
+  File was written
+Call: write_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/02_GESTION_ESTADO_Y_VIEWMODEL.md, text=# Nodo 2: Gestión de Estado y Lógica de Negocio (MainViewModel)
+
+Este documento detalla el cerebro reactivo de la aplicación: [`MainViewModel.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/main/MainViewModel.kt) y su modelo de estado inmutable [`HubUiState`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/model/EspHomeModels.kt#L41).
+
+---
+
+## 1. El Estado Unificado (`HubUiState`)
+
+La aplicación sigue el patrón **UDF (Unidirectional Data Flow)** de Jetpack Compose, concentrando toda la información en un único `data class` inmutable expuesto a través de `StateFlow<HubUiState>`:
+
+```mermaid
+flowchart LR
+    VM[MainViewModel] -->|StateFlow HubUiState| ComposeView[SmartHubDashboard Composable]
+    ComposeView -->|Eventos de Usuario / Callbacks| VM
+    VM -->|Mutaciones internas atómicas .update| StateFlow[uiState StateFlow]
+```
+
+### Atributos Clave del Estado:
+- **Temporales**: `currentTime` ("HH:mm"), `currentDate` ("EEEE, d 'de' MMMM").
+- **Sensores Locales (IN)**: `temperature`, `humidity`, `pressure` (AHT20/BMP280 en ESP32).
+- **Radar de Presencia (LD2410)**: `isPresenceDetected`, `isMovingPresence`, `isStaticPresence`.
+- **Clima Exterior (OUT)**: `extTemperature`, `extHumidity`, `extPressure`, `windSpeed`, `windDirection`, `precipitation`, `cloudCover`, `weatherDescription`, `uvIndex`, `weatherLocationName`.
+- **Hardware Dispositivo (J6)**: `phoneBatteryLevel`, `isPhoneCharging`, `isRelayOn`, `isDimmed`, `isLoading`, `error`.
+- **Multimedia**: `musicTitle`, `musicArtist`, `musicCoverUrl`, `isPlaying`, `isMusicLoading`, `isRadioActive`, `radioName`, `plexTitle`, `isPlexActive`, `plexMediaUrl`, `youtubeVideoId`.
+- **Asistente de Voz**: `isListening`, `isThinking`, `voiceTranscript`.
+- **Alarmas y Recordatorios**: `alarms` (lista), `isAlarmFiring`, `firingAlarmLabel`.
+
+---
+
+## 2. Corrutinas y Bucles Concurrentes
+
+Al inicializarse el `MainViewModel` en su bloque `init`, se arrancan los siguientes procesos en segundo plano usando `viewModelScope`:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant VM as MainViewModel
+    participant Clock as Loop Reloj (1000ms)
+    participant Polling as Loop Telemetría (5000ms)
+    participant Repo as Repositorios (IoT + Clima + Batería)
+    participant Voice as VoiceAssistantManager
+    participant Player as ExoPlayer
+
+    VM->>Clock: Iniciar startClock()
+    VM->>Polling: Iniciar startPolling()
+    VM->>Voice: Suscribirse a StateFlows de Voz
+    VM->>Player: Registrar Player.Listener
+
+    loop Cada 1 segundo
+        Clock->>Clock: Evaluar Hora Actual y Alarmas Activas
+        alt Alarma Coincide (Hora, Minuto, Segundo=0)
+            Clock->>Voice: speak(Alarma / Recordatorio)
+            Clock->>VM: _uiState.update { isAlarmFiring = true }
+        end
+    end
+
+    loop Cada 5 segundos
+        Polling->>Repo: Consultar Batería J6
+        Polling->>Repo: fetchWeather() (Open-Meteo)
+        Polling->>Repo: fetchStatus() (ESP32 .13)
+        Repo-->>Polling: Telemetría Actualizada
+        Polling->>VM: evaluateBatteryLogic() & _uiState.update
+    end
+```
+
+### 2.1. Loop de Reloj y Disparo de Alarmas (`startClock()`)
+- Ejecutado cada 1000 ms.
+- Reconstruye los textos formateados de fecha y hora en español.
+- Comprueba si el segundo exacto es `0` y si la hora y minuto coinciden con alguna alarma habilitada (`isEnabled == true`):
+  - **Alarmas con fecha específica**: `specificDate == todayStr` ("yyyy-MM-dd").
+  - **Alarmas repetitivas**: `repeatDays.contains(currentDayOfWeek)`.
+  - **Diferenciación Alarma vs Recordatorio**:
+    - Si `isReminder == true`: el asistente de voz lee el mensaje mediante TTS (`"Atención, recordatorio: $msg"`), sin activar la sirena en pantalla completa.
+    - Si es alarma estándar: se dispara el overlay de alarma a pantalla completa (`isAlarmFiring = true`) y se anuncia vocalmente.
+
+### 2.2. Loop de Polling de Sensores y Clima (`startPolling()`)
+- Ejecutado cada 5000 ms. Invoca a `refreshData()`:
+  1. **Lectura de Batería Local**: Lee el estado directo del sistema operativo vía `BatteryManagerHelper`.
+  2. **Consulta Meteorológica Externa**: Invoca `weatherRepository.fetchWeather()` en `Dispatchers.IO` para no bloquear el hilo principal.
+  3. **Consulta de Sensores ESP32**: Solicita `repository.fetchStatus()`.
+  4. **Cálculo de Atenuación de Pantalla (Smart Dimming)**:
+     ```kotlin
+     isDimmed = !status.presence && !_manualWakeActive.value && !currentState.isAlarmFiring
+     ```
+     Si el radar LD2410 no detecta ninguna presencia humana en la habitación, ni la alarma está sonando, ni hay un despertar manual activo, la pantalla se atenúa automáticamente para ahorrar energía y evitar desgaste del panel AMOLED.
+
+---
+
+## 3. Despertar Manual de Pantalla (`manualWake()`)
+
+Para permitir al usuario consultar la pantalla cuando el sensor de presencia aún no lo ha detectado o la habitación está a oscuras, se implementa `manualWake()`:
+- Al recibir un doble toque en la pantalla (`detectTapGestures(onDoubleTap = { ... })`):
+  1. Se establece `_manualWakeActive.value = true`.
+  2. Se cancela la atenuación (`isDimmed = false`).
+  3. Se inicia un temporizador de 30 segundos (`delay(30_000)`).
+  4. Tras los 30 segundos, el flag se desactiva y el estado vuelve a depender exclusivamente del radar de presencia física.
+
+---
+
+## 4. Control de Ducking de Audio y Escucha Activa
+
+El `MainViewModel` coordina la interacción entre el reproductor multimedia y el reconocimiento por voz:
+- Cuando `voiceManager.isListening` emite `true` (el usuario está hablando):
+  ```kotlin
+  player.volume = 0.2f // Atenuación al 20%
+  ```
+- Cuando la escucha finaliza (`isListening = false`):
+  ```kotlin
+  player.volume = 1.0f // Restablecimiento al 100%
+  ```
+- Además, la transcripción de voz (`voiceTranscript`) se mantiene en pantalla durante 5 segundos mediante una corrutina temporal antes de ocultarse automáticamente.
+
+---
+
+## 5. Limpieza de Recursos (`onCleared`)
+
+Dado que tanto `ExoPlayer` como los motores de reconocimiento y síntesis de voz mantienen servicios de sistema y códecs de bajo nivel:
+```kotlin
+override fun onCleared() {
+    super.onCleared()
+    player.release()
+    voiceManager.release()
+}
+```
+Esto previene fugas de memoria (*memory leaks*) en AudioTrack, AudioRecord y TextToSpeech.
+)
+Response:
+  File was written
+Call: write_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/03_DOMOTICA_IOT_Y_BATERIA.md, text=# Nodo 3: Domótica IoT, Sensores y Protección de Batería
+
+Este documento analiza la comunicación con el microcontrolador local (ESP32 con firmware ESPHome), la adquisición de telemetría de sensores ambientales y radar de presencia, y el algoritmo automatizado de protección de batería del dispositivo móvil.
+
+---
+
+## 1. Conexión con el ESP32 (Microcontrolador Local)
+
+El sistema se integra con un dispositivo ESP32 ubicado en la IP fija local `http://192.168.1.13/` mediante la interfaz Retrofit [`EspHomeApi.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/remote/EspHomeApi.kt).
+
+```mermaid
+flowchart LR
+    subgraph Android["Terminal Samsung Galaxy J6"]
+        NetClient[NetworkClient Retrofit]
+        HubRepo[HubRepositoryImpl]
+        VM[MainViewModel]
+    end
+
+    subgraph ESP32["Microcontrolador ESP32 (192.168.1.13)"]
+        Server[Servidor Web / API REST]
+        AHT[Sensor AHT20: Temp & Humedad]
+        BMP[Sensor BMP280: Presión]
+        LD[Radar mmWave LD2410: Presencia]
+        Relay[Relé Físico 220V / Cargador USB]
+    end
+
+    HubRepo -->|GET /api/status| Server
+    Server -->|JSON EspHomeStatus| HubRepo
+    VM -->|POST /api/rele/on / off| Server
+    Server --> Relay
+    AHT --> Server
+    BMP --> Server
+    LD --> Server
+```
+
+### 1.1. Endpoints REST
+1. **Consulta de Estado Unificado**: `GET http://192.168.1.13/api/status`
+   Devuelve el payload JSON mapeado por la clase [`EspHomeStatus`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/model/EspHomeModels.kt#L7):
+   ```json
+   {
+     "rele": true,
+     "presencia": true,
+     "movimiento": true,
+     "persona_estatica": false,
+     "dht_temperatura": 21.5,
+     "dht_humedad": 45.2,
+     "aht_temperatura": 21.8,
+     "aht_humedad": 44.9,
+     "bmp_temperatura": 21.7,
+     "bmp_presion": 1018.4
+   }
+   ```
+2. **Conmutación del Relé**: `POST http://192.168.1.13/api/rele/{action}`
+   Donde `{action}` toma el valor `"on"` o `"off"`.
+
+---
+
+## 2. Sensores Integrados y Propósito
+
+| Sensor | Magnitud Medida | Variable en App | Rol en la Interfaz |
+| :--- | :--- | :--- | :--- |
+| **AHT20** | Temperatura y Humedad relativa interior | `ahtTemp`, `ahtHum` | Se muestra en la tarjeta ambiental interior ("IN (Sensor)"). Alta precisión y estabilidad frente al antiguo DHT. |
+| **BMP280** | Presión barométrica interior | `bmpPressure` | Presión atmosférica en hPa para calibración local y predicción de cambios de tiempo. |
+| **LD2410 (mmWave)** | Presencia global, movimiento y presencia estática | `presence`, `movement`, `staticPresence` | Radar de microondas de 24 GHz capaz de detectar la respiración humana (presencia estática). Controla la atenuación de pantalla (*Smart Dimming*). |
+| **Relé 5V/220V** | Conexión eléctrica del cargador del J6 | `relay` | Encendido/apagado físico del adaptador de corriente del smartphone. |
+
+---
+
+## 3. Algoritmo Inteligente de Gestión de Batería
+
+Uno de los mayores riesgos al reutilizar un smartphone antiguo como pantalla de pared 24/7 es la **degradación acelerada y el hinchamiento de la batería de litio (*battery swelling*)** si permanece conectada continuamente al 100% de carga.
+
+Para solucionar esto, el `MainViewModel` implementa un algoritmo de carga con histéresis mediante la función `evaluateBatteryLogic()`:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Monitoreo: Polling cada 5 segundos
+    
+    state Monitoreo {
+        direction TB
+        LeerBateria: Leer porcentaje real (BatteryManagerHelper)
+        VerificarRelay: Leer estado actual del relé
+    }
+
+    Monitoreo --> EncenderCarga: Batería <= 20% Y Relé Apagado
+    EncenderCarga --> Cargando: POST /api/rele/on
+    
+    Cargando --> MantenerCarga: 20% < Batería < 80%
+    MantenerCarga --> Cargando
+    
+    Cargando --> CortarCarga: Batería >= 80% Y Relé Encendido
+    CortarCarga --> Descargando: POST /api/rele/off
+    
+    Descargando --> MantenerDescarga: 20% < Batería < 80%
+    MantenerDescarga --> Descargando
+    
+    Descargando --> EncenderCarga: Batería <= 20%
+```
+
+### Reglas del Algoritmo:
+1. **Regla de Carga Mínima**: Si el nivel de batería del Samsung J6 cae al **20% o menos** y el relé está apagado, se envía la orden de **encender el relé** (`toggleRelay(true)`).
+2. **Regla de Corte Máximo**: Cuando la batería alcanza el **80% o más** y el cargador está activo, se envía la orden de **apagar el relé** (`toggleRelay(false)`).
+3. **Zona de Histéresis Segura (21% - 79%)**: No se realiza ninguna acción de conmutación. Esto previene ciclos de conmutación continuos en el relé mecánico y prolonga la vida química de la celda de ion-litio por años.
+
+---
+
+## 4. Helper de Diagnóstico de Batería (`BatteryManagerHelper`)
+
+En [`BatteryManagerHelper.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/util/BatteryManagerHelper.kt), se utiliza el receptor sticky del sistema Android para obtener lecturas inmediatas sin esperas:
+
+```kotlin
+val intentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+val batteryStatus: Intent? = context.registerReceiver(null, intentFilter)
+```
+
+- Extrae el nivel actual (`EXTRA_LEVEL`) y la escala (`EXTRA_SCALE`) para calcular el porcentaje real normalizado `(level / scale) * 100`.
+- Comprueba si el dispositivo está recibiendo corriente a través del flag `EXTRA_STATUS` verificando `BATTERY_STATUS_CHARGING` o `BATTERY_STATUS_FULL`.
+
+---
+
+## 5. Persistencia de Alarmas en `HubRepositoryImpl`
+
+El repositorio [`HubRepositoryImpl.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/repository/HubRepositoryImpl.kt) administra el almacenamiento local de las alarmas y recordatorios:
+- Utiliza `SharedPreferences` con el nombre de fichero `"smart_hub_prefs"`.
+- Los objetos [`Alarm`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/model/EspHomeModels.kt#L22) se serializan y deserializan en formato JSON utilizando `Gson` y `TypeToken<List<Alarm>>()`.
+- Proporciona operaciones atómicas para consultar (`getAlarms`), guardar o actualizar (`saveAlarm`), eliminar (`deleteAlarm`) y conmutar el interruptor (`toggleAlarm`).
+)
+Response:
+  File was written
+Call: write_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/04_MULTIMEDIA_STREAMING.md, text=# Nodo 4: Multimedia, Audio y Streaming
+
+Este documento profundiza en la arquitectura multimedia de **EstacionJ6**, que combina reproducción de audio local y en red con **Jetpack Media3 (ExoPlayer)**, streaming de música privada con **Navidrome (API Subsonic)**, sintonización de emisoras con **Radio-Browser**, streaming de vídeo doméstico con **Plex Media Server** y soporte para **YouTube**.
+
+---
+
+## 1. Motor de Reproducción de Audio: Jetpack Media3 (ExoPlayer)
+
+La aplicación utiliza la biblioteca estándar de Android para reproducción audiovisual (`androidx.media3:media3-exoplayer:1.2.1`):
+
+```mermaid
+flowchart TD
+    VM[MainViewModel] -->|Instancia compartida| Exo[ExoPlayer Media3]
+    Exo -->|Player.Listener| Listener[Listener de Estado]
+    Listener -->|onIsPlayingChanged| UIState1[Actualiza isPlaying en HubUiState]
+    Listener -->|onPlaybackStateChanged| UIState2[Actualiza isMusicLoading si BUFFERING]
+    
+    Navi[Navidrome: Stream MP3/FLAC] -->|MediaItem.fromUri| Exo
+    Radio[Radio-Browser: Stream AAC/MP3] -->|MediaItem.fromUri| Exo
+    Plex[Plex: Stream Direct Play] -->|MediaItem.fromUri| Exo
+    
+    Voice[VoiceAssistantManager] -->|isListening = true| Ducking[player.volume = 0.2f]
+    Voice -->|isListening = false| FullVol[player.volume = 1.0f]
+```
+
+### Características implementadas:
+- **Streaming directo por URL**: Se carga mediante `player.setMediaItem(MediaItem.fromUri(streamUrl))`, seguido de `player.prepare()` y `player.play()`.
+- **Ducking de Audio**: Al activarse el asistente de voz, el volumen del reproductor se reduce automáticamente a `0.2f` (20%) para permitir que el micrófono capture la voz del usuario sin eco ni interferencias de la música.
+- **Liberación de Recursos**: En `MainViewModel.onCleared()`, se ejecuta `player.release()`, liberando códecs de hardware, buffers de audio y servicios del sistema.
+
+---
+
+## 2. Servidor de Música Personal: Navidrome (API Subsonic)
+
+El repositorio [`MusicRepository.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/repository/MusicRepository.kt) implementa el protocolo de autenticación y consulta compatible con Subsonic API (v1.16.1) conectando con el servidor Navidrome en `http://192.168.1.30:4533/`.
+
+### 2.1. Protocolo de Autenticación Subsonic (Token + Salt MD5)
+Para no enviar la contraseña en texto plano en cada petición GET:
+```kotlin
+val salt = UUID.randomUUID().toString().substring(0, 8)
+val token = md5(pass + salt)
+```
+Donde `md5` realiza el digest criptográfico de la contraseña concatenada con el valor aleatorio (*salt*).
+
+### 2.2. Algoritmo de Búsqueda en Cascada (Cascading Search)
+Cuando el usuario solicita reproducir algo (por ejemplo: *"Pon Queen"* o *"Pon Bohemian Rhapsody"*), `searchSongs(query)` resuelve el contenido de forma inteligente en 3 niveles:
+
+```mermaid
+flowchart TD
+    Query[Búsqueda: api.search query] --> CheckSongs{¿Hay canciones directas?}
+    CheckSongs -->|Sí| ReturnSongs[Devolver lista de canciones coincidentes]
+    
+    CheckSongs -->|No| CheckArtist{¿Se encontró un Artista?}
+    CheckArtist -->|Sí| GetArtist[api.getArtist -> Obtener primer álbum]
+    GetArtist --> GetAlbumSongs[api.getAlbum -> Devolver canciones del álbum]
+    
+    CheckArtist -->|No| CheckAlbum{¿Se encontró un Álbum?}
+    CheckAlbum -->|Sí| GetAlbumDirect[api.getAlbum -> Devolver canciones]
+    CheckAlbum -->|No| Empty[Retornar lista vacía]
+```
+
+1. **Nivel 1 (Canción directa)**: Si la API devuelve canciones en `searchResult.songs`, toma la primera coincidencia.
+2. **Nivel 2 (Artista)**: Si el término coincide con un artista (ej. *"AC/DC"*), consulta sus álbumes con `getArtist()` y extrae las canciones del primer álbum disponible.
+3. **Nivel 3 (Álbum)**: Si el término coincide con un título de disco, consulta el álbum con `getAlbum()` y reproduce sus canciones.
+
+---
+
+## 3. Emisoras de Radio en Directo: Radio-Browser API
+
+La aplicación se integra con la API comunitaria internacional [Radio-Browser](https://www.radio-browser.info/) mediante [`RadioApi.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/remote/RadioApi.kt) y [`RadioRepository.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/repository/RadioRepository.kt).
+
+- **Servidor Base**: `https://de1.api.radio-browser.info/`
+- **Endpoint**: `GET json/stations/byname/{name}?limit=5&order=votes&reverse=true`
+- **Lógica**: Ordena las emisoras por votos comunitarios de forma descendente y selecciona la estación más popular y estable.
+- **Metadatos y Carátula**: Extrae el nombre oficial de la emisora (`station.name`), la URL directa del stream de audio (`station.url`) y el favicon/logotipo de la emisora (`station.favicon`).
+
+---
+
+## 4. Servidor Multimedia de Vídeo y Series: Plex Media Server
+
+[`PlexRepository.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/repository/PlexRepository.kt) implementa la navegación por el catálogo de medios de un servidor Plex en `http://192.168.1.30:32400/`.
+
+### 4.1. Resolución de Series, Temporadas y Episodios
+Cuando el usuario solicita reproducir una serie por voz (por ejemplo: *"Pon Breaking Bad temporada 2 capítulo 3"*):
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Voice as Asistente IA
+    participant Repo as PlexRepository
+    participant Plex as Servidor Plex (192.168.1.30:32400)
+
+    Voice->>Repo: searchMedia("Breaking Bad", season=2, episode=3)
+    Repo->>Plex: GET /search?query=Breaking Bad
+    Plex-->>Repo: Metadata (type: "show", ratingKey: "1234")
+
+    Repo->>Plex: GET /library/metadata/1234/children (Temporadas)
+    Plex-->>Repo: Lista de Temporadas (index=1, index=2, ...)
+    Repo->>Repo: Seleccionar Temporada index=2 (ratingKey: "5678")
+
+    Repo->>Plex: GET /library/metadata/5678/children (Episodios)
+    Plex-->>Repo: Lista de Episodios (index=1, index=2, index=3, ...)
+    Repo->>Repo: Seleccionar Episodio index=3 (fileKey: "/library/parts/9999/file.mkv")
+
+    Repo-->>Voice: StreamUrl = "http://192.168.1.30:32400/library/parts/9999/file.mkv?X-Plex-Token=..."
+```
+
+### 4.2. Direct Play
+- La URL de streaming obtenida (`$baseUrl$fileKey?X-Plex-Token=$token`) apunta directamente a la parte física del archivo multimedia en Plex, permitiendo al reproductor realizar **Direct Play** sin transcodificación en el servidor cuando el códec es compatible.
+
+---
+
+## 5. Visualización en Tarjeta Musical (`MusicCard`)
+
+En [`SmartHubDashboard.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/components/SmartHubDashboard.kt#L368), la UI presenta un componente unificado para cualquier fuente sonora:
+- **Carátulas con Coil**: Usa `AsyncImage` para descargar y cachear dinámicamente las carátulas tanto de Navidrome como los logotipos de emisoras de radio.
+- **Estados Dinámicos**:
+  - Si el reproductor está cargando (`isLoading == true`), muestra un `CircularProgressIndicator` en el botón central.
+  - Alterna entre los iconos `PlayArrow` y `Pause`.
+  - Diferencia visualmente con iconos temáticos entre reproducción de música local (`MusicNote`) y radio en directo (`Radio`).
+)
+Response:
+  File was written
+Call: write_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/05_ASISTENTE_VOZ_E_IA.md, text=# Nodo 5: Asistente de Voz y Procesamiento de Lenguaje Natural (IA)
+
+Este documento detalla la arquitectura de control por voz del Smart Hub implementada en [`VoiceAssistantManager.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/util/VoiceAssistantManager.kt). El sistema cuenta con una arquitectura de doble motor: inferencia neuronal en la nube con **Gemini 1.5 Flash** y un **cerebro de emergencia offline** basado en heurística y expresiones regulares.
+
+---
+
+## 1. Flujo de Trabajo Multimodal de Voz
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Usuario
+    participant UI as SmartHubDashboard (FAB Mic)
+    participant VAM as VoiceAssistantManager
+    participant STT as Android SpeechRecognizer
+    participant Gemini as Google Gemini 1.5 Flash
+    participant Fallback as Cerebro de Emergencia (Regex/NLP)
+    participant TTS as Android TextToSpeech
+    participant VM as MainViewModel
+
+    Usuario->>UI: Pulsa botón de Micrófono o comando
+    UI->>VAM: startListening()
+    VAM->>STT: Iniciar captura de audio (es-ES)
+    VAM->>VM: isListening = true (Ducking de música a 20%)
+    
+    Usuario->>STT: Habla ("Pon la película Inception en Plex")
+    STT-->>VAM: onResults(transcript: "Pon la película Inception en Plex")
+    VAM->>VM: isListening = false, transcript actualizado
+    
+    VAM->>VAM: processIntent(transcript)
+    VAM->>VM: isThinking = true
+
+    alt Conexión disponible y Gemini responde
+        VAM->>Gemini: Prompt estructurado solicitando JSON estricto
+        Gemini-->>VAM: JSON con action: "PLEX_PLAY", query: "Inception"
+    else Fallo de Red o Error en JSON
+        VAM->>Fallback: Parser léxico offline por palabras clave y regex
+        Fallback-->>VAM: Comando extraído heurísticamente
+    end
+
+    VAM->>TTS: speak("Buscando Inception en Plex")
+    VAM->>VM: onCommand(AssistantCommand.PlexPlay(...))
+    VAM->>VM: isThinking = false
+    VM->>VM: Ejecuta acción en hardware o multimedia
+```
+
+---
+
+## 2. Reconocimiento y Síntesis de Voz Nativas
+
+### 2.1. Speech-to-Text (STT)
+- Utiliza la clase nativa `android.speech.SpeechRecognizer`.
+- Configurado con `RecognizerIntent.LANGUAGE_MODEL_FREE_FORM` y localización `es-ES`.
+- Implementa `RecognitionListener`:
+  - `onReadyForSpeech`: Notifica inicio de captura (`_isListening = true`).
+  - `onPartialResults`: Proporciona transcripción en tiempo real mientras el usuario continúa hablando.
+  - `onResults`: Extrae la cadena de texto más probable y la entrega a la cadena de procesamiento.
+
+### 2.2. Text-to-Speech (TTS)
+- Implementa `TextToSpeech.OnInitListener` fijando el idioma a `Locale("es", "ES")`.
+- Responde por voz al usuario con confirmaciones auditivas amigables (`speak(text)` con `TextToSpeech.QUEUE_FLUSH`).
+
+---
+
+## 3. Inferencia Semántica con Gemini 1.5 Flash
+
+Para interpretar órdenes complejas en lenguaje natural sin requerir comandos rígidos, la aplicación utiliza el SDK oficial de Google AI:
+- **Modelo**: `gemini-1.5-flash-latest` (optimizado para baja latencia).
+- **Prompting de Salida Estructurada**: Se fuerza al modelo a responder exclusivamente un objeto JSON parseable:
+
+```text
+Responde SOLO un JSON: {
+  "response": "..",
+  "action": "ALARM_SET" | "MUSIC_PLAY" | "MUSIC_STOP" | "RELAY_ON" | "RELAY_OFF" | "RADIO_PLAY" | "YOUTUBE_PLAY" | "PLEX_PLAY",
+  "hour": 8,
+  "minute": 30,
+  "label": "..",
+  "isReminder": false,
+  "query": "búsqueda",
+  "season": 1,
+  "episode": 5
+}
+```
+
+### 3.1. Extracción de Parámetros
+- **Acciones Domóticas**: `RELAY_ON`, `RELAY_OFF`.
+- **Acciones de Alarma/Recordatorio**: Extrae horas, minutos, etiquetas de texto y clasifica si se trata de un recordatorio puntual (`isReminder = true`) o una alarma despertador.
+- **Acciones Multimedia**: Extrae términos de búsqueda y separa temporada (`season`) y episodio (`episode`) si se solicita una serie para Plex.
+
+---
+
+## 4. El Cerebro de Emergencia (Motor Offline)
+
+Si la conexión a Internet falla, la cuota de la API de Gemini se agota o la respuesta de la IA no contiene un JSON válido, el bloque `catch` activa un **motor heurístico de emergencia**:
+
+### 4.1. Diccionario de Números en Texto a Enteros
+Mapea palabras comunes en español a sus valores numéricos:
+```kotlin
+val wordMap = mapOf(
+    "CERO" to 0, "UNA" to 1, "UNO" to 1, "DOS" to 2, "TRES" to 3, 
+    "CUATRO" to 4, "CINCO" to 5, "DIEZ" to 10, "QUINCE" to 15,
+    "VEINTE" to 20, "TREINTA" to 30, "CUARENTA" to 40, "CINCUENTA" to 50
+    // ...
+)
+```
+Si el usuario dice *"Alarma a las ocho y media"* o *"Recuérdame a las siete y quince"*, el algoritmo busca tanto dígitos numéricos (`\d+`) como palabras del diccionario para construir la hora y el minuto de forma autónoma.
+
+### 4.2. Despacho Heurístico por Reglas
+1. **Alarmas y Recordatorios**:
+   Detecta `"ALARMA"` o `"RECUÉRDAME"`.
+2. **Radio**:
+   Detecta `"RADIO"` o `"EMISORA"`. Limpia conectores habituales (*"pon la radio"*, *"pon la emisora"*) y envía el nombre limpio a Radio-Browser.
+3. **Detener Reproducción**:
+   Detecta `"QUITAR"`, `"PARAR"`, `"DETENER"`, `"SILENCIO"` o `"PARA LA"`.
+4. **Música, Plex y YouTube**:
+   Detecta `"MÚSICA"` o `"PON"`. Aplica reglas de desambiguación:
+   - Si incluye `"VIDEO"` o `"YOUTUBE"` $\rightarrow$ Comando YouTube.
+   - Si incluye `"PLEX"`, `"PELÍCULA"` o `"SERIE"` $\rightarrow$ Extrae con expresiones regulares `temporada \d+` y `capítulo \d+`, despachando a Plex.
+   - En cualquier otro caso $\rightarrow$ Despacha a Navidrome.
+5. **Relé Domótico**:
+   Detecta `"ENCIENDE"` $\rightarrow$ `RelayOn`; `"APAGA"` $\rightarrow$ `RelayOff`.
+
+---
+
+## 5. Jerarquía de Comandos (`AssistantCommand`)
+
+Los comandos resultantes se encapsulan en una jerarquía tipada segura mediante una `sealed class`:
+
+```kotlin
+sealed class AssistantCommand {
+    data class MusicPlay(val query: String) : AssistantCommand()
+    data class RadioPlay(val query: String) : AssistantCommand()
+    data class YouTubePlay(val query: String) : AssistantCommand()
+    data class PlexPlay(val query: String, val season: Int? = null, val episode: Int? = null) : AssistantCommand()
+    object MusicStop : AssistantCommand()
+    object RelayOn : AssistantCommand()
+    object RelayOff : AssistantCommand()
+    data class AlarmSet(
+        val hour: Int, val minute: Int, 
+        val repeatDays: List<Int>? = null,
+        val specificDate: String? = null,
+        val label: String? = null,
+        val isReminder: Boolean = false
+    ) : AssistantCommand()
+    object None : AssistantCommand()
+}
+```
+Esto permite al `MainViewModel` consumir cada intención con un bloque `when` exhaustivo y sin riesgo de excepciones de tipo en tiempo de ejecución.
+)
+Response:
+  File was written
+Call: write_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/06_METEOROLOGIA_Y_GEOLOCALIZACION.md, text=# Nodo 6: Meteorología y Geolocalización
+
+Este documento profundiza en la adquisición de telemetría meteorológica externa, resolución de posición geográfica y geocodificación inversa implementada en [`WeatherRepository.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/repository/WeatherRepository.kt) y consumida mediante la API abierta **Open-Meteo**.
+
+---
+
+## 1. Arquitectura de Datos Meteorológicos
+
+El Smart Hub combina dos fuentes de información climática complementarias:
+1. **Mediciones Físicas Interiores (IN)**: Provenientes de los sensores de hardware conectados al microcontrolador ESP32 (AHT20 y BMP280).
+2. **Previsión Atmosférica Exterior (OUT)**: Proveniente de los satélites y modelos de predicción de Open-Meteo, calculados en base a la ubicación real del dispositivo.
+
+```mermaid
+flowchart TD
+    subgraph Dispositivo["Hardware Samsung J6"]
+        LocMgr[LocationManager: GPS / Red Móvil]
+        Geo[Geocoder: Reverse Geocoding]
+    end
+
+    subgraph Internet["Servicios Externos"]
+        OM[API Abierta Open-Meteo]
+    end
+
+    subgraph App["WeatherRepository"]
+        GetLoc[getLocation]
+        GetCity[getCityName]
+        Fetch[fetchWeather]
+        WMO[Decodificador Códigos WMO]
+        Wind[Calculador Rosa de los Vientos]
+    end
+
+    LocMgr --> GetLoc
+    GetLoc --> Geo
+    Geo --> GetCity
+    GetLoc -->|Latitud & Longitud| Fetch
+    Fetch -->|GET /v1/forecast| OM
+    OM -->|JSON WeatherResponse| Fetch
+    Fetch --> WMO
+    Fetch --> Wind
+    WMO --> Model[WeatherData]
+    Wind --> Model
+    GetCity --> Model
+```
+
+---
+
+## 2. Resolución de Coordenadas y Geocodificación
+
+### 2.1. Selección de Proveedor de Ubicación (`getLocation`)
+Para operar de manera óptima tanto en exteriores como dentro de una vivienda donde la señal GPS puede ser débil o nula:
+- Consulta tanto `LocationManager.GPS_PROVIDER` como `LocationManager.NETWORK_PROVIDER`.
+- Si ambos proveedores entregan una lectura, compara las marcas de tiempo (`time`) y selecciona **la más reciente**.
+- Si no hay señal disponible o los permisos no fueron otorgados, utiliza un *fallback* seguro fijado en las coordenadas de Madrid (`40.4168, -3.7038`).
+
+### 2.2. Geocodificación Inversa (`getCityName`)
+Convierte el par `(latitud, longitud)` en un nombre de población comprensible para el usuario:
+- Utiliza la clase nativa `android.location.Geocoder(context, Locale.getDefault())`.
+- Evalúa en cascada: `locality` (municipio) $\rightarrow$ `subAdminArea` (comarca/partido) $\rightarrow$ `adminArea` (provincia/comunidad).
+- Si el servicio de geocodificación de Google Play Services falla, muestra directamente las coordenadas formateadas `"lat, lon"`.
+
+---
+
+## 3. Integración con la API de Open-Meteo
+
+Se utiliza la interfaz Retrofit [`WeatherApi.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/remote/WeatherApi.kt):
+- **Base URL**: `https://api.open-meteo.com/`
+- **Endpoint**: `GET v1/forecast`
+- **Parámetros consultados en tiempo real**:
+  ```http
+  ?latitude={lat}&longitude={lon}&current=temperature_2m,relative_humidity_2m,surface_pressure,apparent_temperature,wind_speed_10m,wind_direction_10m,weather_code,uv_index,precipitation,cloud_cover
+  ```
+
+### 3.1. Mapeo de Códigos Meteorológicos WMO (`getWeatherDescription`)
+Los modelos meteorológicos numéricos devuelven los estados del cielo mediante el estándar de la Organización Meteorológica Mundial (WMO). El repositorio los transforma en descripciones visuales con emojis enriquecidos:
+
+| Rango de Códigos WMO | Condición Meteorológica | Emoji Asociado |
+| :--- | :--- | :--- |
+| `0` | Cielo despejado | ☀️ |
+| `1, 2, 3` | Parcialmente nublado / Intervalos nubosos | ⛅ |
+| `45, 48` | Niebla y niebla con escarcha | 🌫️ |
+| `51, 53, 55, 56, 57` | Llovizna y llovizna helada | 🌧️ |
+| `61, 63, 65, 66, 67` | Lluvia moderada o fuerte | 🌧️ |
+| `71, 73, 75, 77` | Nieve y granos de nieve | ❄️ |
+| `80, 81, 82` | Chubascos de lluvia | 🌦️ |
+| `95, 96, 99` | Tormenta eléctrica con o sin granizo | ⛈️ |
+| *Cualquier otro* | Clima variable | 🌤️ |
+
+### 3.2. Conversión de Ángulo de Viento a Puntos Cardinales
+Transforma los grados sexagesimales de dirección de viento ($0^\circ - 360^\circ$) en la rosa de los vientos de 8 rumbos:
+```kotlin
+val directions = arrayOf("N", "NE", "E", "SE", "S", "SO", "O", "NO")
+val index = (((degrees + 22.5f) % 360) / 45).toInt()
+return "${directions[index]} (${degrees.toInt()}°)"
+```
+Permite presentar al usuario valores intuitivos como `"SO (225°)"` en lugar de un ángulo abstracto.
+
+---
+
+## 4. Estructura de Datos Unificada: `WeatherData`
+
+El resultado final se empaqueta en el siguiente modelo de dominio:
+```kotlin
+data class WeatherData(
+    val temperature: Float,
+    val humidity: Float,
+    val pressure: Float,
+    val apparentTemperature: Float,
+    val windSpeed: Float,
+    val windDirection: String,
+    val precipitation: Float,
+    val cloudCover: Float,
+    val weatherDescription: String,
+    val uvIndex: Float,
+    val locationName: String
+)
+```
+Estos valores alimentan directamente las columnas visuales de la tarjeta [`ClimateAndStatusCard`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/components/SmartHubDashboard.kt#L236) en Compose.
+)
+Response:
+  File was written
+Call: write_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/07_INTERFAZ_UI_JETPACK_COMPOSE.md, text=# Nodo 7: Interfaz Gráfica con Jetpack Compose
+
+Este documento analiza la construcción de la interfaz visual en Jetpack Compose implementada principalmente en [`SmartHubDashboard.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/components/SmartHubDashboard.kt) y la pantalla complementaria [`DashboardScreen.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/components/DashboardScreen.kt).
+
+---
+
+## 1. Diseño Orientado a Pantalla Apaisada (*Landscape Panel*)
+
+Dado que el dispositivo se monta horizontalmente en pared o mesita de noche, [`SmartHubDashboard`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/components/SmartHubDashboard.kt#L36) implementa una vista organizada en columnas modulares mediante `Row` con desplazamiento horizontal (`horizontalScroll`):
+
+```mermaid
+flowchart LR
+    subgraph Dashboard["SmartHubDashboard (Contenedor Horizontal con Radial Gradient)"]
+        direction LR
+        Col1["Columna 1: Reloj y Fecha (215dp)"]
+        Col2["Columna 2: Clima & Batería (360dp)"]
+        Col3["Columna 3: Alarmas y Recordatorios (220dp)"]
+        Col4["Columna 4: Reproductor de Música & Radio (225dp)"]
+    end
+
+    subgraph Overlays["Capas de Superposición (Overlays)"]
+        O1["Overlay Atenuación (dimAlpha 0 a 0.95)"]
+        O2["Overlay Alarma Activa (Pulsante Rojo/Negro)"]
+        O3["Píldora Transcripción de Voz (BottomCenter)"]
+        O4["FAB Micrófono Flotante (BottomEnd)"]
+        O5["Banner de Error Wi-Fi/Red (TopCenter)"]
+    end
+
+    Dashboard -.-> Overlays
+```
+
+---
+
+## 2. Desglose de Columnas y Componentes
+
+### 2.1. Columna 1: Reloj Tipográfico de Alto Impacto
+- Diseñado para lectura a gran distancia (desde la cama o el otro extremo de la habitación).
+- **Hora**: Texto de `90.sp` con peso `FontWeight.ExtraBold` y espaciado negativo entre caracteres (`letterSpacing = (-4).sp`) para máxima compacidad.
+- **Fecha**: Texto de `18.sp` en gris medio (`Color.Gray`) con el primer carácter en mayúscula.
+
+### 2.2. Columna 2: Tarjeta de Clima Comparativo y Batería (`ClimateAndStatusCard`)
+Diseñada con una superficie oscura de bordes redondeados (`Color(0xFF1E1E1E)`, `20.dp` de radio):
+1. **Cabecera**: Localidad detectada por GPS/red con icono de marcador (`LocationOn`) y estado resumido del tiempo (`weatherDescription`).
+2. **Comparativa IN vs OUT**:
+   - **Columna IN (Sensor local ESP32)**: Temperatura, humedad y presión atmosférica barométrica directa de la habitación.
+   - **Columna OUT (Servicio Web Open-Meteo)**: Temperatura exterior, humedad, presión, sensación térmica, velocidad y rumbo del viento, precipitación acumulada y cobertura de nubes.
+3. **Control de Alimentación y Batería**:
+   - Icono dinámico de batería (`BatteryChargingFull` vs `BatteryFull`) con color adaptativo (Rojo si $<20\%$, Verde en caso contrario).
+   - Porcentaje numérico e indicador de estado del cargador (*"Cargador Activo"* vs *"Cargador Apagado"*).
+   - Interruptor manual (`Switch`) para forzar la activación o corte del relé.
+
+### 2.3. Columna 3: Gestión de Alarmas y Recordatorios
+- Contenedor con scroll vertical propio (`verticalScroll`).
+- Cada elemento (`AlarmItem`):
+  - Muestra la hora formateada a dos dígitos (`%02d:%02d`) en tipografía destacada de `20.sp`.
+  - Muestra la etiqueta descriptiva o motivo del recordatorio.
+  - Botón de borrado rápido (`Delete`).
+  - Interruptor (`Switch`) de activación/desactivación rápida.
+
+### 2.4. Columna 4: Tarjeta Multimedia (`MusicCard`)
+- **Carátula Asíncrona**: Integrada con la biblioteca `Coil` (`AsyncImage`) para portadas de canciones de Navidrome o favicons de emisoras de radio. Si no hay carátula, muestra un icono representativo (`Radio` o `MusicNote`).
+- **Título y Artista**: Textos truncados a 1 línea con puntos suspensivos para evitar desbordamientos.
+- **Control Unificado Play/Pause**: Botón de superficie blanca con contraste total que conmuta entre `PlayArrow` y `Pause`, o despliega un `CircularProgressIndicator` si la canción está en buffer (`isMusicLoading == true`).
+
+---
+
+## 3. Sistema de Overlays Interactivos y Animaciones
+
+### 3.1. Atenuación Inteligente de Pantalla (`dimAlpha`)
+Para alargar la vida útil del panel AMOLED del Samsung J6 y evitar que ilumine la estancia cuando no hay nadie presente:
+```kotlin
+val dimAlpha by animateFloatAsState(
+    targetValue = if (state.isDimmed) 0.95f else 0f,
+    animationSpec = tween(durationMillis = 800),
+    label = "dimAlpha"
+)
+```
+- Transición suave de 800 milisegundos mediante interpolador temporal (*tween*).
+- El nivel de atenuación llega al **95% de opacidad negra**, manteniendo visible el contorno de los números sin emitir luz excesiva.
+- **Despertar por Doble Toque**: Todo el fondo de la pantalla captura gestos táctiles mediante `pointerInput(Unit) { detectTapGestures(onDoubleTap = { onManualWake() }) }`.
+
+### 3.2. Pantalla Completa de Alarma Disparada (`AlarmFiringOverlay`)
+Cuando una alarma se activa (`isAlarmFiring == true`), se despliega una capa por encima de todo el contenido con animaciones infinitas para captar la atención inmediatamente:
+- **Animación Cromática**: Alterna suavemente entre rojo semitransparente (`Color.Red.copy(alpha = 0.6f)`) y negro opaco cada 500 ms usando `rememberInfiniteTransition()`.
+- **Efecto de Pulso/Escalado**: El icono de la campana de alarma escala cíclicamente entre `1.0x` y `1.1x` (`scale`).
+- **Botón de Parada**: Un botón prominente de 200x80 dp con texto extra grande *"DETENER"* que invoca `onDismissAlarm()`.
+
+### 3.3. Transcripción de Voz y Botón Flotante (FAB)
+- **Cápsula Flotante de Transcripción**: Muestra el texto capturado por el micrófono en la parte inferior central (`Alignment.BottomCenter`) sobre una superficie oscura traslúcida.
+- **FAB de Micrófono**: Ubicado en la esquina inferior derecha (`Alignment.BottomEnd`). Cambia dinámicamente su color a **Rojo** e icono a `MicOff` cuando el micrófono está grabando activamente, o a **Azul** con icono `Mic` en reposo.
+
+---
+
+## 4. Pantalla Alternativa Vertical (`DashboardScreen.kt`)
+
+La base de código incluye también [`DashboardScreen.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/components/DashboardScreen.kt), un diseño alternativo basado en `Scaffold` estándar de Material 3 con `TopAppBar`:
+- Incluye el componente especializado [`PresenceCard`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/components/DashboardScreen.kt#L91), que muestra con código de color verde/gris si la habitación está ocupada (*"PRESENCIA DETECTADA"* vs *"HABITACIÓN VACÍA"*) y chips independientes para presencia de movimiento y presencia estática del sensor radar LD2410.
+- Resulta ideal si en el futuro se desea utilizar el dispositivo en orientación vertical (*Portrait*).
+)
+Response:
+  File was written
+Call: write_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/08_EVALUACION_CRITICA_Y_MEJORAS.md, text=# Nodo 8: Evaluación Crítica, Seguridad y Plan de Mejoras
+
+Este documento presenta una auditoría técnica exhaustiva de la base de código actual de **EstacionJ6**, identificando vulnerabilidades de seguridad, riesgos de estabilidad y una hoja de ruta con mejoras arquitectónicas recomendadas para producción.
+
+---
+
+## 1. Auditoría de Seguridad y Credenciales Expuestas
+
+> [!CAUTION]
+> Se han detectado múltiples credenciales críticas, claves de API privadas y tokens de autenticación incrustados directamente (*hardcoded*) en el código fuente de control de versiones.
+
+| Vulnerabilidad | Archivo y Ubicación | Riesgo | Mitigación Recomendada |
+| :--- | :--- | :--- | :--- |
+| **API Key de Google Gemini** | [`VoiceAssistantManager.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/util/VoiceAssistantManager.kt#L35) (`AIzaSyB3...`) | Exfiltración de cuota y acceso no autorizado a modelos de IA facturables. | Trasladar a `local.properties` y generar a través de `BuildConfig` o *Secrets Gradle Plugin*. |
+| **Token de Acceso Plex** | [`MainActivity.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/MainActivity.kt#L52) (`Sz1L76...`) | Acceso completo de administrador al servidor multimedia y biblioteca personal. | Extraer a configuración protegida o pantalla de ajustes iniciales con `EncryptedSharedPreferences`. |
+| **Credenciales Navidrome** | [`MainActivity.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/MainActivity.kt#L41) (`admin` / `admin`) | Compromiso de credenciales por defecto del servidor Subsonic. | Parametrizar en pantalla de ajustes y exigir cambio de contraseña por defecto. |
+| **IPs Locales Rígidas** | [`NetworkClient.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/data/remote/NetworkClient.kt#L13) (`.13`, `.30`) | Si el router reinicia la asignación DHCP, la aplicación pierde comunicación completa. | Implementar resolución mDNS / Zeroconf (ej. `esphome.local`, `navidrome.local`) o permitir configurar IPs en la interfaz. |
+
+---
+
+## 2. Prevención de Quemado de Pantalla AMOLED (*Burn-In*)
+
+> [!WARNING]
+> El Samsung Galaxy J6 cuenta con un panel **Super AMOLED**. Los elementos estáticos con tipografía de alto brillo (como el reloj blanco a `90.sp`) visualizados de manera continua las 24 horas del día durante semanas provocarán **quemado irreversible de los píxeles (*burn-in*)**.
+
+### Solución Técnica: Pixel Shifting
+Implementar un mecanismo de desplazamiento sutil de píxeles cada cierto intervalo de minutos:
+```kotlin
+// Desplazamiento imperceptible de ±2 a 5 píxeles cada 5 minutos
+val pixelOffsetX = remember { mutableStateOf(0.dp) }
+val pixelOffsetY = remember { mutableStateOf(0.dp) }
+
+LaunchedEffect(Unit) {
+    while (true) {
+        delay(300_000) // Cada 5 minutos
+        pixelOffsetX.value = (-3..3).random().dp
+        pixelOffsetY.value = (-3..3).random().dp
+    }
+}
+```
+Adicionalmente, activar un modo de salvapantallas de baja emisión (*true black*) cuando la habitación permanezca vacía por más de 10 minutos.
+
+---
+
+## 3. Deuda Técnica y Mejoras Arquitectónicas
+
+### 3.1. Inyección de Dependencias (Migración a Hilt)
+- **Estado Actual**: `MainActivity` instancia manualmente todos los repositorios y APIs dentro de un `ViewModelProvider.Factory` de 40 líneas.
+- **Mejora**: Integrar **Dagger Hilt** (`@HiltAndroidApp`, `@AndroidEntryPoint`, `@HiltViewModel`). Esto permitirá inyectar clientes HTTP desacoplados, mockear repositorios en tests unitarios y evitar código espagueti de inicialización en la Activity.
+
+### 3.2. Persistencia de Alarmas (Migración de SharedPreferences a Room)
+- **Estado Actual**: `HubRepositoryImpl` guarda la lista de alarmas como un string JSON en `SharedPreferences`.
+- **Riesgos**: Operaciones de lectura/escritura de todo el archivo en cada actualización, sin transaccionalidad, ni soporte nativo de consultas reactivas con `Flow`.
+- **Mejora**: Implementar **Room Database**:
+  ```kotlin
+  @Entity(tableName = "alarms")
+  data class AlarmEntity(...)
+
+  @Dao
+  interface AlarmDao {
+      @Query("SELECT * FROM alarms")
+      fun observeAlarms(): Flow<List<AlarmEntity>>
+  }
+  ```
+
+### 3.3. Gestión de Permisos en Tiempo de Ejecución
+- **Estado Actual**:
+  - `RECORD_AUDIO` se solicita ciegamente con `requestPermissions` en `onCreate` sin verificar si ya fue concedido.
+  - Los permisos de ubicación (`ACCESS_FINE_LOCATION`, `ACCESS_COARSE_LOCATION`) se ignoran mediante `@SuppressLint("MissingPermission")` en `WeatherRepository.kt`. Si el usuario instala la app sin concederlos manualmente en los ajustes de Android, la app siempre caerá en las coordenadas por defecto de Madrid.
+- **Mejora**: Utilizar el contrato oficial de Compose `rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions())` y solicitar los permisos de forma guiada al primer arranque.
+
+### 3.4. Resiliencia de Red y Polling Adaptativo
+- **Estado Actual**: El sondeo de telemetría a `192.168.1.13` se realiza cada 5 segundos de forma fija. Si el ESP32 se apaga o pierde conexión Wi-Fi, se registran excepciones constantes en el logcat y el estado de error parpadea.
+- **Mejora**:
+  - Implementar retroceso exponencial (*exponential backoff*): si fallan 3 intentos seguidos, espaciar el sondeo a 15s o 30s hasta que el host vuelva a responder.
+  - Alternativa ideal: Cambiar el sondeo HTTP por un canal persistente de **Server-Sent Events (SSE)** o **WebSockets**, ambos soportados nativamente por ESPHome (`/events`). Esto reduce el tráfico de red local a cero cuando los sensores no cambian de valor.
+
+---
+
+## 4. Tabla Comparativa: Estado Actual vs Estado Propuesto
+
+| Área | Implementación Actual | Arquitectura Recomendada | Beneficio |
+| :--- | :--- | :--- | :--- |
+| **Inyección de Dependencias** | Manual (Factory en Activity) | Hilt / Koin | Modularidad, desacoplamiento y testabilidad. |
+| **Persistencia Local** | SharedPreferences + JSON Gson | Room Database (SQLite) | Integridad transaccional, tipos estrictos y queries reactivas. |
+| **Secretos & Seguridad** | Claves hardcodeadas en código | `local.properties` + EncryptedSharedPreferences | Protección contra filtración de claves y robo de credenciales. |
+| **Protocolo IoT** | HTTP Polling (cada 5s) | Server-Sent Events (SSE) o WebSockets | Respuestas inmediatas a presencia y reducción de carga en CPU/red. |
+| **Protección Panel** | Atenuación básica al 95% | Pixel Shifting + True Black Saver | Evita el quemado (*burn-in*) del panel Super AMOLED. |
+| **Permisos Android** | Invocación básica sin callbacks | ActivityResultContracts con Compose | Experiencia de usuario limpia y sin fallos silenciosos de GPS. |
+)
+Response:
+  File was written
+Call: write_file(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/README.md, text=# Documentación Técnica: Estación J6 (Smart Hub Kiosk)
+
+Bienvenido a la documentación técnica oficial de la aplicación **EstacionJ6**, una solución integral diseñada para convertir un smartphone Android (Samsung Galaxy J6) en un panel de control domótico y multimedia de pared siempre encendido (24/7).
+
+Toda la documentación detallada está organizada de forma modular en este directorio:
+
+---
+
+## 📑 Índice de Módulos y Documentos
+
+| Módulo | Documento | Descripción Temática |
+| :---: | :--- | :--- |
+| **00** | [**Mapa Mental Global**](./00_MAPA_MENTAL.md) | Diagrama conceptual general en Mermaid y mapa jerárquico de nodos de la app. |
+| **01** | [**Arquitectura Base y Modo Kiosk**](./01_ARQUITECTURA_Y_KIOSK.md) | Inmersión total de pantalla, flags Always-On, trampas anti-minimización (`onUserLeaveHint`, bloqueo `onBackPressed`) y ciclo de vida de la Activity. |
+| **02** | [**Gestión de Estado y ViewModel**](./02_GESTION_ESTADO_Y_VIEWMODEL.md) | Patrón UDF, modelo inmutable `HubUiState`, bucle de reloj (1s), sondeo de sensores (5s), ducking de audio y despertar manual táctil. |
+| **03** | [**Domótica IoT, Sensores y Batería**](./03_DOMOTICA_IOT_Y_BATERIA.md) | Integración REST con microcontrolador ESP32 (ESPHome .13), telemetría AHT20/BMP280, radar mmWave LD2410 y algoritmo de protección de batería (histéresis 20%-80%). |
+| **04** | [**Multimedia, Audio y Streaming**](./04_MULTIMEDIA_STREAMING.md) | Jetpack Media3 (ExoPlayer), streaming privado con Navidrome (Subsonic API MD5/Salt), sintonización Radio-Browser, catálogo Plex y YouTube. |
+| **05** | [**Asistente de Voz e Inteligencia Artificial**](./05_ASISTENTE_VOZ_E_IA.md) | Pipeline multimodal: SpeechRecognizer (STT) + TextToSpeech (TTS) + Google Gemini 1.5 Flash (JSON estructurado) con cerebro de emergencia offline heurístico. |
+| **06** | [**Meteorología y Geolocalización**](./06_METEOROLOGIA_Y_GEOLOCALIZACION.md) | Detección de coordenadas por GPS/Red móvil, geocodificación inversa con Geocoder y conexión a Open-Meteo REST API con mapeo de códigos WMO. |
+| **07** | [**Interfaz Gráfica Jetpack Compose**](./07_INTERFAZ_UI_JETPACK_COMPOSE.md) | Cuadrícula horizontal optimizada para pantalla apaisada, cards modulares, overlays reactivos (atenuación inteligente, alarma pulsante de emergencia y transcripción). |
+| **08** | [**Evaluación Crítica y Plan de Mejoras**](./08_EVALUACION_CRITICA_Y_MEJORAS.md) | Auditoría de seguridad (claves y tokens hardcodeados), prevención de quemado de panel Super AMOLED (Pixel Shifting), migración a Hilt y persistencia con Room. |
+
+---
+
+## 🧭 Mapa Mental Rápido
+
+```mermaid
+flowchart TD
+    App["Estación J6 (Smart Hub)"]
+    
+    App --> Kiosk["1. Kiosk & Sistema<br/>(Pantalla completa, Anti-escape)"]
+    App --> VM["2. Estado & ViewModel<br/>(HubUiState, Loops concurrentes)"]
+    App --> IoT["3. IoT & Batería<br/>(ESP32, LD2410, Carga 20-80%)"]
+    App --> Media["4. Streaming Multimedia<br/>(ExoPlayer, Navidrome, Plex, Radio)"]
+    App --> AI["5. Voz & Gemini IA<br/>(STT/TTS, JSON parsing, Fallback)"]
+    App --> Weather["6. Clima & Geoposición<br/>(Open-Meteo, Geocoder, WMO)"]
+    App --> UI["7. Interfaz Compose<br/>(Layout apaisado, Overlays, Animaciones)"]
+    App --> Audit["8. Seguridad & Mejoras<br/>(Auditoría, AMOLED Burn-In, Hilt)"]
+```
+
+---
+
+## 🛠️ Stack Tecnológico Utilizado
+
+- **Lenguaje**: Kotlin 2.0+
+- **Interfaz Declarativa**: Jetpack Compose (BOM 2024.02.00) + Material 3
+- **Reproducción Audiovisual**: Jetpack Media3 (ExoPlayer 1.2.1)
+- **Networking**: Retrofit 2.9.0 + OkHttp 4.12.0 con Logging Interceptor
+- **Inteligencia Artificial**: Google AI Client SDK (Gemini 1.5 Flash)
+- **Procesamiento de Imágenes**: Coil Compose 2.6.0
+- **Serialización**: Gson 2.9.0
+- **Servicios Externos**: ESPHome REST API, Open-Meteo API, Radio-Browser API, Navidrome Subsonic API, Plex Media Server API.
+)
+Response:
+  File was written
+Call: list_files(absolutePath=/home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación, maxDepth=1)
+Response:
+  README.md (53 lines)
+  00_MAPA_MENTAL.md (103 lines)
+  05_ASISTENTE_VOZ_E_IA.md (149 lines)
+  01_ARQUITECTURA_Y_KIOSK.md (140 lines)
+  04_MULTIMEDIA_STREAMING.md (121 lines)
+  03_DOMOTICA_IOT_Y_BATERIA.md (127 lines)
+  02_GESTION_ESTADO_Y_VIEWMODEL.md (126 lines)
+  07_INTERFAZ_UI_JETPACK_COMPOSE.md (99 lines)
+  08_EVALUACION_CRITICA_Y_MEJORAS.md (90 lines)
+  06_METEOROLOGIA_Y_GEOLOCALIZACION.md (118 lines)
+Agent:  
+He generado la documentación completa y detallada en formato Markdown dentro del directorio [`documentación`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación).
+
+A continuación tienes el **mapa mental estructurado** del sistema y el desglose de cada nodo analizado en profundidad.
+
+---
+
+### 🗺️ Mapa Mental de la Aplicación
+
+```mermaid
+flowchart TD
+    Root["Smart Hub J6 (EstacionJ6)"]
+
+    %% NODO 1: KIOSK
+    Root --> Kiosk["1. Sistema & Modo Kiosk"]
+    Kiosk --> K1["Modo Inmersivo Total (hideSystemUI)"]
+    Kiosk --> K2["Keep Screen On & Unlock Flags"]
+    Kiosk --> K3["Trampa Anti-Escape (onUserLeaveHint & BackLock)"]
+    Kiosk --> K4["Orientación Landscape Sensor"]
+
+    %% NODO 2: ESTADO & LOGICA
+    Root --> StateNode["2. Estado & ViewModel"]
+    StateNode --> S1["HubUiState (StateFlow Inmutable)"]
+    StateNode --> S2["Loop Reloj & Alarmas (1 seg)"]
+    StateNode --> S3["Loop Polling IoT & Clima (5 seg)"]
+    StateNode --> S4["Smart Dimming por ausencia física"]
+    StateNode --> S5["Ducking de Audio (20% al escuchar voz)"]
+
+    %% NODO 3: IOT & BATERIA
+    Root --> IoT["3. Domótica IoT & Batería"]
+    IoT --> I1["ESP32 ESPHome (192.168.1.13)"]
+    I1 --> I1A["AHT20/BMP280 (Temp, Hum, Presión)"]
+    I1 --> I1B["Radar mmWave LD2410 (Presencia/Movimiento)"]
+    IoT --> I2["Control de Relé USB (Cargador)"]
+    IoT --> I3["Histéresis Batería (Carga 20% - 80%)"]
+
+    %% NODO 4: MULTIMEDIA
+    Root --> Media["4. Multimedia & Streaming"]
+    Media --> M1["ExoPlayer Media3"]
+    Media --> M2["Navidrome (API Subsonic MD5/Salt)"]
+    Media --> M3["Radio-Browser (Emisoras Online)"]
+    Media --> M4["Plex Media Server (Direct Play / Series / Películas)"]
+
+    %% NODO 5: IA & VOZ
+    Root --> Voice["5. Asistente de Voz & IA"]
+    Voice --> V1["SpeechRecognizer (STT es-ES)"]
+    Voice --> V2["TextToSpeech (TTS es-ES)"]
+    Voice --> V3["Gemini 1.5 Flash (Parsing JSON de Intenciones)"]
+    Voice --> V4["Cerebro de Emergencia (Regex + NLP Léxico Offline)"]
+
+    %% NODO 6: CLIMA
+    Root --> Weather["6. Meteorología & Ubicación"]
+    Weather --> W1["LocationManager (GPS / Red)"]
+    Weather --> W2["Reverse Geocoding (Geocoder Ciudad)"]
+    Weather --> W3["Open-Meteo REST API (Códigos WMO con Emojis)"]
+
+    %% NODO 7: INTERFAZ
+    Root --> UI["7. Interfaz Gráfica (Compose)"]
+    UI --> U1["SmartHubDashboard (Layout Apaisado)"]
+    U1 --> U1A["Reloj Tipográfico 90sp"]
+    U1 --> U1B["Card Comparativa Clima (IN vs OUT)"]
+    U1 --> U1C["Gestión de Alarmas y Recordatorios"]
+    U1 --> U1D["Card de Música / Radio con Coil"]
+    UI --> U2["Overlays (Atenuación suave, Sirena Alarma, Transcripción)"]
+
+    %% NODO 8: EVALUACION
+    Root --> Audit["8. Auditoría & Mejoras"]
+    Audit --> A1["Credenciales y API Keys expuestas"]
+    Audit --> A2["Prevención Quemado Super AMOLED (Pixel Shifting)"]
+    Audit --> A3["Migración a Hilt y Room"]
+```
+
+---
+
+### 📚 Índice de la Documentación Generada
+
+Puedes navegar directamente por cada documento en el repositorio:
+
+1. [**`README.md`**](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/README.md): Índice principal de navegación y resumen del stack tecnológico.
+2. [**`00_MAPA_MENTAL.md`**](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/00_MAPA_MENTAL.md): Visión general del proyecto, mapa conceptual y resumen ejecutivo.
+3. [**`01_ARQUITECTURA_Y_KIOSK.md`**](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/01_ARQUITECTURA_Y_KIOSK.md): Análisis de [`MainActivity.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/MainActivity.kt), pantalla completa inmersiva, flags *Always-On* y trampas anti-minimización (`onUserLeaveHint`, bloqueo de retroceso).
+4. [**`02_GESTION_ESTADO_Y_VIEWMODEL.md`**](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/02_GESTION_ESTADO_Y_VIEWMODEL.md): Desglose de [`MainViewModel.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/main/MainViewModel.kt), arquitectura UDF con `HubUiState`, bucles concurrentes con corrutinas (reloj de 1s y polling de 5s) y liberación de recursos.
+5. [**`03_DOMOTICA_IOT_Y_BATERIA.md`**](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/03_DOMOTICA_IOT_Y_BATERIA.md): Comunicación HTTP con el ESP32 (ESPHome), sensores AHT20/BMP280, radar mmWave LD2410 y algoritmo de protección de batería (carga automatizada entre 20% y 80% mediante relé).
+6. [**`04_MULTIMEDIA_STREAMING.md`**](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/04_MULTIMEDIA_STREAMING.md): Jetpack Media3 (ExoPlayer), streaming privado con Navidrome (autenticación Subsonic Salt+MD5), emisoras de Radio-Browser y navegación por series/episodios de Plex Media Server.
+7. [**`05_ASISTENTE_VOZ_E_IA.md`**](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/05_ASISTENTE_VOZ_E_IA.md): Pipeline multimodal con STT (`SpeechRecognizer`), TTS (`TextToSpeech`), extracción de intenciones con Gemini 1.5 Flash (JSON) y el motor heurístico de emergencia offline.
+8. [**`06_METEOROLOGIA_Y_GEOLOCALIZACION.md`**](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/06_METEOROLOGIA_Y_GEOLOCALIZACION.md): Resolución de posición GPS/red, geocodificación inversa con Geocoder, integración con Open-Meteo y decodificación de códigos WMO con emojis.
+9. [**`07_INTERFAZ_UI_JETPACK_COMPOSE.md`**](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/07_INTERFAZ_UI_JETPACK_COMPOSE.md): Desglose del layout horizontal [`SmartHubDashboard.kt`](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/app/src/main/java/com/example/estacionj6/ui/components/SmartHubDashboard.kt), overlays animados de atenuación, alarma activa pulsante y componentes Material 3.
+10. [**`08_EVALUACION_CRITICA_Y_MEJORAS.md`**](file:///home/jcramossa/AndroidStudioProjects/EstacionJ6/documentación/08_EVALUACION_CRITICA_Y_MEJORAS.md): Auditoría de seguridad (claves de API y tokens hardcodeados), solución para evitar quemado (*burn-in*) en el panel Super AMOLED del J6 (*Pixel Shifting*), y plan de migración a Hilt y Room.
