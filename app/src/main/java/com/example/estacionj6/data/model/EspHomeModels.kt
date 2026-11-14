@@ -37,15 +37,6 @@ data class RadioStation(
     @SerializedName("tags") val tags: String? = null
 )
 
-// Modelo para el Sensor Exterior (.12)
-data class ExternalSensorStatus(
-    @SerializedName("device") val device: String,
-    @SerializedName("temperature_aht") val tempAht: Float,
-    @SerializedName("humidity") val humidity: Float,
-    @SerializedName("pressure") val pressure: Float,
-    @SerializedName("relay") val relay: Boolean
-)
-
 // Estado unificado que consumirá la interfaz gráfica en Compose
 data class HubUiState(
     val currentTime: String = "00:00",
@@ -87,5 +78,14 @@ data class HubUiState(
     // Alarmas
     val alarms: List<Alarm> = emptyList(),
     val isAlarmFiring: Boolean = false,
-    val firingAlarmLabel: String? = null
+    val firingAlarmLabel: String? = null,
+    val weatherLocationName: String = "GPS",
+    val extPressure: Float = 0f,
+    val extApparentTemp: Float = 0f,
+    val windSpeed: Float = 0f,
+    val windDirection: String = "",
+    val precipitation: Float = 0f,
+    val cloudCover: Float = 0f,
+    val weatherDescription: String = "Cargando...",
+    val uvIndex: Float = 0f
 )

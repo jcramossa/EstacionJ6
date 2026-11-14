@@ -12,10 +12,13 @@ import com.example.estacionj6.data.repository.HubRepository
 import com.example.estacionj6.data.repository.MusicRepository
 import com.example.estacionj6.data.repository.RadioRepository
 import com.example.estacionj6.data.repository.PlexRepository
+import com.example.estacionj6.data.repository.WeatherRepository
 import com.example.estacionj6.util.VoiceAssistantManager
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,6 +27,7 @@ class MainViewModel(
     private val musicRepository: MusicRepository,
     private val radioRepository: RadioRepository,
     private val plexRepository: PlexRepository,
+    private val weatherRepository: WeatherRepository,
     private val voiceManager: VoiceAssistantManager,
     val player: ExoPlayer
 ) : ViewModel() {
@@ -52,6 +56,12 @@ class MainViewModel(
         viewModelScope.launch {
             voiceManager.isListening.collect { isListening ->
                 _uiState.update { it.copy(isListening = isListening) }
+                // Atenuar volumen si está escuchando
+                if (isListening) {
+                    player.volume = 0.2f
+                } else {
+                    player.volume = 1.0f
+                }
             }
         }
         viewModelScope.launch {
@@ -142,8 +152,38 @@ class MainViewModel(
 
     suspend fun refreshData() {
         val batteryInfo = repository.getPhoneBatteryInfo()
+
+        // Actualizar batería siempre, incluso si falla el ESP32
+        _uiState.update { currentState ->
+            currentState.copy(
+                phoneBatteryLevel = batteryInfo.level,
+                isPhoneCharging = batteryInfo.isCharging
+            )
+        }
+
+        // Obtener clima exterior y ubicación de la web (Open-Meteo + Geocoder)
+        val weatherResult = withContext(Dispatchers.IO) {
+            weatherRepository.fetchWeather()
+        }
+        weatherResult.onSuccess { weatherData ->
+            _uiState.update { currentState ->
+                currentState.copy(
+                    extTemperature = weatherData.temperature,
+                    extHumidity = weatherData.humidity,
+                    extPressure = weatherData.pressure,
+                    extApparentTemp = weatherData.apparentTemperature,
+                    windSpeed = weatherData.windSpeed,
+                    windDirection = weatherData.windDirection,
+                    precipitation = weatherData.precipitation,
+                    cloudCover = weatherData.cloudCover,
+                    weatherDescription = weatherData.weatherDescription,
+                    uvIndex = weatherData.uvIndex,
+                    weatherLocationName = weatherData.locationName
+                )
+            }
+        }
+
         val internalResult = repository.fetchStatus()
-        val externalResult = repository.fetchExternalStatus()
 
         internalResult.onSuccess { status ->
             _uiState.update { currentState ->
@@ -155,23 +195,15 @@ class MainViewModel(
                     isMovingPresence = status.movement,
                     isStaticPresence = status.staticPresence,
                     isRelayOn = status.relay,
-                    phoneBatteryLevel = batteryInfo.level,
-                    isPhoneCharging = batteryInfo.isCharging,
                     isDimmed = !status.presence && !_manualWakeActive.value && !currentState.isAlarmFiring,
                     isLoading = false,
                     error = null
                 )
             }
             evaluateBatteryLogic(batteryInfo.level, status.relay)
-        }.onFailure {
-            _uiState.update { it.copy(isLoading = false, error = "Error de conexión con HUB Principal (.13)") }
-        }
-
-        externalResult.onSuccess { extStatus ->
-            _uiState.update { it.copy(
-                extTemperature = extStatus.tempAht,
-                extHumidity = extStatus.humidity
-            ) }
+        }.onFailure { exception ->
+            Log.e("SH_LOG", "Error obteniendo status de ESP32 (.13): ${exception.localizedMessage}", exception)
+            _uiState.update { it.copy(isLoading = false, error = "Error ESP32 (.13): ${exception.localizedMessage}") }
         }
     }
 
@@ -213,11 +245,15 @@ class MainViewModel(
 
     fun toggleRelay(turnOn: Boolean) {
         Log.e("SH_LOG", ">>> toggleRelay llamado con: $turnOn")
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.setRelayState(turnOn).onSuccess {
-                _uiState.update { it.copy(isRelayOn = turnOn) }
+                withContext(Dispatchers.Main) {
+                    _uiState.update { it.copy(isRelayOn = turnOn) }
+                }
             }.onFailure { exception ->
-                _uiState.update { it.copy(error = "Fallo al conmutar relé: ${exception.message}") }
+                withContext(Dispatchers.Main) {
+                    _uiState.update { it.copy(error = "Fallo al conmutar relé: ${exception.message}") }
+                }
             }
         }
     }

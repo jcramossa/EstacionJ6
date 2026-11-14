@@ -1,6 +1,7 @@
 package com.example.estacionj6
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
@@ -21,6 +22,7 @@ import com.example.estacionj6.data.repository.HubRepositoryImpl
 import com.example.estacionj6.data.repository.MusicRepository
 import com.example.estacionj6.data.repository.PlexRepository
 import com.example.estacionj6.data.repository.RadioRepository
+import com.example.estacionj6.data.repository.WeatherRepository
 import com.example.estacionj6.ui.components.SmartHubDashboard
 import com.example.estacionj6.ui.main.MainViewModel
 import com.example.estacionj6.util.VoiceAssistantManager
@@ -51,12 +53,17 @@ class MainActivity : ComponentActivity() {
                     token = "Sz1L76j34TQPsX5CV7Tw",
                     baseUrl = "http://192.168.1.30:32400"
                 )
+
+                val weatherRepository = WeatherRepository(
+                    api = NetworkClient.weatherApi,
+                    context = applicationContext
+                )
                 
                 val voiceManager = VoiceAssistantManager(applicationContext)
                 val exoPlayer = ExoPlayer.Builder(applicationContext).build()
 
                 @Suppress("UNCHECKED_CAST")
-                return MainViewModel(repository, musicRepository, radioRepository, plexRepository, voiceManager, exoPlayer) as T
+                return MainViewModel(repository, musicRepository, radioRepository, plexRepository, weatherRepository, voiceManager, exoPlayer) as T
             }
         }
     }
@@ -73,8 +80,14 @@ class MainActivity : ComponentActivity() {
         // Configurar pantalla completa total (Modo Inmersivo)
         hideSystemUI()
 
-        // Mantener la pantalla encendida
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        // Mantener la pantalla encendida y desbloqueada siempre (Modo Kiosk / Siempre en primer plano)
+        @Suppress("DEPRECATION")
+        window.addFlags(
+            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
+            WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
+            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+            WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+        )
 
         setContent {
             val state by viewModel.uiState.collectAsState()
@@ -90,6 +103,28 @@ class MainActivity : ComponentActivity() {
                 player = viewModel.player // Necesitamos exponer el player en el ViewModel
             )
         }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            hideSystemUI()
+        }
+    }
+
+    @Deprecated("Deprecated in Java", ReplaceWith("Unit"))
+    @Suppress("MissingSuperCall", "DEPRECATION")
+    override fun onBackPressed() {
+        // Bloquear el botón de atrás para impedir salir de la interfaz
+    }
+
+    override fun onUserLeaveHint() {
+        super.onUserLeaveHint()
+        // Si el usuario intenta presionar el botón Home o minimizar, traer la app inmediatamente al frente
+        val intent = Intent(this, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+        }
+        startActivity(intent)
     }
 
     private fun hideSystemUI() {

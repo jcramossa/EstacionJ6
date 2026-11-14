@@ -1,9 +1,9 @@
 package com.example.estacionj6.data.repository
 
 import android.content.Context
+import android.util.Log
 import com.example.estacionj6.data.model.Alarm
 import com.example.estacionj6.data.model.EspHomeStatus
-import com.example.estacionj6.data.model.ExternalSensorStatus
 import com.example.estacionj6.data.remote.EspHomeApi
 import com.example.estacionj6.util.BatteryInfo
 import com.example.estacionj6.util.BatteryManagerHelper
@@ -19,11 +19,12 @@ class HubRepositoryImpl(
     private val gson = Gson()
 
     override suspend fun fetchStatus(): Result<EspHomeStatus> = runCatching {
-        api.getStatus()
-    }
-
-    override suspend fun fetchExternalStatus(): Result<ExternalSensorStatus> = runCatching {
-        api.getExternalStatus()
+        Log.d("SH_LOG", "--> Solicitando estado al ESP32: http://192.168.1.13/api/status")
+        val response = api.getStatus()
+        Log.d("SH_LOG", "<-- Respuesta recibida de ESP32: $response")
+        response
+    }.onFailure { e ->
+        Log.e("SH_LOG", "!-- Error en fetchStatus(): ${e.javaClass.simpleName} - ${e.message}", e)
     }
 
     override suspend fun setRelayState(turnOn: Boolean): Result<Unit> = runCatching {

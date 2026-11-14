@@ -14,31 +14,22 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
-import androidx.media3.ui.PlayerView
 import coil.compose.AsyncImage
 import com.example.estacionj6.data.model.HubUiState
 import com.example.estacionj6.data.model.Alarm
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import java.util.*
 
 @Composable
@@ -53,7 +44,11 @@ fun SmartHubDashboard(
     onDismissAlarm: () -> Unit,
     player: Player
 ) {
-    val dimAlpha by animateFloatAsState(targetValue = if (state.isDimmed) 0.92f else 0f, label = "dimAlpha")
+    val dimAlpha by animateFloatAsState(
+        targetValue = if (state.isDimmed) 0.95f else 0f,
+        animationSpec = tween(durationMillis = 800),
+        label = "dimAlpha"
+    )
     val scrollState = rememberScrollState()
 
     Box(
@@ -71,15 +66,32 @@ fun SmartHubDashboard(
                 .background(Brush.radialGradient(colors = listOf(Color(0xFF1A1A1A), Color.Black), radius = 1000f))
         )
 
+        // Banner de error de conexión / Wi-Fi si ocurre
+        state.error?.let { errorMsg ->
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(top = 12.dp)
+                    .background(Color.Red.copy(alpha = 0.85f), RoundedCornerShape(12.dp))
+                    .padding(horizontal = 16.dp, vertical = 6.dp)
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(imageVector = Icons.Default.WifiOff, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(text = errorMsg, color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                }
+            }
+        }
+
         Row(
             modifier = Modifier
                 .fillMaxSize()
                 .horizontalScroll(scrollState)
                 .padding(24.dp),
-            horizontalArrangement = Arrangement.spacedBy(30.dp),
+            horizontalArrangement = Arrangement.spacedBy(24.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // --- COLUMNA 1: RELOJ + AMBIENTE ---
+            // --- COLUMNA 1 / CARD 1: RELOJ Y FECHA ---
             Column(
                 modifier = Modifier.width(215.dp),
                 verticalArrangement = Arrangement.Center
@@ -99,34 +111,20 @@ fun SmartHubDashboard(
                     fontWeight = FontWeight.Medium,
                     textAlign = TextAlign.Center
                 )
-
-                Spacer(modifier = Modifier.height(4.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(2.dp)
-                ) {
-                    MiniClimateCard(title = "Int.", temp = state.temperature, hum = state.humidity, icon = Icons.Default.Home, accentColor = Color(0xFF42A5F5), modifier = Modifier.weight(1f))
-                    MiniClimateCard(title = "Ext.", temp = state.extTemperature, hum = state.extHumidity, icon = Icons.Default.WbSunny, accentColor = Color(0xFFFFCA28), modifier = Modifier.weight(1f))
-                    MiniPressureCard(pressure = state.pressure, modifier = Modifier.weight(1f))
-                }
             }
 
-            // --- COLUMNA 2: ESTADO Y CONTROL ---
-            Column(
-                modifier = Modifier.width(215.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                PresenceMiniCard(isDetected = state.isPresenceDetected)
-                SystemStatusCard(level = state.phoneBatteryLevel, isCharging = state.isPhoneCharging, isRelayOn = state.isRelayOn, onToggleRelay = onToggleRelay)
-            }
+            // --- COLUMNA 2 / CARD 2: DATO DE CLIMA IN VS OUT + BATERÍA Y RELÉ ---
+            ClimateAndStatusCard(
+                state = state,
+                onToggleRelay = onToggleRelay
+            )
 
             // --- COLUMNA 3: ALARMAS ---
             Column(
                 modifier = Modifier
                     .width(220.dp)
                     .fillMaxHeight()
-                    .verticalScroll(rememberScrollState()) // Scroll vertical añadido
+                    .verticalScroll(rememberScrollState())
                     .padding(vertical = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
@@ -144,7 +142,6 @@ fun SmartHubDashboard(
                         AlarmItem(alarm = alarm, onDelete = onDeleteAlarm, onToggle = onToggleAlarm)
                     }
                 }
-                // Espacio extra al final para que la última alarma no quede tapada por el botón
                 Spacer(modifier = Modifier.height(80.dp))
             }
 
@@ -173,260 +170,266 @@ fun SmartHubDashboard(
                 Surface(
                     color = Color.Black.copy(alpha = 0.7f),
                     shape = RoundedCornerShape(20.dp),
-                    modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 100.dp, start = 32.dp, end = 32.dp)
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 32.dp)
                 ) {
-                    Text(text = text, color = Color.White, fontSize = 18.sp, modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp), textAlign = TextAlign.Center)
+                    Text(
+                        text = text,
+                        color = Color.White,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Medium,
+                        modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp)
+                    )
                 }
             }
         }
 
-        // --- BOTÓN DE VOZ ---
+        // --- BOTÓN FLOTANTE DE MICRÓFONO / GRABACIÓN DE VOZ PARA ALARMAS Y COMANDOS ---
         FloatingActionButton(
             onClick = onVoiceMicClick,
-            modifier = Modifier.align(Alignment.BottomEnd).padding(24.dp).size(if (state.isListening || state.isThinking) 72.dp else 56.dp),
-            containerColor = when {
-                state.isThinking -> Color(0xFFFFA000)
-                state.isListening -> Color.Red
-                else -> Color(0xFF6200EE)
-            },
-            contentColor = Color.White
+            containerColor = if (state.isListening) Color.Red else Color(0xFF42A5F5),
+            contentColor = Color.White,
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(24.dp)
+                .size(64.dp)
         ) {
-            Icon(imageVector = when {
-                state.isThinking -> Icons.Default.AutoAwesome
-                state.isListening -> Icons.Default.GraphicEq
-                else -> Icons.Default.Mic
-            }, contentDescription = "Voz")
+            Icon(
+                imageVector = if (state.isListening) Icons.Default.MicOff else Icons.Default.Mic,
+                contentDescription = "Grabar Voz / Configurar Alarma",
+                modifier = Modifier.size(32.dp)
+            )
         }
 
-        // --- CAPA DE OSCURECIMIENTO ---
-        if (dimAlpha > 0f && !state.isAlarmFiring) {
-            Box(modifier = Modifier.fillMaxSize().alpha(dimAlpha).background(Color.Black))
+        // --- OVERLAY DE ATENUACIÓN / APAGADO DE PANTALLA ---
+        if (dimAlpha > 0f) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .graphicsLayer { alpha = dimAlpha }
+                    .background(Color.Black)
+            )
         }
 
-        // --- OVERLAY DE ALARMA ---
+        // --- OVERLAY DE ALARMA ACTIVADA ---
         if (state.isAlarmFiring) {
             AlarmFiringOverlay(
                 message = state.firingAlarmLabel,
                 onDismiss = onDismissAlarm
             )
         }
-
-        // --- REPRODUCTOR DE YOUTUBE (PANTALLA COMPLETA) ---
-        if (state.isYoutubeActive && state.youtubeVideoId != null) {
-            YouTubeOverlay(
-                videoId = state.youtubeVideoId,
-                onClose = onToggleMusic // Reutilizamos para parar
-            )
-        }
-
-        // --- REPRODUCTOR DE PLEX (PANTALLA COMPLETA) ---
-        if (state.isPlexActive && state.plexMediaUrl != null) {
-            PlexOverlay(
-                title = state.plexTitle,
-                url = state.plexMediaUrl,
-                player = player,
-                onClose = onToggleMusic
-            )
-        }
     }
 }
 
 @Composable
-fun PlexOverlay(title: String?, url: String, player: Player, onClose: () -> Unit) {
-    LaunchedEffect(url) {
-        player.setMediaItem(MediaItem.fromUri(url))
-        player.prepare()
-        player.play()
-    }
-
-    Box(modifier = Modifier.fillMaxSize().background(Color.Black)) {
-        AndroidView(
-            factory = { context ->
-                PlayerView(context).apply {
-                    this.player = player
-                    useController = true
-                }
-            },
-            modifier = Modifier.fillMaxSize()
-        )
-        
-        IconButton(
-            onClick = onClose,
-            modifier = Modifier.align(Alignment.TopEnd).padding(16.dp).background(Color.Black.copy(alpha = 0.5f), RoundedCornerShape(24.dp))
-        ) {
-            Icon(Icons.Default.Close, contentDescription = "Cerrar", tint = Color.White)
-        }
-    }
-}
-
-@Composable
-fun YouTubeOverlay(videoId: String, onClose: () -> Unit) {
-    Box(modifier = Modifier.fillMaxSize().background(Color.Black)) {
-        AndroidView(
-            factory = { context ->
-                YouTubePlayerView(context).apply {
-                    enableAutomaticInitialization = false
-                    initialize(object : AbstractYouTubePlayerListener() {
-                        override fun onReady(youTubePlayer: YouTubePlayer) {
-                            youTubePlayer.loadVideo(videoId, 0f)
-                        }
-                    })
-                }
-            },
-            modifier = Modifier.fillMaxSize()
-        )
-        
-        IconButton(
-            onClick = onClose,
-            modifier = Modifier.align(Alignment.TopEnd).padding(16.dp).background(Color.Black.copy(alpha = 0.5f), RoundedCornerShape(24.dp))
-        ) {
-            Icon(Icons.Default.Close, contentDescription = "Cerrar", tint = Color.White)
-        }
-    }
-}
-
-@Composable
-fun AlarmItem(alarm: Alarm, onDelete: (String) -> Unit, onToggle: (String, Boolean) -> Unit) {
+fun ClimateAndStatusCard(
+    state: HubUiState,
+    onToggleRelay: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Surface(
         color = Color(0xFF1E1E1E),
-        shape = RoundedCornerShape(16.dp),
-        modifier = Modifier.fillMaxWidth()
+        shape = RoundedCornerShape(20.dp),
+        modifier = modifier.width(360.dp)
     ) {
-        Row(
-            modifier = Modifier.padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Column {
+            // --- ENCABEZADO: LOCALIDAD Y DESCRIPCIÓN CLIMA ---
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        imageVector = if (alarm.isReminder) Icons.Default.NotificationsActive else Icons.Default.Alarm,
+                        imageVector = Icons.Default.LocationOn,
                         contentDescription = null,
-                        tint = if (alarm.isReminder) Color.Yellow else Color.Red,
-                        modifier = Modifier.size(14.dp)
+                        tint = Color(0xFFFFCA28),
+                        modifier = Modifier.size(18.dp)
                     )
                     Spacer(modifier = Modifier.width(6.dp))
-                    Text(text = String.format(Locale.getDefault(), "%02d:%02d", alarm.hour, alarm.minute), color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                    Text(
+                        text = state.weatherLocationName,
+                        color = Color.White,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    )
                 }
-                
-                // Mostrar mensaje/label si existe
-                alarm.label?.let {
-                    Text(text = it, color = if (alarm.isReminder) Color.Yellow.copy(alpha = 0.8f) else Color.White.copy(alpha = 0.7f), fontSize = 12.sp, maxLines = 1)
-                }
-
-                // Mostrar repetición o fecha
-                val infoText = when {
-                    alarm.specificDate != null -> alarm.specificDate
-                    alarm.repeatDays != null -> {
-                        val daysMap = mapOf(1 to "D", 2 to "L", 3 to "M", 4 to "X", 5 to "J", 6 to "V", 7 to "S")
-                        alarm.repeatDays.joinToString(" ") { daysMap[it] ?: "" }
-                    }
-                    else -> "Todos los días"
-                }
-                Text(text = infoText ?: "", color = Color.Cyan, fontSize = 11.sp)
-
-                IconButton(onClick = { onDelete(alarm.id) }, modifier = Modifier.size(24.dp)) {
-                    Icon(Icons.Default.Delete, contentDescription = null, tint = Color.Gray, modifier = Modifier.size(16.dp))
-                }
-            }
-            Switch(checked = alarm.isEnabled, onCheckedChange = { onToggle(alarm.id, it) }, colors = SwitchDefaults.colors(checkedThumbColor = Color.Cyan))
-        }
-    }
-}
-
-@Composable
-fun AlarmFiringOverlay(message: String?, onDismiss: () -> Unit) {
-    val infiniteTransition = rememberInfiniteTransition(label = "alarm")
-    val color by infiniteTransition.animateColor(
-        initialValue = Color.Red.copy(alpha = 0.6f),
-        targetValue = Color.Black.copy(alpha = 0.9f),
-        animationSpec = infiniteRepeatable(animation = tween(500), repeatMode = RepeatMode.Reverse),
-        label = "alarmColor"
-    )
-    val scale by infiniteTransition.animateFloat(
-        initialValue = 1f,
-        targetValue = 1.1f,
-        animationSpec = infiniteRepeatable(animation = tween(500), repeatMode = RepeatMode.Reverse),
-        label = "alarmScale"
-    )
-
-    Box(
-        modifier = Modifier.fillMaxSize().background(color),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Icon(Icons.Default.Alarm, contentDescription = null, tint = Color.White, modifier = Modifier.size(120.dp).scale(scale))
-            
-            if (message != null) {
-                Spacer(modifier = Modifier.height(24.dp))
                 Text(
-                    text = message,
+                    text = state.weatherDescription,
                     color = Color.White,
-                    fontSize = 32.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(horizontal = 32.dp)
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold
                 )
             }
 
-            Spacer(modifier = Modifier.height(48.dp))
-            Button(
-                onClick = onDismiss,
-                colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Red),
-                modifier = Modifier.size(200.dp, 80.dp),
-                shape = RoundedCornerShape(40.dp)
+            Spacer(modifier = Modifier.height(10.dp))
+            HorizontalDivider(color = Color.Gray.copy(alpha = 0.3f), thickness = 1.dp)
+            Spacer(modifier = Modifier.height(10.dp))
+
+            // --- 2 COLUMNAS DE VALORES: IN VS OUT ---
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = "DETENER", fontSize = 24.sp, fontWeight = FontWeight.ExtraBold)
-            }
-        }
-    }
-}
-
-@Composable
-fun MiniClimateCard(title: String, temp: Float, hum: Float, icon: ImageVector, accentColor: Color, modifier: Modifier = Modifier) {
-    Surface(color = Color(0xFF121212), shape = RoundedCornerShape(16.dp), modifier = modifier) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(icon, contentDescription = null, tint = accentColor, modifier = Modifier.size(14.dp))
-                Spacer(modifier = Modifier.width(6.dp))
-                Text(text = title, color = Color.Gray, fontSize = 11.sp, fontWeight = FontWeight.Bold)
-            }
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(text = String.format(Locale.getDefault(), "%.1f°", temp), color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Medium)
-            Text(text = String.format(Locale.getDefault(), "%.0f%% Hum", hum), color = Color.Gray, fontSize = 16.sp)
-        }
-    }
-}
-
-@Composable
-fun PresenceMiniCard(isDetected: Boolean) {
-    val bgColor by animateColorAsState(targetValue = if (isDetected) Color(0xFF1B5E20) else Color(0xFF333333), label = "presenceColor")
-    Surface(color = bgColor, shape = RoundedCornerShape(20.dp), modifier = Modifier.fillMaxWidth()) {
-        Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-            Icon(imageVector = if (isDetected) Icons.Default.Person else Icons.Default.PersonOff, contentDescription = null, tint = Color.White, modifier = Modifier.size(24.dp))
-            Spacer(modifier = Modifier.width(12.dp))
-            Text(text = if (isDetected) "PRESENCIA" else "VACÍO", color = Color.White, fontWeight = FontWeight.ExtraBold, fontSize = 16.sp)
-        }
-    }
-}
-
-@Composable
-fun SystemStatusCard(level: Int, isCharging: Boolean, isRelayOn: Boolean, onToggleRelay: (Boolean) -> Unit) {
-    Surface(color = Color(0xFF1E1E1E), shape = RoundedCornerShape(20.dp), modifier = Modifier.fillMaxWidth()) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                Column {
-                    Text(text = "Batería J6", color = Color.Gray, fontSize = 12.sp)
+                // COLUMNA 1: IN (Sensor ESP32 .13)
+                Column(modifier = Modifier.weight(1f)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(imageVector = if (isCharging) Icons.Default.BatteryChargingFull else Icons.Default.BatteryFull, contentDescription = null, tint = if (level < 20) Color.Red else Color.Green, modifier = Modifier.size(16.dp))
+                        Icon(
+                            imageVector = Icons.Default.Home,
+                            contentDescription = null,
+                            tint = Color(0xFF42A5F5),
+                            modifier = Modifier.size(14.dp)
+                        )
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text(text = "$level%", color = Color.White, fontWeight = FontWeight.Bold)
+                        Text(
+                            text = "IN (Sensor)",
+                            color = Color(0xFF42A5F5),
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold
+                        )
                     }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Temp: ${String.format(Locale.getDefault(), "%.1f", state.temperature)} °C",
+                        color = Color.White,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "Hum: ${String.format(Locale.getDefault(), "%.1f", state.humidity)} %",
+                        color = Color.White,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "Presión: ${String.format(Locale.getDefault(), "%.0f", state.pressure)} hPa",
+                        color = Color.White,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
                 }
-                Switch(checked = isRelayOn, onCheckedChange = onToggleRelay, colors = SwitchDefaults.colors(checkedThumbColor = Color.Green, checkedTrackColor = Color.Green.copy(alpha = 0.5f)))
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+                // COLUMNA 2: OUT (Servicio Web)
+                Column(modifier = Modifier.weight(1.2f)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Default.WbSunny,
+                            contentDescription = null,
+                            tint = Color(0xFFFFCA28),
+                            modifier = Modifier.size(14.dp)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = "OUT (Web)",
+                            color = Color(0xFFFFCA28),
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Text(
+                        text = "Temp: ${String.format(Locale.getDefault(), "%.1f", state.extTemperature)} °C",
+                        color = Color.White,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        text = "Hum: ${String.format(Locale.getDefault(), "%.1f", state.extHumidity)} %",
+                        color = Color.White,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        text = "Presión: ${String.format(Locale.getDefault(), "%.0f", state.extPressure)} hPa",
+                        color = Color.White,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        text = "Sensación: ${String.format(Locale.getDefault(), "%.1f", state.extApparentTemp)} °C",
+                        color = Color.White,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        text = "Viento: ${String.format(Locale.getDefault(), "%.1f", state.windSpeed)} km/h",
+                        color = Color.White,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        text = "Dirección: ${state.windDirection}",
+                        color = Color.White,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        text = "Precip: ${String.format(Locale.getDefault(), "%.1f", state.precipitation)} mm",
+                        color = Color.White,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        text = "Nubes: ${String.format(Locale.getDefault(), "%.0f", state.cloudCover)} %",
+                        color = Color.White,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
             }
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = if (isRelayOn) "Cargador Activo" else "Cargador Apagado", color = if (isRelayOn) Color.Green else Color.Gray, fontSize = 11.sp)
+
+            Spacer(modifier = Modifier.height(12.dp))
+            HorizontalDivider(color = Color.Gray.copy(alpha = 0.3f), thickness = 1.dp)
+            Spacer(modifier = Modifier.height(10.dp))
+
+            // --- ÚLTIMA FILA DE CARD 2: BATERÍA Y CONMUTADOR DE CARGA ---
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column {
+                    Text(text = "Batería J6", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Medium)
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = if (state.isPhoneCharging) Icons.Default.BatteryChargingFull else Icons.Default.BatteryFull,
+                            contentDescription = null,
+                            tint = if (state.phoneBatteryLevel < 20) Color.Red else Color.Green,
+                            modifier = Modifier.size(16.dp)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = "${state.phoneBatteryLevel}%",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp
+                        )
+                    }
+                    Text(
+                        text = if (state.isRelayOn) "Cargador Activo" else "Cargador Apagado",
+                        color = if (state.isRelayOn) Color.Green else Color.White,
+                        fontSize = 10.sp
+                    )
+                }
+
+                Switch(
+                    checked = state.isRelayOn,
+                    onCheckedChange = onToggleRelay,
+                    colors = SwitchDefaults.colors(
+                        checkedThumbColor = Color.Green,
+                        checkedTrackColor = Color.Green.copy(alpha = 0.5f)
+                    )
+                )
+            }
         }
     }
 }
@@ -448,91 +451,169 @@ fun MusicCard(
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = if (isRadio) Icons.Default.Radio else Icons.Default.MusicNote,
-                    contentDescription = null,
-                    tint = if (isRadio) Color(0xFF00BCD4) else Color(0xFFE91E63),
-                    modifier = Modifier.size(18.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = if (isRadio) "Radio Online" else "Navidrome",
-                    color = Color.Gray,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-            Spacer(modifier = Modifier.height(12.dp))
-            
-            if (title != null) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    // Carátula o Icono de Radio
-                    Surface(
-                        modifier = Modifier.size(60.dp),
-                        shape = RoundedCornerShape(8.dp),
-                        color = Color(0xFF333333)
+                if (coverUrl != null) {
+                    AsyncImage(
+                        model = coverUrl,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(Color.DarkGray, RoundedCornerShape(8.dp))
+                    )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(Color.DarkGray, RoundedCornerShape(8.dp)),
+                        contentAlignment = Alignment.Center
                     ) {
-                        if (coverUrl != null) {
-                            AsyncImage(
-                                model = coverUrl,
-                                contentDescription = "Carátula",
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        } else {
-                            Box(contentAlignment = Alignment.Center) {
-                                Icon(
-                                    imageVector = if (isRadio) Icons.Default.Radio else Icons.Default.MusicNote,
-                                    contentDescription = null,
-                                    tint = Color.Gray,
-                                    modifier = Modifier.size(32.dp)
-                                )
-                            }
-                        }
-                    }
-                    
-                    Spacer(modifier = Modifier.width(12.dp))
-                    
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(text = title, color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.Bold, maxLines = 1)
-                        Text(text = artist ?: "Desconocido", color = Color.Gray, fontSize = 14.sp, maxLines = 1)
-                    }
-
-                    IconButton(
-                        onClick = onToggleMusic,
-                        modifier = Modifier.size(48.dp)
-                    ) {
-                        if (isLoading) {
-                            CircularProgressIndicator(color = Color.White, modifier = Modifier.size(24.dp))
-                        } else {
-                            Icon(
-                                imageVector = if (isPlaying) Icons.Default.PauseCircle else Icons.Default.PlayCircle,
-                                contentDescription = null,
-                                tint = Color.White,
-                                modifier = Modifier.size(48.dp)
-                            )
-                        }
+                        Icon(
+                            imageVector = if (isRadio) Icons.Default.Radio else Icons.Default.MusicNote,
+                            contentDescription = null,
+                            tint = Color.White
+                        )
                     }
                 }
-            } else {
-                Text(text = "Sin reproducción", color = Color.Gray, fontSize = 14.sp)
-                Text(text = "Pide una canción o radio", color = Color(0xFF444444), fontSize = 11.sp)
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = title ?: "Sin reproducción",
+                        color = Color.White,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1
+                    )
+                    Text(
+                        text = artist ?: "Selecciona música o radio",
+                        color = Color.Gray,
+                        fontSize = 12.sp,
+                        maxLines = 1
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            IconButton(
+                onClick = onToggleMusic,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(40.dp)
+                    .background(Color.White, RoundedCornerShape(20.dp))
+            ) {
+                if (isLoading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(20.dp),
+                        color = Color.Black,
+                        strokeWidth = 2.dp
+                    )
+                } else {
+                    Icon(
+                        imageVector = if (isPlaying) Icons.Default.Pause else Icons.Default.PlayArrow,
+                        contentDescription = null,
+                        tint = Color.Black
+                    )
+                }
             }
         }
     }
 }
 
 @Composable
-fun MiniPressureCard(pressure: Float, modifier: Modifier = Modifier) {
-    Surface(color = Color(0xFF121212), shape = RoundedCornerShape(16.dp), modifier = modifier) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Default.Air, contentDescription = null, tint = Color.LightGray, modifier = Modifier.size(14.dp))
-                Spacer(modifier = Modifier.width(6.dp))
-                Text(text = "Pres.", color = Color.Gray, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+fun AlarmItem(
+    alarm: Alarm,
+    onDelete: (String) -> Unit,
+    onToggle: (String, Boolean) -> Unit
+) {
+    Surface(
+        color = Color(0xFF1E1E1E),
+        shape = RoundedCornerShape(16.dp),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column {
+                Text(
+                    text = String.format(Locale.getDefault(), "%02d:%02d", alarm.hour, alarm.minute),
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                alarm.label?.let {
+                    Text(text = it, color = Color.Gray, fontSize = 11.sp)
+                }
+                IconButton(onClick = { onDelete(alarm.id) }, modifier = Modifier.size(24.dp)) {
+                    Icon(Icons.Default.Delete, contentDescription = null, tint = Color.Gray, modifier = Modifier.size(16.dp))
+                }
             }
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(text = String.format(Locale.getDefault(), "%.0f", pressure), color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Medium)
-            Text(text = "hPa", color = Color.Gray, fontSize = 14.sp)
+            Switch(
+                checked = alarm.isEnabled,
+                onCheckedChange = { onToggle(alarm.id, it) },
+                colors = SwitchDefaults.colors(checkedThumbColor = Color.Cyan)
+            )
+        }
+    }
+}
+
+@Composable
+fun AlarmFiringOverlay(message: String?, onDismiss: () -> Unit) {
+    val infiniteTransition = rememberInfiniteTransition(label = "alarm")
+    val color by infiniteTransition.animateColor(
+        initialValue = Color.Red.copy(alpha = 0.6f),
+        targetValue = Color.Black.copy(alpha = 0.9f),
+        animationSpec = infiniteRepeatable(animation = tween(500), repeatMode = RepeatMode.Reverse),
+        label = "alarmColor"
+    )
+    val scale by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 1.1f,
+        animationSpec = infiniteRepeatable(animation = tween(500), repeatMode = RepeatMode.Reverse),
+        label = "alarmScale"
+    )
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Icon(
+                imageVector = Icons.Default.Alarm,
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier
+                    .size(120.dp)
+                    .scale(scale)
+            )
+
+            if (message != null) {
+                Spacer(modifier = Modifier.height(24.dp))
+                Text(
+                    text = message,
+                    color = Color.White,
+                    fontSize = 32.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 32.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(48.dp))
+            Button(
+                onClick = onDismiss,
+                colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Red),
+                modifier = Modifier.size(200.dp, 80.dp),
+                shape = RoundedCornerShape(40.dp)
+            ) {
+                Text(text = "DETENER", fontSize = 24.sp, fontWeight = FontWeight.ExtraBold)
+            }
         }
     }
 }

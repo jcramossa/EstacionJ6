@@ -17,10 +17,10 @@ object BatteryManagerHelper {
 
         val level = batteryStatus?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
         val scale = batteryStatus?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
-        val batteryPct = if (level != -1 && scale != -1) {
+        val batteryPct = if (level != -1 && scale > 0) {
             ((level / scale.toFloat()) * 100).toInt()
         } else {
-            -1 // Cambiado de 0 a -1 para indicar error
+            -1
         }
 
         val status = batteryStatus?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ?: -1

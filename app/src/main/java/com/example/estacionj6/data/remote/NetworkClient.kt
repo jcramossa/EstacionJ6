@@ -1,7 +1,6 @@
 package com.example.estacionj6.data.remote
 
 import android.util.Log
-import okhttp3.ConnectionSpec
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
@@ -21,20 +20,19 @@ object NetworkClient {
     }
 
     private val okHttpClient = OkHttpClient.Builder()
-        .connectionSpecs(listOf(ConnectionSpec.CLEARTEXT, ConnectionSpec.MODERN_TLS))
         .connectTimeout(10, TimeUnit.SECONDS)
         .readTimeout(10, TimeUnit.SECONDS)
         .addInterceptor { chain ->
-            val request: Request = chain.request()
+            val originalRequest = chain.request()
+            val request = originalRequest.newBuilder()
+                .header("User-Agent", "Mozilla/5.0 (Linux; Android 10; SM-J600G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36")
+                .header("Accept", "application/json, text/plain, */*")
+                .build()
 
             // Log manual directo a la consola de la URL enviada
             Log.d(TAG, "--> ENVIANDO PETICIÓN A: ${request.url}")
 
-            val newRequest = request.newBuilder()
-                .header("Connection", "close")
-                .build()
-
-            val response = chain.proceed(newRequest)
+            val response = chain.proceed(request)
 
             Log.d(TAG, "<-- RESPUESTA DE: ${response.request.url} | Código: ${response.code}")
             response
@@ -82,5 +80,16 @@ object NetworkClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(PlexApi::class.java)
+    }
+
+    private const val WEATHER_BASE_URL = "https://api.open-meteo.com/"
+
+    val weatherApi: WeatherApi by lazy {
+        Retrofit.Builder()
+            .baseUrl(WEATHER_BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(WeatherApi::class.java)
     }
 }
